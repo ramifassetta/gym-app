@@ -28,10 +28,10 @@ export default function DashboardHeader() {
       <div className="flex flex-1 items-center justify-end gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon" className="relative">
+            <Button variant="outline" size="icon" className="relative hover:bg-blue-50 hover:text-blue-600 border-blue-200">
               <Bell className="h-4 w-4" />
               {notifications > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[10px] text-white">
                   {notifications}
                 </span>
               )}
@@ -69,7 +69,7 @@ export default function DashboardHeader() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative h-8 flex items-center gap-2 rounded-full">
+            <Button variant="ghost" className="relative h-8 flex items-center gap-2 rounded-full hover:!bg-blue-50 hover:!text-blue-600 px-3">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/placeholder-user.jpg" alt="@user" />
                 <AvatarFallback>FZ</AvatarFallback>
