@@ -1,29 +1,34 @@
 import type { Metadata } from 'next'
-import { Quicksand } from 'next/font/google'
+import { Inter, Quicksand } from 'next/font/google'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const quicksand = Quicksand({ 
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-quicksand',
+  subsets: ["latin"],
+  variable: "--font-quicksand",
 })
 
 export const metadata: Metadata = {
-  title: 'GymRoutine Pro',
-  description: 'Plataforma de gestión de rutinas para gimnasios',
+  title: 'FitZone Gym - Dashboard',
+  description: 'Panel de control para administrar tu gimnasio',
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="es">
-      <body className={`${quicksand.variable} font-sans`}>
-        <div className="min-h-screen flex flex-col">
+    <html lang="es" suppressHydrationWarning>
+      <body className={`${quicksand.variable} font-sans antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -11,6 +11,7 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { MoreHorizontal, FileEdit, Trash2, Send, Copy } from "lucide-react"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 export function RoutinesTable() {
   const routines = [
@@ -61,54 +62,85 @@ export function RoutinesTable() {
     },
   ]
 
+  const getLevelVariant = (level: string) => {
+    switch (level) {
+      case "Principiante":
+        return "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
+      case "Intermedio":
+        return "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
+      case "Avanzado":
+        return "bg-gradient-to-r from-red-500 to-red-600 text-white"
+      default:
+        return "default"
+    }
+  }
+
   return (
-    <div className="rounded-md border">
+    <div className="rounded-xl border border-primary/10 overflow-hidden bg-gradient-to-br from-background to-muted/20 shadow-lg">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Nombre</TableHead>
-            <TableHead>Cliente</TableHead>
-            <TableHead>Nivel</TableHead>
-            <TableHead>Ejercicios</TableHead>
-            <TableHead>Duración</TableHead>
-            <TableHead>Creada</TableHead>
-            <TableHead className="text-right">Acciones</TableHead>
+          <TableRow className="bg-gradient-to-r from-muted/30 to-muted/10 border-primary/10 hover:bg-gradient-to-r hover:from-muted/40 hover:to-muted/20">
+            <TableHead className="font-semibold text-foreground">Nombre</TableHead>
+            <TableHead className="font-semibold text-foreground">Cliente</TableHead>
+            <TableHead className="font-semibold text-foreground">Nivel</TableHead>
+            <TableHead className="font-semibold text-foreground">Ejercicios</TableHead>
+            <TableHead className="font-semibold text-foreground">Duración</TableHead>
+            <TableHead className="font-semibold text-foreground">Creada</TableHead>
+            <TableHead className="text-right font-semibold text-foreground">Acciones</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {routines.map((routine) => (
-            <TableRow key={routine.id}>
-              <TableCell className="font-medium">{routine.name}</TableCell>
-              <TableCell>{routine.client}</TableCell>
+          {routines.map((routine, index) => (
+            <motion.tr
+              key={routine.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2, delay: index * 0.05 }}
+              className="border-primary/10 hover:bg-gradient-to-r hover:from-primary/5 hover:to-primary/2 transition-all duration-300 group"
+            >
+              <TableCell className="font-medium group-hover:text-primary transition-colors duration-300">
+                {routine.name}
+              </TableCell>
+              <TableCell className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                {routine.client}
+              </TableCell>
               <TableCell>
-                <Badge
-                  variant={
-                    routine.level === "Principiante"
-                      ? "secondary"
-                      : routine.level === "Intermedio"
-                        ? "default"
-                        : "outline"
-                  }
-                >
+                <Badge className={getLevelVariant(routine.level)}>
                   {routine.level}
                 </Badge>
               </TableCell>
-              <TableCell>{routine.exercises}</TableCell>
-              <TableCell>{routine.duration} min</TableCell>
-              <TableCell>{routine.createdAt}</TableCell>
+              <TableCell className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <span className="font-medium">{routine.exercises}</span> ejercicios
+              </TableCell>
+              <TableCell className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <span className="font-medium">{routine.duration}</span> min
+              </TableCell>
+              <TableCell className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                {routine.createdAt}
+              </TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className="h-8 w-8 hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 hover:scale-105 transition-all duration-300"
+                    >
                       <MoreHorizontal className="h-4 w-4" />
                       <span className="sr-only">Abrir menú</span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+                  <DropdownMenuContent 
+                    align="end" 
+                    className="bg-background/95 backdrop-blur-lg border-primary/20 shadow-xl"
+                  >
+                    <DropdownMenuLabel className="text-primary font-semibold">Acciones</DropdownMenuLabel>
+                    <DropdownMenuSeparator className="bg-primary/20" />
                     <DropdownMenuItem asChild>
-                      <Link href={`/dashboard/routines/${routine.id}`} className="flex items-center cursor-pointer">
+                      <Link 
+                        href={`/dashboard/routines/${routine.id}`} 
+                        className="flex items-center cursor-pointer hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 transition-all duration-300"
+                      >
                         <FileEdit className="mr-2 h-4 w-4" />
                         <span>Ver Detalles</span>
                       </Link>
@@ -116,33 +148,32 @@ export function RoutinesTable() {
                     <DropdownMenuItem asChild>
                       <Link
                         href={`/dashboard/routines/${routine.id}/edit`}
-                        className="flex items-center cursor-pointer"
+                        className="flex items-center cursor-pointer hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 transition-all duration-300"
                       >
                         <FileEdit className="mr-2 h-4 w-4" />
                         <span>Editar</span>
                       </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex items-center cursor-pointer">
+                    <DropdownMenuItem className="flex items-center cursor-pointer hover:bg-gradient-to-r hover:from-emerald-500/10 hover:to-emerald-500/5 transition-all duration-300">
                       <Send className="mr-2 h-4 w-4" />
                       <span>Enviar al Cliente</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex items-center cursor-pointer">
+                    <DropdownMenuItem className="flex items-center cursor-pointer hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-blue-500/5 transition-all duration-300">
                       <Copy className="mr-2 h-4 w-4" />
                       <span>Duplicar</span>
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex items-center text-destructive cursor-pointer">
+                    <DropdownMenuSeparator className="bg-primary/20" />
+                    <DropdownMenuItem className="flex items-center text-destructive cursor-pointer hover:bg-gradient-to-r hover:from-destructive/10 hover:to-destructive/5 transition-all duration-300">
                       <Trash2 className="mr-2 h-4 w-4" />
                       <span>Eliminar</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>
-            </TableRow>
+            </motion.tr>
           ))}
         </TableBody>
       </Table>
     </div>
   )
 }
-

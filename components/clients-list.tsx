@@ -13,7 +13,7 @@ export function ClientsList() {
       status: "active",
       goal: "Pérdida de peso",
       lastActive: "Hace 2 días",
-      avatar: "/placeholder.svg",
+      avatar: null,
     },
     {
       id: 2,
@@ -22,7 +22,7 @@ export function ClientsList() {
       status: "active",
       goal: "Tonificación",
       lastActive: "Hoy",
-      avatar: "/placeholder.svg",
+      avatar: null,
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ export function ClientsList() {
       status: "inactive",
       goal: "Ganancia muscular",
       lastActive: "Hace 1 semana",
-      avatar: "/placeholder.svg",
+      avatar: null,
     },
     {
       id: 4,
@@ -40,7 +40,7 @@ export function ClientsList() {
       status: "active",
       goal: "Resistencia",
       lastActive: "Ayer",
-      avatar: "/placeholder.svg",
+      avatar: null,
     },
   ]
 
@@ -55,17 +55,27 @@ export function ClientsList() {
           className="flex flex-col sm:flex-row sm:items-center justify-between p-5 rounded-lg border hover:shadow-md transition-all duration-300 hover:border-primary/20 bg-gradient-to-r from-background to-background/80"
         >
           <div className="flex items-center gap-4">
-            <Avatar className="h-12 w-12 border-2 border-primary/10">
-              <AvatarImage src={client.avatar} alt={client.name} />
-              <AvatarFallback className="bg-primary/10 text-primary">{client.name.charAt(0)}</AvatarFallback>
-            </Avatar>
+            <div className="relative">
+              <Avatar className="h-12 w-12 border-2 border-primary/20 shadow-md group-hover:border-primary/40 transition-all duration-300">
+                {client.avatar ? (
+                  <AvatarImage src={client.avatar} alt={client.name} />
+                ) : null}
+                <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/30 text-primary font-semibold">
+                  {client.name.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-full border-2 border-background shadow-sm"></div>
+            </div>
             <div>
               <div className="font-medium text-lg">{client.name}</div>
               <div className="text-sm text-muted-foreground">{client.email}</div>
               <div className="flex items-center gap-2 mt-1.5">
                 <Badge 
                   variant={client.status === "active" ? "default" : "secondary"}
-                  className={client.status === "active" ? "bg-green-500/80 hover:bg-green-500" : ""}
+                  className={client.status === "active" 
+                    ? "bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white shadow-sm" 
+                    : "bg-gradient-to-r from-slate-400 to-slate-500 hover:from-slate-500 hover:to-slate-600 text-white"
+                  }
                 >
                   {client.status === "active" ? "Activo" : "Inactivo"}
                 </Badge>

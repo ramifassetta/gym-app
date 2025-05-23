@@ -9,7 +9,6 @@ export function StatsCards() {
       value: "24",
       change: "+2 desde el mes pasado",
       icon: Users,
-      color: "bg-blue-500",
       gradient: "from-blue-500 to-blue-600"
     },
     {
@@ -17,7 +16,6 @@ export function StatsCards() {
       value: "18",
       change: "+3 desde el mes pasado",
       icon: Dumbbell,
-      color: "bg-purple-500",
       gradient: "from-purple-500 to-purple-600"
     },
     {
@@ -25,7 +23,6 @@ export function StatsCards() {
       value: "12",
       change: "Para esta semana",
       icon: Calendar,
-      color: "bg-amber-500",
       gradient: "from-amber-500 to-amber-600"
     },
     {
@@ -33,7 +30,6 @@ export function StatsCards() {
       value: "$2,450",
       change: "+15% desde el mes pasado",
       icon: TrendingUp,
-      color: "bg-emerald-500",
       gradient: "from-emerald-500 to-emerald-600"
     }
   ]
@@ -43,23 +39,21 @@ export function StatsCards() {
       {stats.map((stat, index) => (
         <motion.div
           key={stat.title}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.1 }}
+          transition={{ duration: 0.4, delay: index * 0.1 }}
         >
-          <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-primary/10">
-            <div className={`h-1 w-full bg-gradient-to-r ${stat.gradient}`}></div>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <Card className="overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
+            <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 bg-gradient-to-r from-primary/5 to-primary/10">
               <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-              <div className={`p-2 rounded-full bg-gradient-to-br ${stat.gradient} text-white shadow-sm`}>
+              <div className={`p-2 rounded-lg bg-gradient-to-br ${stat.gradient} text-white shadow-sm`}>
                 <stat.icon className="h-4 w-4" />
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <div className="flex items-center mt-1">
-                <p className="text-xs text-muted-foreground">{stat.change}</p>
-              </div>
+              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">{stat.value}</div>
+              <p className="text-xs text-muted-foreground">{stat.change}</p>
             </CardContent>
           </Card>
         </motion.div>

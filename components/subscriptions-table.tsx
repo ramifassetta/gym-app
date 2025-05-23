@@ -67,35 +67,47 @@ export function SubscriptionsTable() {
   ]
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border border-primary/10">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Cliente</TableHead>
-            <TableHead>Plan</TableHead>
-            <TableHead>Importe</TableHead>
-            <TableHead>Estado</TableHead>
-            <TableHead>Próximo Pago</TableHead>
-            <TableHead>Método</TableHead>
-            <TableHead className="text-right">Acciones</TableHead>
+          <TableRow className="bg-primary/5 hover:bg-primary/5">
+            <TableHead className="font-medium">Cliente</TableHead>
+            <TableHead className="font-medium">Plan</TableHead>
+            <TableHead className="font-medium">Importe</TableHead>
+            <TableHead className="font-medium">Estado</TableHead>
+            <TableHead className="font-medium">Próximo Pago</TableHead>
+            <TableHead className="font-medium">Método</TableHead>
+            <TableHead className="text-right font-medium">Acciones</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {subscriptions.map((subscription) => (
-            <TableRow key={subscription.id}>
+            <TableRow 
+              key={subscription.id}
+              className="hover:bg-primary/5 transition-colors duration-200"
+            >
               <TableCell>
                 <div className="flex items-center gap-3">
-                  <Avatar className="h-8 w-8">
+                  <Avatar className="h-8 w-8 border-2 border-primary/10">
                     <AvatarImage src={subscription.avatar} alt={subscription.client} />
-                    <AvatarFallback>{subscription.client.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="bg-gradient-to-br from-primary/10 to-primary/5">
+                      {subscription.client.charAt(0)}
+                    </AvatarFallback>
                   </Avatar>
                   <span>{subscription.client}</span>
                 </div>
               </TableCell>
-              <TableCell>{subscription.plan}</TableCell>
-              <TableCell>{subscription.amount}</TableCell>
+              <TableCell className="font-medium">{subscription.plan}</TableCell>
+              <TableCell className="font-medium">{subscription.amount}</TableCell>
               <TableCell>
-                <Badge variant={subscription.status === "active" ? "default" : "secondary"}>
+                <Badge 
+                  variant={subscription.status === "active" ? "default" : "secondary"}
+                  className={
+                    subscription.status === "active"
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                      : "bg-gradient-to-r from-primary/10 to-primary/5 text-primary hover:bg-primary/20"
+                  }
+                >
                   {subscription.status === "active" ? "Activa" : "Inactiva"}
                 </Badge>
               </TableCell>
@@ -104,25 +116,29 @@ export function SubscriptionsTable() {
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className="hover:bg-primary/10 hover:text-primary transition-colors duration-200"
+                    >
                       <MoreHorizontal className="h-4 w-4" />
                       <span className="sr-only">Abrir menú</span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="w-[200px]">
                     <DropdownMenuLabel>Acciones</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex items-center cursor-pointer">
+                    <DropdownMenuItem className="flex items-center cursor-pointer hover:bg-primary/5">
                       <Edit className="mr-2 h-4 w-4" />
                       <span>Editar Suscripción</span>
                     </DropdownMenuItem>
                     {subscription.status === "active" ? (
-                      <DropdownMenuItem className="flex items-center cursor-pointer text-destructive">
+                      <DropdownMenuItem className="flex items-center cursor-pointer text-destructive hover:bg-destructive/10">
                         <AlertCircle className="mr-2 h-4 w-4" />
                         <span>Cancelar Suscripción</span>
                       </DropdownMenuItem>
                     ) : (
-                      <DropdownMenuItem className="flex items-center cursor-pointer">
+                      <DropdownMenuItem className="flex items-center cursor-pointer hover:bg-primary/5">
                         <AlertCircle className="mr-2 h-4 w-4" />
                         <span>Reactivar Suscripción</span>
                       </DropdownMenuItem>

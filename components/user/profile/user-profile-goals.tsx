@@ -2,8 +2,26 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { CheckCircle, Clock, Target } from "lucide-react"
+import { motion } from "framer-motion"
 
 export function UserProfileGoals() {
+  const getCategoryVariant = (category: string) => {
+    switch (category.toLowerCase()) {
+      case 'peso':
+        return 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white'
+      case 'composición':
+        return 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+      case 'resistencia':
+        return 'bg-gradient-to-r from-purple-500 to-purple-600 text-white'
+      case 'fuerza':
+        return 'bg-gradient-to-r from-orange-500 to-orange-600 text-white'
+      case 'flexibilidad':
+        return 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
+      default:
+        return 'bg-gradient-to-r from-primary/10 to-primary/5 text-primary'
+    }
+  }
+
   // Datos simulados para los objetivos
   const goals = [
     {
@@ -77,55 +95,81 @@ export function UserProfileGoals() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h3 className="font-medium">Mis Objetivos</h3>
-        <Badge variant="outline">6 objetivos activos</Badge>
+        <h3 className="font-medium text-foreground">
+          Mis Objetivos
+        </h3>
+        <Badge className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+          6 objetivos activos
+        </Badge>
       </div>
 
       <div className="space-y-4">
-        {goals.map((goal) => (
-          <Card key={goal.id}>
-            <CardContent className="p-4">
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="font-medium">{goal.title}</h3>
-                  <p className="text-sm text-muted-foreground">{goal.description}</p>
+        {goals.map((goal, index) => (
+          <motion.div
+            key={goal.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+          >
+            <Card className="overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
+              <CardContent className="p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="font-medium text-foreground">
+                      {goal.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">{goal.description}</p>
+                  </div>
+                  <Badge className={getCategoryVariant(goal.category)}>
+                    {goal.category}
+                  </Badge>
                 </div>
-                <Badge>{goal.category}</Badge>
-              </div>
 
-              <div className="mt-4 space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                  <span>Progreso</span>
-                  <span className="font-medium">{goal.progress}%</span>
+                <div className="mt-4 space-y-2">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Progreso</span>
+                    <span className="font-medium text-primary">
+                      {goal.progress}%
+                    </span>
+                  </div>
+                  <Progress 
+                    value={goal.progress} 
+                    className="h-2 bg-primary/10"
+                  />
                 </div>
-                <Progress value={goal.progress} className="h-2" />
-              </div>
 
-              <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <Target className="h-4 w-4 text-muted-foreground" />
-                  <div>
-                    <p className="text-muted-foreground">Objetivo</p>
-                    <p className="font-medium">{goal.target}</p>
+                <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-sm">
+                      <Target className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Objetivo</p>
+                      <p className="font-medium text-foreground">{goal.target}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-sm">
+                      <CheckCircle className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Actual</p>
+                      <p className="font-medium text-foreground">{goal.current}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 text-white shadow-sm">
+                      <Clock className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-muted-foreground">Fecha límite</p>
+                      <p className="font-medium text-foreground">{goal.deadline}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-muted-foreground" />
-                  <div>
-                    <p className="text-muted-foreground">Actual</p>
-                    <p className="font-medium">{goal.current}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-muted-foreground" />
-                  <div>
-                    <p className="text-muted-foreground">Fecha límite</p>
-                    <p className="font-medium">{goal.deadline}</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </div>

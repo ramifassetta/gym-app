@@ -49,25 +49,28 @@ export function UserPaymentsTable() {
   ]
 
   return (
-    <div className="rounded-md border">
+    <div className="rounded-md border border-primary/10">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Descripción</TableHead>
-            <TableHead>Importe</TableHead>
-            <TableHead>Estado</TableHead>
-            <TableHead>Fecha</TableHead>
-            <TableHead>Método</TableHead>
-            <TableHead className="text-right">Acciones</TableHead>
+          <TableRow className="bg-primary/5 hover:bg-primary/5">
+            <TableHead className="font-medium">ID</TableHead>
+            <TableHead className="font-medium">Descripción</TableHead>
+            <TableHead className="font-medium">Importe</TableHead>
+            <TableHead className="font-medium">Estado</TableHead>
+            <TableHead className="font-medium">Fecha</TableHead>
+            <TableHead className="font-medium">Método</TableHead>
+            <TableHead className="text-right font-medium">Acciones</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {payments.map((payment) => (
-            <TableRow key={payment.id}>
+            <TableRow 
+              key={payment.id}
+              className="hover:bg-primary/5 transition-colors duration-200"
+            >
               <TableCell className="font-medium">{payment.id}</TableCell>
               <TableCell>{payment.description}</TableCell>
-              <TableCell>{payment.amount}</TableCell>
+              <TableCell className="font-medium">{payment.amount}</TableCell>
               <TableCell>
                 <Badge
                   variant={
@@ -76,6 +79,13 @@ export function UserPaymentsTable() {
                       : payment.status === "pending"
                         ? "secondary"
                         : "destructive"
+                  }
+                  className={
+                    payment.status === "completed"
+                      ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                      : payment.status === "pending"
+                        ? "bg-gradient-to-r from-primary/10 to-primary/5 text-primary hover:bg-primary/20"
+                        : "bg-gradient-to-r from-red-500 to-red-600"
                   }
                 >
                   {payment.status === "completed"
@@ -90,17 +100,21 @@ export function UserPaymentsTable() {
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
+                    <Button 
+                      variant="ghost" 
+                      size="icon"
+                      className="hover:bg-primary/10 hover:text-primary transition-colors duration-200"
+                    >
                       <MoreHorizontal className="h-4 w-4" />
                       <span className="sr-only">Abrir menú</span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem className="flex items-center cursor-pointer">
+                  <DropdownMenuContent align="end" className="w-[200px]">
+                    <DropdownMenuItem className="flex items-center cursor-pointer hover:bg-primary/5">
                       <FileText className="mr-2 h-4 w-4" />
                       <span>Ver Factura</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="flex items-center cursor-pointer">
+                    <DropdownMenuItem className="flex items-center cursor-pointer hover:bg-primary/5">
                       <Download className="mr-2 h-4 w-4" />
                       <span>Descargar Factura</span>
                     </DropdownMenuItem>

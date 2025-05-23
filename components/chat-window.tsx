@@ -13,7 +13,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-export function ChatWindow({ chat }) {
+interface Chat {
+  name: string
+  avatar: string | null
+  online: boolean
+}
+
+interface ChatWindowProps {
+  chat: Chat
+}
+
+export function ChatWindow({ chat }: ChatWindowProps) {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([
     {
@@ -66,7 +76,7 @@ export function ChatWindow({ chat }) {
     },
   ])
 
-  const messagesEndRef = useRef(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -90,7 +100,7 @@ export function ChatWindow({ chat }) {
     setMessage("")
   }
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleSendMessage()
@@ -98,45 +108,73 @@ export function ChatWindow({ chat }) {
   }
 
   return (
-    <>
-      <div className="flex items-center justify-between p-4 border-b">
-        <div className="flex items-center gap-3">
-          <Avatar>
-            <AvatarImage src={chat.avatar} alt={chat.name} />
-            <AvatarFallback>{chat.name.charAt(0)}</AvatarFallback>
-          </Avatar>
+    <div className="flex flex-col h-full">
+      <div className="flex-none flex items-center justify-between p-6 border-b border-primary/10 bg-gradient-to-r from-primary/5 to-primary/10">
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <Avatar className="h-12 w-12 border-2 border-primary/20 shadow-md group-hover:border-primary/40 transition-all duration-300">
+              {chat.avatar ? (
+                <AvatarImage src={chat.avatar} alt={chat.name} />
+              ) : null}
+              <AvatarFallback className="bg-gradient-to-br from-primary/20 to-primary/30 text-primary font-semibold">
+                {chat.name.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            {chat.online && (
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 bg-gradient-to-br from-emerald-400 to-emerald-500 border-2 border-background rounded-full animate-pulse-light shadow-sm"></span>
+            )}
+          </div>
           <div>
-            <div className="font-medium">{chat.name}</div>
-            <div className="text-xs text-muted-foreground">{chat.online ? "En línea" : "Desconectado"}</div>
+            <div className="font-semibold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              {chat.name}
+            </div>
+            <div className="text-sm text-muted-foreground flex items-center gap-2">
+              <div className={`w-2 h-2 rounded-full ${chat.online ? 'bg-emerald-500 animate-pulse' : 'bg-muted'}`}></div>
+              {chat.online ? "En línea" : "Desconectado"}
+            </div>
           </div>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="hover:bg-primary/10 hover:text-primary transition-all duration-300">
               <MoreVertical className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem>Ver perfil</DropdownMenuItem>
-            <DropdownMenuItem>Ver rutinas asignadas</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Silenciar conversación</DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive">Eliminar conversación</DropdownMenuItem>
+          <DropdownMenuContent align="end" className="w-48 bg-gradient-to-br from-card to-card/80 backdrop-blur-sm border-primary/20 shadow-xl">
+            <DropdownMenuItem className="hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/20 transition-all duration-200">
+              Ver perfil
+            </DropdownMenuItem>
+            <DropdownMenuItem className="hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/20 transition-all duration-200">
+              Ver rutinas asignadas
+            </DropdownMenuItem>
+            <DropdownMenuSeparator className="bg-primary/20" />
+            <DropdownMenuItem className="hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/20 transition-all duration-200">
+              Silenciar conversación
+            </DropdownMenuItem>
+            <DropdownMenuItem className="text-destructive hover:bg-gradient-to-r hover:from-red-100 hover:to-red-200 dark:hover:from-red-900/30 dark:hover:to-red-800/30 transition-all duration-200">
+              Eliminar conversación
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((msg) => (
-          <div key={msg.id} className={`flex ${msg.sender === "trainer" ? "justify-end" : "justify-start"}`}>
+      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gradient-to-br from-background to-background/80">
+        {messages.map((msg, index) => (
+          <div 
+            key={msg.id} 
+            className={`flex animate-fade-in ${msg.sender === "trainer" ? "justify-end" : "justify-start"}`}
+            style={{ animationDelay: `${index * 0.05}s` }}
+          >
             <div
-              className={`max-w-[80%] rounded-lg p-3 ${
-                msg.sender === "trainer" ? "bg-primary text-primary-foreground" : "bg-muted"
+              className={`max-w-[80%] rounded-2xl p-4 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                msg.sender === "trainer" 
+                  ? "bg-gradient-to-r from-primary to-primary/80 text-white" 
+                  : "bg-gradient-to-br from-card to-card/50 border border-primary/10 text-foreground"
               }`}
             >
-              <div className="text-sm">{msg.text}</div>
+              <div className="text-sm leading-relaxed">{msg.text}</div>
               <div
-                className={`text-xs mt-1 ${
+                className={`text-xs mt-2 ${
                   msg.sender === "trainer" ? "text-primary-foreground/70" : "text-muted-foreground"
                 }`}
               >
@@ -148,24 +186,32 @@ export function ChatWindow({ chat }) {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="border-t p-4">
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="icon">
-            <Paperclip className="h-4 w-4" />
+      <div className="flex-none border-t border-primary/10 bg-gradient-to-r from-primary/5 to-primary/10 p-6">
+        <div className="flex items-center gap-3">
+          <Button 
+            variant="outline" 
+            size="icon"
+            className="border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+          >
+            <Paperclip className="h-4 w-4 text-primary" />
           </Button>
           <Input
             placeholder="Escribe un mensaje..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="flex-1"
+            className="flex-1 bg-gradient-to-r from-background to-background/80 border-primary/20 hover:border-primary/40 focus:border-primary/40 transition-all duration-300"
           />
-          <Button size="icon" onClick={handleSendMessage} disabled={!message.trim()}>
+          <Button 
+            size="icon" 
+            onClick={handleSendMessage} 
+            disabled={!message.trim()}
+            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <Send className="h-4 w-4" />
           </Button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
-

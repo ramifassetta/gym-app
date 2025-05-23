@@ -7,6 +7,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Plus, ChevronLeft, ChevronRight } from "lucide-react"
 import { CalendarEvents } from "@/components/calendar-events"
 import { AddSessionDialog } from "@/components/add-session-dialog"
+import { motion } from "framer-motion"
 
 export default function CalendarPage() {
   const [date, setDate] = useState<Date | undefined>(new Date())
@@ -29,57 +30,114 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h1 className="text-2xl font-bold tracking-tight">Calendario</h1>
-        <Button onClick={() => setIsDialogOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" /> Nueva Sesión
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="h-[calc(100vh-8rem)] flex flex-col"
+    >
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+        className="flex-none flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
+      >
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+            Calendario
+          </h1>
+          <p className="text-muted-foreground mt-1">Gestiona tus sesiones y citas con clientes</p>
+        </div>
+        <Button 
+          onClick={() => setIsDialogOpen(true)}
+          className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+        >
+          <Plus className="mr-2 h-4 w-4" /> 
+          Nueva Sesión
         </Button>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-2">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle>Calendario de Sesiones</CardTitle>
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="icon" onClick={handlePreviousMonth}>
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="icon" onClick={handleNextMonth}>
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
+      <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-8 min-h-0">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="lg:col-span-2"
+        >
+          <Card className="h-full overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
+            <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                    Calendario de Sesiones
+                  </CardTitle>
+                  <CardDescription className="text-base">
+                    Programa y visualiza tus sesiones con clientes
+                  </CardDescription>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={handlePreviousMonth}
+                    className="border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={handleNextMonth}
+                    className="border-primary/20 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
-            </div>
-            <CardDescription>Programa y visualiza tus sesiones con clientes</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md border" />
-          </CardContent>
-        </Card>
+            </CardHeader>
+            <CardContent className="p-6">
+              <Calendar 
+                mode="single" 
+                selected={date} 
+                onSelect={setDate} 
+                className="rounded-xl border border-primary/10 shadow-lg bg-gradient-to-br from-background to-background/80 hover:shadow-xl transition-shadow duration-300" 
+              />
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Sesiones del Día</CardTitle>
-            <CardDescription>
-              {date
-                ? date.toLocaleDateString("es-ES", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })
-                : "Selecciona una fecha"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <CalendarEvents date={date} />
-          </CardContent>
-        </Card>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="h-full"
+        >
+          <Card className="h-full overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
+            <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
+            <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10">
+              <CardTitle className="text-xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                Sesiones del Día
+              </CardTitle>
+              <CardDescription className="text-sm">
+                {date
+                  ? date.toLocaleDateString("es-ES", {
+                      weekday: "long",
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : "Selecciona una fecha"}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              <CalendarEvents date={date} />
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
 
       <AddSessionDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
-    </div>
+    </motion.div>
   )
 }
-
