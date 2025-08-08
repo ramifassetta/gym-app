@@ -102,10 +102,9 @@ const PricingPlan = ({ plan, index }: { plan: typeof pricingPlans[0], index: num
           </ul>
         </CardContent>
         
-        <CardFooter className="mt-auto pt-6 pb-8">
+        <CardFooter className="pt-0">
           <Button 
-            className={`w-full ${plan.popular ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-muted hover:bg-muted/80'}`}
-            variant={plan.popular ? "default" : "outline"}
+            className={`w-full ${plan.popular ? 'bg-primary hover:bg-primary/90' : 'bg-primary/10 text-primary hover:bg-primary hover:text-white'}`}
           >
             {plan.ctaText}
           </Button>
@@ -118,11 +117,12 @@ const PricingPlan = ({ plan, index }: { plan: typeof pricingPlans[0], index: num
 const Pricing: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1">
+      <main className="flex-1 pt-16 sm:pt-20">
         <section className="relative overflow-hidden bg-gradient-gym text-white py-16 rounded-md">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute top-1/2 -left-24 w-72 h-72 bg-accent/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-24 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl"></div>
           </div>
           
           <div className="container mx-auto px-4 relative z-10">

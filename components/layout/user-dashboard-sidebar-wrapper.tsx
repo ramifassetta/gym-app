@@ -7,6 +7,10 @@ const UserDashboardSidebar = dynamic(
   { ssr: false }
 )
 
-export default function UserDashboardSidebarWrapper() {
-  return <UserDashboardSidebar />
+interface UserDashboardSidebarWrapperProps {
+  onClose?: () => void
+}
+
+export default function UserDashboardSidebarWrapper({ onClose }: UserDashboardSidebarWrapperProps) {
+  return <UserDashboardSidebar onClose={onClose} />
 } 

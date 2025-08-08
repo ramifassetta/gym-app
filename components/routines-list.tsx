@@ -1,10 +1,15 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Dumbbell, Clock, Calendar } from "lucide-react"
+import { useState } from "react"
+import { Dumbbell, Clock, Calendar, Eye, FileEdit } from "lucide-react"
 import { motion } from "framer-motion"
+import { RoutineDetailsModal } from "./routine-details-modal"
+import { EditRoutineModal } from "./edit-routine-modal"
 
 export function RoutinesList() {
+  const [selectedRoutine, setSelectedRoutine] = useState<any>(null);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const routines = [
     {
       id: 1,
@@ -47,6 +52,50 @@ export function RoutinesList() {
     }
   };
 
+  const handleViewDetails = (routineId: number) => {
+    const routine = routines.find(r => r.id === routineId);
+    if (routine) {
+      // Agregar ejercicios de ejemplo para el modal de detalles
+      const routineWithExercises = {
+        ...routine,
+        exercises: [
+          { id: 1, name: "Press de banca", sets: 4, reps: "8-10", rest: "90s", notes: "Mantener la espalda apoyada" },
+          { id: 2, name: "Sentadillas", sets: 3, reps: "12-15", rest: "60s", notes: "Pies al ancho de hombros" },
+          { id: 3, name: "Peso muerto", sets: 3, reps: "8-10", rest: "120s", notes: "Mantener la espalda recta" },
+          { id: 4, name: "Press militar", sets: 3, reps: "10-12", rest: "90s", notes: "Controlar el movimiento" },
+          { id: 5, name: "Remo con barra", sets: 4, reps: "10-12", rest: "60s", notes: "Apretar los omóplatos" },
+          { id: 6, name: "Curl de bíceps", sets: 3, reps: "12-15", rest: "45s", notes: "Controlar el descenso" },
+          { id: 7, name: "Extensiones de tríceps", sets: 3, reps: "12-15", rest: "45s", notes: "Mantener los codos fijos" },
+          { id: 8, name: "Plancha", sets: 3, reps: "30s", rest: "30s", notes: "Mantener el cuerpo recto" }
+        ].slice(0, routine.exercises)
+      };
+      setSelectedRoutine(routineWithExercises);
+      setIsDetailsModalOpen(true);
+    }
+  }
+
+  const handleEditRoutine = (routineId: number) => {
+    const routine = routines.find(r => r.id === routineId);
+    if (routine) {
+      // Agregar ejercicios de ejemplo para el modal de edición
+      const routineWithExercises = {
+        ...routine,
+        exercises: [
+          { id: 1, name: "Press de banca", sets: 4, reps: "8-10", rest: "90s", notes: "Mantener la espalda apoyada" },
+          { id: 2, name: "Sentadillas", sets: 3, reps: "12-15", rest: "60s", notes: "Pies al ancho de hombros" },
+          { id: 3, name: "Peso muerto", sets: 3, reps: "8-10", rest: "120s", notes: "Mantener la espalda recta" },
+          { id: 4, name: "Press militar", sets: 3, reps: "10-12", rest: "90s", notes: "Controlar el movimiento" },
+          { id: 5, name: "Remo con barra", sets: 4, reps: "10-12", rest: "60s", notes: "Apretar los omóplatos" },
+          { id: 6, name: "Curl de bíceps", sets: 3, reps: "12-15", rest: "45s", notes: "Controlar el descenso" },
+          { id: 7, name: "Extensiones de tríceps", sets: 3, reps: "12-15", rest: "45s", notes: "Mantener los codos fijos" },
+          { id: 8, name: "Plancha", sets: 3, reps: "30s", rest: "30s", notes: "Mantener el cuerpo recto" }
+        ].slice(0, routine.exercises)
+      };
+      setSelectedRoutine(routineWithExercises);
+      setIsEditModalOpen(true);
+    }
+  }
+
   return (
     <div className="space-y-4">
       {routines.map((routine, index) => (
@@ -83,17 +132,47 @@ export function RoutinesList() {
           </div>
 
           <div className="flex justify-end gap-2 mt-5">
-            <Link href={`/dashboard/routines/${routine.id}`}>
-              <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary hover:bg-primary/5">
-                Ver Detalles
-              </Button>
-            </Link>
-            <Link href={`/dashboard/routines/${routine.id}/edit`}>
-              <Button size="sm" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary shadow-sm hover:shadow">Editar</Button>
-            </Link>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="border-primary/20 hover:border-primary hover:bg-primary/5"
+              onClick={() => handleViewDetails(routine.id)}
+            >
+              <Eye className="mr-2 h-4 w-4" />
+              Ver Detalles
+            </Button>
+            <Button 
+              size="sm" 
+              className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary shadow-sm hover:shadow"
+              onClick={() => handleEditRoutine(routine.id)}
+            >
+              <FileEdit className="mr-2 h-4 w-4" />
+              Editar
+            </Button>
           </div>
         </motion.div>
       ))}
+      
+      {/* Modales */}
+      <RoutineDetailsModal
+        open={isDetailsModalOpen}
+        onOpenChange={(open) => setIsDetailsModalOpen(open)}
+        routine={selectedRoutine}
+        onEdit={handleEditRoutine}
+        onSend={() => {}}
+        onDuplicate={() => {}}
+        onDelete={() => {}}
+      />
+
+      <EditRoutineModal
+        open={isEditModalOpen}
+        onOpenChange={(open) => setIsEditModalOpen(open)}
+        routine={selectedRoutine}
+        onSave={(updatedRoutine) => {
+          console.log("Rutina actualizada:", updatedRoutine);
+          setIsEditModalOpen(false);
+        }}
+      />
     </div>
   )
 }

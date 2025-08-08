@@ -1,24 +1,37 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ExerciseSelector } from "@/components/exercise-selector"
 import { ExerciseList } from "@/components/exercise-list"
-import { ArrowLeft, Save } from "lucide-react"
-import Link from "next/link"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Save, X } from "lucide-react"
 
-export default function CreateRoutinePage() {
-  const router = useRouter()
+interface CreateRoutineFromClientModalProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  clientId?: number
+  clientName?: string
+  onRoutineCreated?: () => void
+}
+
+export function CreateRoutineFromClientModal({ 
+  open, 
+  onOpenChange, 
+  clientId, 
+  clientName,
+  onRoutineCreated 
+}: CreateRoutineFromClientModalProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedExercises, setSelectedExercises] = useState([])
+  const [selectedExercises, setSelectedExercises] = useState<any[]>([])
+
+  console.log("CreateRoutineFromClientModal renderizado, open:", open, "clientId:", clientId)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,33 +40,36 @@ export default function CreateRoutinePage() {
     // Simulación de creación de rutina
     setTimeout(() => {
       setIsLoading(false)
-      router.push("/dashboard/routines")
+      onOpenChange(false)
+      if (onRoutineCreated) {
+        onRoutineCreated()
+      }
     }, 1500)
   }
 
-  const handleAddExercise = (exercise) => {
+  const handleAddExercise = (exercise: any) => {
     setSelectedExercises([...selectedExercises, exercise])
   }
 
-  const handleRemoveExercise = (index) => {
+  const handleRemoveExercise = (index: number) => {
     const updatedExercises = [...selectedExercises]
     updatedExercises.splice(index, 1)
     setSelectedExercises(updatedExercises)
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-4">
-        <Link href="/dashboard/routines">
-          <Button variant="outline" size="icon">
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-        </Link>
-        <h1 className="text-2xl font-bold tracking-tight">Crear Nueva Rutina</h1>
-      </div>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold">
+            Crear Rutina para {clientName || "Cliente"}
+          </DialogTitle>
+          <DialogDescription>
+            Completa la información para crear una nueva rutina de ejercicios
+          </DialogDescription>
+        </DialogHeader>
 
-      <form onSubmit={handleSubmit}>
-        <div className="grid gap-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Información de la Rutina</CardTitle>
@@ -68,16 +84,12 @@ export default function CreateRoutinePage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="client">Cliente</Label>
-                  <Select>
-                    <SelectTrigger id="client">
-                      <SelectValue placeholder="Seleccionar cliente" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="client1">Juan Pérez</SelectItem>
-                      <SelectItem value="client2">María García</SelectItem>
-                      <SelectItem value="client3">Carlos López</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Input 
+                    id="client" 
+                    value={clientName || ""} 
+                    disabled 
+                    className="bg-muted"
+                  />
                 </div>
 
                 <div className="space-y-2">
@@ -125,18 +137,23 @@ export default function CreateRoutinePage() {
             </CardContent>
           </Card>
 
-          <CardFooter className="flex justify-end gap-4 pt-6">
-            <Button variant="outline" type="button" onClick={() => router.push("/dashboard/routines")}>
+          <div className="flex justify-end gap-4 pt-6">
+            <Button 
+              variant="outline" 
+              type="button" 
+              onClick={() => onOpenChange(false)}
+              disabled={isLoading}
+            >
+              <X className="mr-2 h-4 w-4" />
               Cancelar
             </Button>
             <Button type="submit" disabled={isLoading}>
               <Save className="mr-2 h-4 w-4" />
               {isLoading ? "Guardando..." : "Guardar Rutina"}
             </Button>
-          </CardFooter>
-        </div>
-      </form>
-    </div>
+          </div>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
-}
-
+} 

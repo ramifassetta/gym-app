@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
+import { Search, MessageCircle } from "lucide-react"
 import { MessagesList } from "@/components/messages-list"
 import { ChatWindow } from "@/components/chat-window"
 import { motion } from "framer-motion"
@@ -91,7 +91,7 @@ export default function MessagesPage() {
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center text-center space-y-4 p-6">
                 <div className="bg-gradient-to-r from-primary/10 to-primary/5 rounded-full p-8">
-                  <div className="text-4xl">💬</div>
+                  <MessageCircle className="h-12 w-12 text-primary" />
                 </div>
                 <div className="space-y-2">
                   <div className="text-lg font-medium bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">

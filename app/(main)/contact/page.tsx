@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, Mail, Phone, MapPin, Send } from "lucide-react";
-import { motion } from "framer-motion";
+
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
 
 const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -17,17 +22,12 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulación de envío del formulario
+    
+    // Simulación de envío
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 1500);
-  };
-
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
+    }, 2000);
   };
 
   return (

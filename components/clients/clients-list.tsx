@@ -1,9 +1,16 @@
+"use client"
+
+import { useState } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { CreateRoutineFromClientModal } from "@/components/create-routine-from-client-modal"
 
 export function ClientsList() {
+  const [modalOpen, setModalOpen] = useState(false)
+  const [selectedClient, setSelectedClient] = useState<{ id: number; name: string } | null>(null)
+
   const clients = [
     {
       id: 1,
@@ -43,39 +50,61 @@ export function ClientsList() {
     },
   ]
 
+  const handleCreateRoutine = (client: { id: number; name: string }) => {
+    setSelectedClient(client)
+    setModalOpen(true)
+  }
+
+  const handleRoutineCreated = () => {
+    console.log("Rutina creada exitosamente para:", selectedClient?.name)
+  }
+
   return (
-    <div className="space-y-4">
-      {clients.map((client) => (
-        <div key={client.id} className="flex items-center justify-between p-4 rounded-lg border">
-          <div className="flex items-center gap-4">
-            <Avatar>
-              <AvatarImage src={client.avatar} alt={client.name} />
-              <AvatarFallback>{client.name.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div>
-              <div className="font-medium">{client.name}</div>
-              <div className="text-sm text-muted-foreground">{client.email}</div>
-              <div className="flex items-center gap-2 mt-1">
-                <Badge variant={client.status === "active" ? "default" : "secondary"}>
-                  {client.status === "active" ? "Activo" : "Inactivo"}
-                </Badge>
-                <span className="text-xs text-muted-foreground">{client.goal}</span>
+    <>
+      <div className="space-y-4">
+        {clients.map((client) => (
+          <div key={client.id} className="flex items-center justify-between p-4 rounded-lg border">
+            <div className="flex items-center gap-4">
+              <Avatar>
+                <AvatarImage src={client.avatar} alt={client.name} />
+                <AvatarFallback>{client.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div>
+                <div className="font-medium">{client.name}</div>
+                <div className="text-sm text-muted-foreground">{client.email}</div>
+                <div className="flex items-center gap-2 mt-1">
+                  <Badge variant={client.status === "active" ? "default" : "secondary"}>
+                    {client.status === "active" ? "Activo" : "Inactivo"}
+                  </Badge>
+                  <span className="text-xs text-muted-foreground">{client.goal}</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Link href={`/dashboard/clients/${client.id}`}>
-              <Button variant="outline" size="sm">
-                Ver Perfil
+            <div className="flex items-center gap-2">
+              <Link href={`/dashboard/clients/${client.id}`}>
+                <Button variant="outline" size="sm">
+                  Ver Perfil
+                </Button>
+              </Link>
+              <Button 
+                size="sm"
+                onClick={() => handleCreateRoutine(client)}
+              >
+                Crear Rutina
               </Button>
-            </Link>
-            <Link href={`/dashboard/routines/create?client=${client.id}`}>
-              <Button size="sm">Crear Rutina</Button>
-            </Link>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+
+      <CreateRoutineFromClientModal 
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        clientId={selectedClient?.id}
+        clientName={selectedClient?.name}
+        onRoutineCreated={handleRoutineCreated}
+      />
+    </>
   )
 }
 

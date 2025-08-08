@@ -33,21 +33,21 @@ const SiteHeader: React.FC = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         isHomePage 
           ? scrolled 
-            ? 'bg-white/90 backdrop-blur-md py-3 shadow-md' 
-            : 'bg-transparent py-5'
-          : 'bg-white/90 backdrop-blur-md py-3 shadow-md'
+            ? 'bg-white/95 backdrop-blur-md py-3 shadow-md' 
+            : 'bg-gradient-gym/20 backdrop-blur-sm py-5'
+          : 'bg-white/95 backdrop-blur-md py-3 shadow-md'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className={`p-2 rounded-lg ${isHomePage ? (scrolled ? 'bg-primary' : 'bg-white/20 backdrop-blur-sm') : 'bg-primary'}`}>
-              <Dumbbell className={`h-6 w-6 ${isHomePage ? (scrolled ? 'text-white' : 'text-white') : 'text-white'}`} />
-            </div>
-            <span className={`text-xl font-bold ${isHomePage ? (scrolled ? 'text-primary' : 'text-white') : 'text-primary'}`}>
-              GymRoutine Pro
-            </span>
-          </Link>
+                      <Link href="/" className="flex items-center space-x-2">
+              <div className={`p-2 rounded-lg ${isHomePage ? (scrolled ? 'bg-primary' : 'bg-white/30 backdrop-blur-sm') : 'bg-primary'}`}>
+                <Dumbbell className={`h-6 w-6 text-white`} />
+              </div>
+              <span className={`text-xl font-bold ${isHomePage ? (scrolled ? 'text-primary' : 'text-white') : 'text-primary'}`}>
+                GymRoutine Pro
+              </span>
+            </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -67,31 +67,31 @@ const SiteHeader: React.FC = () => {
             </nav>
             
             <div className="flex space-x-3">
-              <Link href="/login">
-                <Button
-                  variant="outline"
-                  className={isHomePage 
-                    ? (scrolled 
-                      ? "border-primary text-primary hover:bg-primary hover:text-white" 
-                      : "bg-transparent border-white text-white hover:bg-white/10")
-                    : "border-primary text-primary hover:bg-primary hover:text-white"
-                  }
-                >
-                  Iniciar Sesión
-                </Button>
-              </Link>
-              <Link href="/register">
-                <Button 
-                  className={isHomePage 
-                    ? (scrolled 
-                      ? "bg-primary text-white hover:bg-primary/90" 
-                      : "bg-white text-primary hover:bg-white/90")
-                    : "bg-primary text-white hover:bg-primary/90"
-                  }
-                >
-                  Registrarse
-                </Button>
-              </Link>
+                              <Link href="/login">
+                  <Button
+                    variant="outline"
+                    className={isHomePage 
+                      ? (scrolled 
+                        ? "border-primary text-primary hover:bg-primary hover:text-white" 
+                        : "bg-transparent border-white text-white hover:bg-white/10")
+                      : "border-primary text-primary hover:bg-primary hover:text-white"
+                    }
+                  >
+                    Iniciar Sesión
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button 
+                    className={isHomePage 
+                      ? (scrolled 
+                        ? "bg-primary text-white hover:bg-primary/90" 
+                        : "bg-white text-primary hover:bg-white/90")
+                      : "bg-primary text-white hover:bg-primary/90"
+                    }
+                  >
+                    Registrarse
+                  </Button>
+                </Link>
             </div>
           </div>
           

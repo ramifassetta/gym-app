@@ -7,6 +7,10 @@ const DashboardSidebar = dynamic(
   { ssr: false }
 )
 
-export default function DashboardSidebarWrapper() {
-  return <DashboardSidebar />
+interface DashboardSidebarWrapperProps {
+  onClose?: () => void
+}
+
+export default function DashboardSidebarWrapper({ onClose }: DashboardSidebarWrapperProps) {
+  return <DashboardSidebar onClose={onClose} />
 } 

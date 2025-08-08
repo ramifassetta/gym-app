@@ -139,7 +139,7 @@ export function UserRoutineExercises({ routineId }: { routineId: number }) {
       {exercises.map((exercise) => (
         <Card
           key={exercise.id}
-          className={exercise.completed ? "border-green-200 bg-green-50/50 dark:bg-green-900/10" : ""}
+          className={exercise.completed ? "border-green-200 bg-green-50/50" : ""}
         >
           <CardContent className="p-0">
             <div className="flex items-center justify-between p-4">

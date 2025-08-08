@@ -16,6 +16,7 @@ import {
   ChevronLeft,
   ChevronRight,
   User,
+  X,
 } from "lucide-react"
 
 const navItems = [
@@ -63,7 +64,11 @@ const navItems = [
   },
 ]
 
-export default function UserDashboardSidebar() {
+interface UserDashboardSidebarProps {
+  onClose?: () => void
+}
+
+export default function UserDashboardSidebar({ onClose }: UserDashboardSidebarProps) {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
 
@@ -73,26 +78,40 @@ export default function UserDashboardSidebar() {
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "flex flex-col border-r bg-gradient-to-b from-background to-muted/30 backdrop-blur-sm transition-all duration-300 shadow-lg",
+        "flex flex-col border-r bg-background transition-all duration-300 shadow-lg h-full",
         isCollapsed ? "w-[70px]" : "w-[240px]",
       )}
     >
-      <div className="flex h-16 items-center border-b border-border/50 px-4 bg-gradient-to-r from-primary/10 to-primary/5">
-        <Link href="/user-dashboard" className="flex items-center gap-2 group">
-          <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white shadow-md group-hover:shadow-lg transition-all duration-300">
-            <Dumbbell className="h-5 w-5" />
-          </div>
-          {!isCollapsed && (
-            <motion.span 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              className="font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+      <div className="flex h-16 items-center border-b border-border px-4 bg-background">
+        <div className="flex items-center justify-between w-full">
+          <Link href="/user-dashboard" className="flex items-center gap-2 group">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-primary to-primary/80 text-white shadow-md group-hover:shadow-lg transition-all duration-300">
+              <Dumbbell className="h-5 w-5" />
+            </div>
+            {!isCollapsed && (
+              <motion.span 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+                className="font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+              >
+                GymRoutine Pro
+              </motion.span>
+            )}
+          </Link>
+          
+          {/* Botón de cerrar para móviles */}
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onClose}
+              className="lg:hidden"
             >
-              GymRoutine Pro
-            </motion.span>
+              <X className="h-4 w-4" />
+            </Button>
           )}
-        </Link>
+        </div>
       </div>
       
       <div className="flex-1 overflow-auto py-4">
@@ -111,14 +130,15 @@ export default function UserDashboardSidebar() {
                   className={cn(
                     "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all duration-300 group relative overflow-hidden",
                     isActive
-                      ? "bg-gradient-to-r from-primary/20 to-primary/10 text-primary font-medium shadow-md border border-primary/20"
-                      : "text-muted-foreground hover:bg-gradient-to-r hover:from-muted hover:to-muted/50 hover:text-foreground hover:shadow-sm",
+                      ? "bg-primary/10 text-primary font-medium shadow-sm border border-primary/20"
+                      : "text-foreground hover:bg-muted hover:text-foreground hover:shadow-sm",
                   )}
+                  onClick={onClose} // Cerrar sidebar en móvil al hacer clic
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl"
+                      className="absolute inset-0 bg-primary/5 rounded-xl"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.2 }}
@@ -129,7 +149,7 @@ export default function UserDashboardSidebar() {
                     "p-1.5 rounded-lg transition-all duration-300 relative z-10",
                     isActive 
                       ? `bg-gradient-to-br ${item.gradient} text-white shadow-sm`
-                      : "group-hover:bg-gradient-to-br group-hover:from-muted-foreground/20 group-hover:to-muted-foreground/10"
+                      : "group-hover:bg-muted-foreground/20"
                   )}>
                     <item.icon className="h-4 w-4" />
                   </div>
@@ -150,11 +170,12 @@ export default function UserDashboardSidebar() {
         </nav>
       </div>
       
-      <div className="mt-auto border-t border-border/50 p-3 bg-gradient-to-r from-muted/20 to-muted/10">
+      {/* Botón de contraer solo en desktop */}
+      <div className="hidden lg:block mt-auto border-t border-border p-3 bg-muted/20">
         <Button
           variant="ghost"
           size="sm"
-          className="w-full h-10 justify-center hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 transition-all duration-300 rounded-xl"
+          className="w-full h-10 justify-center hover:bg-primary/10 hover:text-primary transition-all duration-300 rounded-xl"
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           <motion.div

@@ -1,204 +1,152 @@
-'use client';
+"use client"
 
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, Award, Users, Clock, Dumbbell, ArrowRight } from "lucide-react";
+import { ArrowLeft, Users, Target, Award, Heart } from "lucide-react";
 
 const About: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1">
+      <main className="flex-1 pt-16 sm:pt-20">
         {/* About Content Section */}
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div>
-              <motion.div
-                className="mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Link href="/" className="inline-flex items-center text-gray-600 hover:text-primary">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Volver al inicio
-                </Link>
-              </motion.div>
-
-              <motion.div 
-                className="prose max-w-none mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <p className="text-lg mb-6">
-                  En GymRoutine Pro, nos dedicamos a transformar la forma en que los gimnasios y entrenadores gestionan
-                  las rutinas de ejercicios y la comunicación con sus clientes. Nuestra plataforma nació de la necesidad
-                  de digitalizar y optimizar los procesos que tradicionalmente se realizaban en papel.
+              <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Volver al inicio
+              </Link>
+            </div>
+            
+            <motion.div 
+              className="max-w-4xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="text-center mb-12">
+                <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                  Sobre GymRoutine Pro
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                  Somos una plataforma innovadora que transforma la gestión de gimnasios, 
+                  conectando entrenadores y clientes de manera digital y eficiente.
                 </p>
-
-                <motion.h2 
-                  className="text-3xl font-bold mt-12 mb-6 gradient-text"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  viewport={{ once: true }}
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  Nuestra Historia
-                </motion.h2>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  <p className="mb-6">
-                    Fundada en 2020 por un equipo de entrenadores personales y desarrolladores de software, GymRoutine Pro
-                    surgió como respuesta a los desafíos que enfrentaban los profesionales del fitness para gestionar
-                    eficientemente las rutinas de sus clientes y hacer seguimiento de su progreso.
+                  <h2 className="text-3xl font-bold mb-6">Nuestra Misión</h2>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    Facilitar la gestión de gimnasios y mejorar la experiencia de entrenamiento 
+                    mediante tecnología innovadora que conecta entrenadores y clientes de manera 
+                    eficiente y personalizada.
                   </p>
-                  <p className="mb-6">
-                    Lo que comenzó como una simple herramienta para crear rutinas digitales ha evolucionado hasta
-                    convertirse en una plataforma integral que conecta gimnasios, entrenadores y usuarios, facilitando la
-                    comunicación, el seguimiento del progreso y la gestión de pagos en un solo lugar.
+                  <p className="text-muted-foreground leading-relaxed">
+                    Creemos que cada cliente es único y merece una atención personalizada. 
+                    Nuestra plataforma permite a los entrenadores crear rutinas específicas, 
+                    hacer seguimiento del progreso y mantener una comunicación constante con sus clientes.
                   </p>
                 </motion.div>
-
-                <motion.h2 
-                  className="text-3xl font-bold mt-12 mb-6 gradient-text"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  viewport={{ once: true }}
+                
+                <motion.div 
+                  className="relative"
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
                 >
-                  Nuestra Misión
-                </motion.h2>
-                <motion.p 
-                  className="mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  Nuestra misión es empoderar a gimnasios y entrenadores con herramientas digitales que les permitan
-                  ofrecer un servicio más personalizado y eficiente, mientras ayudamos a los usuarios a alcanzar sus
-                  objetivos de fitness de manera más efectiva a través de rutinas personalizadas y seguimiento constante.
-                </motion.p>
-
-                <motion.h2 
-                  className="text-3xl font-bold mt-12 mb-6 gradient-text"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  Nuestros Valores
-                </motion.h2>
-                <motion.ul 
-                  className="list-disc pl-6 mb-12 space-y-4"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  <li className="pl-2">
-                    <strong className="text-primary font-medium">Innovación:</strong> Buscamos constantemente nuevas formas de mejorar nuestra plataforma.
-                  </li>
-                  <li className="pl-2">
-                    <strong className="text-primary font-medium">Personalización:</strong> Creemos en soluciones adaptadas a las necesidades específicas.
-                  </li>
-                  <li className="pl-2">
-                    <strong className="text-primary font-medium">Accesibilidad:</strong> Hacemos que la tecnología fitness sea accesible para todos.
-                  </li>
-                  <li className="pl-2">
-                    <strong className="text-primary font-medium">Comunidad:</strong> Fomentamos una comunidad de apoyo entre profesionales y usuarios.
-                  </li>
-                  <li className="pl-2">
-                    <strong className="text-primary font-medium">Resultados:</strong> Nos enfocamos en ayudar a todos a alcanzar sus objetivos de fitness.
-                  </li>
-                </motion.ul>
-              </motion.div>
-
-              {/* Cards Section */}
-              <div className="mb-16">
-                <motion.h2 
-                  className="text-3xl font-bold text-center mb-12 gradient-text"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                  viewport={{ once: true }}
-                >
-                  Lo que nos hace diferentes
-                </motion.h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[
-                    {
-                      icon: <Award className="h-12 w-12 text-white mb-4" />,
-                      title: "Excelencia",
-                      description: "Comprometidos con ofrecer la mejor plataforma de gestión de rutinas del mercado."
-                    },
-                    {
-                      icon: <Users className="h-12 w-12 text-white mb-4" />,
-                      title: "Comunidad",
-                      description: "Más de 500 gimnasios y 2,000 entrenadores confían en nuestra plataforma."
-                    },
-                    {
-                      icon: <Clock className="h-12 w-12 text-white mb-4" />,
-                      title: "Eficiencia",
-                      description: "Ahorra hasta 10 horas semanales en la gestión de rutinas y clientes."
-                    },
-                    {
-                      icon: <Dumbbell className="h-12 w-12 text-white mb-4" />,
-                      title: "Especialización",
-                      description: "Diseñado específicamente para las necesidades del sector fitness."
-                    }
-                  ].map((card, index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-                      viewport={{ once: true }}
-                    >
-                      <Card className="bg-gradient-gym border-none overflow-hidden h-full">
-                        <CardContent className="p-6 flex flex-col items-center text-center text-white h-full">
-                          <div className="bg-white/10 backdrop-blur-sm p-3 rounded-full mb-4">
-                            {card.icon}
-                          </div>
-                          <h3 className="text-xl font-bold mb-2">{card.title}</h3>
-                          <p className="text-white/80">
-                            {card.description}
-                          </p>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
+                  <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl p-8">
+                    <div className="grid grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
+                          <Users className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-semibold mb-1">+1000</h3>
+                        <p className="text-sm text-muted-foreground">Clientes activos</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
+                          <Target className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-semibold mb-1">+50</h3>
+                        <p className="text-sm text-muted-foreground">Gimnasios</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
+                          <Award className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-semibold mb-1">98%</h3>
+                        <p className="text-sm text-muted-foreground">Satisfacción</p>
+                      </div>
+                      <div className="text-center">
+                        <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
+                          <Heart className="h-6 w-6 text-primary" />
+                        </div>
+                        <h3 className="font-semibold mb-1">24/7</h3>
+                        <p className="text-sm text-muted-foreground">Soporte</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-
-              {/* CTA Section */}
+              
               <motion.div 
-                className="text-center mb-12 bg-white/5 backdrop-blur-sm p-10 rounded-xl border border-white/10 shadow-xl"
+                className="text-center"
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                viewport={{ once: true }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-6 gradient-text">¿Listo para transformar tu gimnasio?</h2>
-                <p className="text-lg mb-8 text-muted-foreground max-w-xl mx-auto">
-                  Únete a cientos de gimnasios que ya han mejorado la forma en que gestionan sus rutinas y clientes.
+                <h2 className="text-3xl font-bold mb-6">¿Por qué elegir GymRoutine Pro?</h2>
+                <p className="text-muted-foreground mb-8 max-w-3xl mx-auto">
+                  Nuestra plataforma está diseñada pensando en las necesidades reales de los gimnasios 
+                  y sus clientes, ofreciendo una solución completa y fácil de usar.
                 </p>
-                <Link href="/register">
-                  <Button size="lg" className="bg-gradient-gym text-white hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                    Comenzar Ahora
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                
+                <div className="grid md:grid-cols-3 gap-8 mb-12">
+                  <div className="text-center">
+                    <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
+                      <Users className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">Gestión Simplificada</h3>
+                    <p className="text-muted-foreground">
+                      Administra clientes, rutinas y pagos desde una sola plataforma intuitiva.
+                    </p>
+                  </div>
+                  
+                  <div className="text-center">
+                    <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
+                      <Target className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">Personalización Total</h3>
+                    <p className="text-muted-foreground">
+                      Crea rutinas únicas adaptadas a las necesidades específicas de cada cliente.
+                    </p>
+                  </div>
+                  
+                  <div className="text-center">
+                    <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
+                      <Award className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-3">Resultados Medibles</h3>
+                    <p className="text-muted-foreground">
+                      Seguimiento detallado del progreso y análisis de rendimiento en tiempo real.
+                    </p>
+                  </div>
+                </div>
+                
+                <Link href="/contact">
+                  <Button size="lg" className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300">
+                    Contáctanos
                   </Button>
                 </Link>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         </section>
       </main>

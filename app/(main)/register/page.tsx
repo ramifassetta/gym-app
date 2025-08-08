@@ -79,26 +79,26 @@ const Register: React.FC = () => {
                 <div className="grid grid-cols-1 gap-4 mt-4">
                   <Button
                     onClick={() => setUserType('gym')}
-                    className="h-auto py-6 px-4 bg-gradient-gym hover:opacity-90 transition-opacity shadow-md hover:shadow-lg"
+                    className="h-auto py-6 px-4 bg-gradient-gym hover:opacity-90 transition-opacity shadow-md hover:shadow-lg text-white"
                   >
                     <div className="flex flex-col items-center gap-2">
                       <Building2 className="h-8 w-8" />
                       <div className="text-center">
-                        <div className="font-semibold">Gimnasio</div>
-                        <div className="text-sm text-white/80">Registra tu gimnasio y gestiona tus clientes</div>
+                        <div className="font-semibold text-base">Gimnasio</div>
+                        <div className="text-xs sm:text-sm text-white/80 mt-1 px-1">Registra tu gimnasio y gestiona tus clientes</div>
                       </div>
                     </div>
                   </Button>
 
                   <Button
                     onClick={() => setUserType('user')}
-                    className="h-auto py-6 px-4 bg-gradient-feature hover:opacity-90 transition-opacity shadow-md hover:shadow-lg"
+                    className="h-auto py-6 px-4 bg-gradient-feature hover:opacity-90 transition-opacity shadow-md hover:shadow-lg text-white"
                   >
                     <div className="flex flex-col items-center gap-2">
                       <User className="h-8 w-8" />
                       <div className="text-center">
-                        <div className="font-semibold">Usuario</div>
-                        <div className="text-sm text-white/80">Únete a un gimnasio y sigue tus rutinas</div>
+                        <div className="font-semibold text-base">Usuario</div>
+                        <div className="text-xs sm:text-sm text-white/80 mt-1 px-1">Únete a un gimnasio y sigue tus rutinas</div>
                       </div>
                     </div>
                   </Button>

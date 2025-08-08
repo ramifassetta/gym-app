@@ -151,7 +151,7 @@ export function ChatWindow({ chat }: ChatWindowProps) {
             <DropdownMenuItem className="hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/20 transition-all duration-200">
               Silenciar conversación
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-destructive hover:bg-gradient-to-r hover:from-red-100 hover:to-red-200 dark:hover:from-red-900/30 dark:hover:to-red-800/30 transition-all duration-200">
+            <DropdownMenuItem className="text-destructive hover:bg-gradient-to-r hover:from-red-100 hover:to-red-200 transition-all duration-200">
               Eliminar conversación
             </DropdownMenuItem>
           </DropdownMenuContent>

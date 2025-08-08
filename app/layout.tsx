@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Quicksand } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/theme-provider'
 
 const quicksand = Quicksand({ 
   subsets: ["latin"],
@@ -21,14 +20,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${quicksand.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   )

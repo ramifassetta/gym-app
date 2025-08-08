@@ -7,11 +7,18 @@ import { Calendar } from "@/components/ui/calendar"
 import { Plus, ChevronLeft, ChevronRight } from "lucide-react"
 import { CalendarEvents } from "@/components/calendar-events"
 import { AddSessionDialog } from "@/components/add-session-dialog"
+import { EditSessionModal } from "@/components/edit-session-modal"
+import { SendReminderModal } from "@/components/send-reminder-modal"
+import { CancelSessionModal } from "@/components/cancel-session-modal"
 import { motion } from "framer-motion"
 
 export default function CalendarPage() {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [reminderModalOpen, setReminderModalOpen] = useState(false)
+  const [cancelModalOpen, setCancelModalOpen] = useState(false)
+  const [selectedSession, setSelectedSession] = useState<any>(null)
 
   const handlePreviousMonth = () => {
     if (date) {
@@ -27,6 +34,35 @@ export default function CalendarPage() {
       nextMonth.setMonth(nextMonth.getMonth() + 1)
       setDate(nextMonth)
     }
+  }
+
+  const handleEditSession = (session: any) => {
+    setSelectedSession(session)
+    setEditModalOpen(true)
+  }
+
+  const handleSendReminder = (session: any) => {
+    setSelectedSession(session)
+    setReminderModalOpen(true)
+  }
+
+  const handleCancelSession = (session: any) => {
+    setSelectedSession(session)
+    setCancelModalOpen(true)
+  }
+
+  const handleSessionEdited = (data: any) => {
+    console.log("Sesión editada:", data)
+    // Aquí puedes actualizar la sesión en el calendario
+  }
+
+  const handleReminderSent = (data: any) => {
+    console.log("Recordatorio enviado:", data)
+  }
+
+  const handleSessionCancelled = (data: any) => {
+    console.log("Sesión cancelada:", data)
+    // Aquí puedes actualizar el estado de la sesión
   }
 
   return (
@@ -131,13 +167,39 @@ export default function CalendarPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="p-6">
-              <CalendarEvents date={date} />
+              <CalendarEvents 
+                date={date}
+                onEditSession={handleEditSession}
+                onSendReminder={handleSendReminder}
+                onCancelSession={handleCancelSession}
+              />
             </CardContent>
           </Card>
         </motion.div>
       </div>
 
       <AddSessionDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+
+      <EditSessionModal
+        open={editModalOpen}
+        onOpenChange={setEditModalOpen}
+        session={selectedSession}
+        onSave={handleSessionEdited}
+      />
+
+      <SendReminderModal
+        open={reminderModalOpen}
+        onOpenChange={setReminderModalOpen}
+        session={selectedSession}
+        onSend={handleReminderSent}
+      />
+
+      <CancelSessionModal
+        open={cancelModalOpen}
+        onOpenChange={setCancelModalOpen}
+        session={selectedSession}
+        onCancel={handleSessionCancelled}
+      />
     </motion.div>
   )
 }
