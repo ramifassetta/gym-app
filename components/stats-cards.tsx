@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Users, Dumbbell, Calendar, TrendingUp } from "lucide-react"
+import { Users, Dumbbell, Calendar, TrendingUp, Shield, DollarSign } from "lucide-react"
 import { motion } from "framer-motion"
 
 export function StatsCards() {
@@ -12,17 +12,17 @@ export function StatsCards() {
       gradient: "from-blue-500 to-blue-600"
     },
     {
-      title: "Rutinas Activas",
-      value: "18",
-      change: "+3 desde el mes pasado",
-      icon: Dumbbell,
+      title: "Accesos Hoy",
+      value: "24",
+      change: "",
+      icon: Shield,
       gradient: "from-purple-500 to-purple-600"
     },
     {
-      title: "Sesiones Programadas",
-      value: "12",
-      change: "Para esta semana",
-      icon: Calendar,
+      title: "Deudas Pendientes",
+      value: "$1,200",
+      change: "3 clientes con pagos vencidos",
+      icon: DollarSign,
       gradient: "from-amber-500 to-amber-600"
     },
     {
@@ -53,7 +53,7 @@ export function StatsCards() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">{stat.value}</div>
-              <p className="text-xs text-muted-foreground">{stat.change}</p>
+              <p className="text-xs text-muted-foreground">{stat.change || " "}</p>
             </CardContent>
           </Card>
         </motion.div>

@@ -1,159 +1,163 @@
 "use client"
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion } from "framer-motion"
+import { Building2, Mail, Lock, Eye, EyeOff } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
-const Login: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+export default function LoginPage() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: ""
+  })
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // Simulación de inicio de sesión
+    e.preventDefault()
+    setIsLoading(true)
+    
+    // Simular login exitoso
     setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-  };
+      setIsLoading(false)
+      // Redirigir al dashboard del gimnasio
+      router.push("/dashboard")
+    }, 1500)
+  }
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="relative w-full max-w-md px-4 py-16">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden -z-10">
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-24 left-24 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/4 -left-12 w-36 h-36 bg-accent/10 rounded-full blur-2xl"></div>
-        </div>
-        
-        <div className="mb-8">
-          <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Volver al inicio
-          </Link>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-card to-background">
-            <CardHeader className="space-y-1 pb-2">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
-                <CardTitle className="text-2xl font-bold bg-gradient-gym bg-clip-text text-transparent">Iniciar Sesión</CardTitle>
-              </motion.div>
-              <CardDescription className="text-muted-foreground">
-                Ingresa tus credenciales para acceder a tu cuenta
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <motion.form 
-                onSubmit={handleSubmit} 
-                className="space-y-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-              >
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground/90">Email</Label>
-                  <Input 
-                    id="email" 
-                    type="email" 
-                    placeholder="tu@email.com" 
-                    required 
-                    className="border-input/50 focus-visible:ring-primary/70" 
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-md"
+      >
+        <Card className="border-primary/20 shadow-2xl bg-white/95 backdrop-blur-sm">
+          <div className="h-1 w-full bg-gradient-to-r from-primary via-secondary to-primary"></div>
+          <CardHeader className="text-center pb-6">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="mx-auto w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mb-4"
+            >
+              <Building2 className="h-8 w-8 text-white" />
+            </motion.div>
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Accede a tu Gimnasio
+            </CardTitle>
+            <CardDescription className="text-lg text-muted-foreground">
+              Gestiona tu gimnasio desde cualquier lugar
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="tu@email.com"
+                    className="pl-10 border-primary/20 focus:border-primary"
                   />
                 </div>
-                
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="password" className="text-foreground/90">Contraseña</Label>
-                    <Link href="/forgot-password" className="text-xs text-primary hover:text-primary/80 hover:underline transition-colors">
-                      ¿Olvidaste tu contraseña?
-                    </Link>
-                  </div>
-                  <div className="relative">
-                    <Input 
-                      id="password" 
-                      type={showPassword ? "text" : "password"} 
-                      required 
-                      className="border-input/50 focus-visible:ring-primary/70 pr-10" 
-                    />
-                    <button 
-                      type="button"
-                      onClick={toggleShowPassword} 
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="password">Contraseña</Label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Tu contraseña"
+                    className="pl-10 pr-10 border-primary/20 focus:border-primary"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4 text-muted-foreground" />
+                    ) : (
+                      <Eye className="h-4 w-4 text-muted-foreground" />
+                    )}
+                  </Button>
                 </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full mt-6 bg-gradient-gym hover:opacity-90 transition-opacity shadow-md hover:shadow-lg"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                      Iniciando sesión...
-                    </>
-                  ) : (
-                    "Iniciar Sesión"
-                  )}
-                </Button>
-              </motion.form>
-
-              <motion.div 
-                className="mt-6 text-center text-sm text-muted-foreground"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+              </div>
+              
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="remember"
+                    className="rounded border-primary/20 text-primary focus:ring-primary"
+                  />
+                  <Label htmlFor="remember" className="text-sm text-muted-foreground">
+                    Recordarme
+                  </Label>
+                </div>
+                <Link href="/forgot-password" className="text-sm text-primary hover:text-primary/80">
+                  ¿Olvidaste tu contraseña?
+                </Link>
+              </div>
+              
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
               >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Iniciando sesión...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Building2 className="h-5 w-5" />
+                    Iniciar Sesión
+                  </div>
+                )}
+              </Button>
+              
+              <div className="text-center text-sm text-muted-foreground">
                 ¿No tienes una cuenta?{" "}
-                <Link href="/register" className="text-primary hover:text-primary/80 font-medium hover:underline transition-colors">
-                  Regístrate
+                <Link href="/register" className="text-primary hover:text-primary/80 font-medium">
+                  Regístrate aquí
                 </Link>
-              </motion.div>
-
-              <motion.div 
-                className="mt-8 pt-6 border-t border-border/40 text-center text-xs text-muted-foreground/70"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                Al iniciar sesión, aceptas nuestros{" "}
-                <Link href="/terms" className="hover:text-foreground hover:underline transition-colors">
-                  Términos y condiciones
-                </Link>{" "}
-                y{" "}
-                <Link href="/privacy" className="hover:text-foreground hover:underline transition-colors">
-                  Política de privacidad
-                </Link>
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
-  );
-};
-
-export default Login;
+  )
+}

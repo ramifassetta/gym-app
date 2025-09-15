@@ -10,13 +10,14 @@ import {
   LayoutDashboard,
   Users,
   Dumbbell,
-  Calendar,
-  MessageSquare,
   CreditCard,
   Settings,
   ChevronLeft,
   ChevronRight,
   X,
+  Shield,
+  BarChart3,
+  MessageSquare,
 } from "lucide-react"
 
 const navItems = [
@@ -39,22 +40,28 @@ const navItems = [
     gradient: "from-emerald-500 to-emerald-600"
   },
   {
-    title: "Calendario",
-    href: "/dashboard/calendar",
-    icon: Calendar,
-    gradient: "from-amber-500 to-amber-600"
-  },
-  {
-    title: "Mensajes",
-    href: "/dashboard/messages",
-    icon: MessageSquare,
-    gradient: "from-cyan-500 to-cyan-600"
-  },
-  {
     title: "Pagos",
     href: "/dashboard/payments",
     icon: CreditCard,
     gradient: "from-rose-500 to-rose-600"
+  },
+  {
+    title: "Control de Acceso",
+    href: "/dashboard/access-control",
+    icon: Shield,
+    gradient: "from-orange-500 to-orange-600"
+  },
+  {
+    title: "Reportes",
+    href: "/dashboard/reports",
+    icon: BarChart3,
+    gradient: "from-indigo-500 to-indigo-600"
+  },
+  {
+    title: "Comunicaciones",
+    href: "/dashboard/communications",
+    icon: MessageSquare,
+    gradient: "from-teal-500 to-teal-600"
   },
   {
     title: "Configuración",

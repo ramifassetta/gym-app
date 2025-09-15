@@ -2,43 +2,43 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Dumbbell, Users, Calendar, CreditCard, ChevronRight, Award, Bell } from "lucide-react";
+import { Building2, Users, CreditCard, Calendar, Bell, BarChart3, Shield, Zap } from "lucide-react";
 
 const features = [
   {
-    icon: <Dumbbell className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Rutinas Personalizadas",
-    description: "Crea y modifica rutinas específicas para cada cliente con ejercicios, repeticiones, series y videos demostrativos.",
-    color: "bg-gradient-gym"
-  },
-  {
     icon: <Users className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Interacción Directa",
-    description: "Comunicación fluida entre gimnasios y usuarios para resolver dudas o solicitar ajustes en las rutinas.",
-    color: "bg-gradient-feature"
-  },
-  {
-    icon: <Calendar className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Seguimiento de Progreso",
-    description: "Los usuarios registran su progreso y visualizan estadísticas de rendimiento a lo largo del tiempo.",
+    title: "Gestión de Clientes",
+    description: "Administra todos tus clientes desde una sola plataforma. Controla suscripciones, estado de pagos y acceso al gimnasio.",
     color: "bg-gradient-gym"
   },
   {
     icon: <CreditCard className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Gestión de Pagos",
-    description: "Sistema integrado para el pago de cuotas y gestión de membresías directamente desde la aplicación.",
+    title: "Suscripciones y Pagos",
+    description: "Sistema completo de gestión de membresías, pagos recurrentes y alertas automáticas de vencimiento.",
     color: "bg-gradient-feature"
   },
   {
-    icon: <Award className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Logros y Recompensas",
-    description: "Sistema de metas, logros y recompensas para mantener a los usuarios motivados y comprometidos.",
+    icon: <Calendar className="h-5 w-5 sm:h-6 sm:w-6" />,
+    title: "Control de Acceso",
+    description: "Integración con sistemas de huella dactilar y control de entrada/salida para monitorear la asistencia.",
     color: "bg-gradient-gym"
   },
   {
+    icon: <Building2 className="h-5 w-5 sm:h-6 sm:w-6" />,
+    title: "Dashboard Empresarial",
+    description: "Vista completa de tu negocio: ingresos, clientes activos, tendencias y métricas de rendimiento.",
+    color: "bg-gradient-feature"
+  },
+  {
     icon: <Bell className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Notificaciones",
-    description: "Recordatorios personalizados para entrenamientos, pagos pendientes y actualizaciones de rutinas.",
+    title: "Notificaciones Automáticas",
+    description: "Alertas inteligentes para suscripciones que vencen, pagos pendientes y recordatorios importantes.",
+    color: "bg-gradient-gym"
+  },
+  {
+    icon: <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />,
+    title: "Reportes y Analytics",
+    description: "Genera reportes detallados de clientes, ingresos y tendencias para tomar decisiones informadas.",
     color: "bg-gradient-feature"
   }
 ];
@@ -61,7 +61,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0], index: n
       </p>
       <div className="flex items-center text-primary font-medium text-xs sm:text-sm group-hover:translate-x-1 transition-transform">
         <span>Saber más</span>
-        <ChevronRight className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
+        <Zap className="ml-1 h-3 w-3 sm:h-4 sm:w-4" />
       </div>
     </motion.div>
   );
@@ -81,7 +81,7 @@ const FeatureSection: React.FC = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            Todo lo que necesitas para tu <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">gimnasio digital</span>
+            Todo lo que necesitas para <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">gestionar tu gimnasio</span>
           </motion.h2>
           <motion.p 
             className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto"
@@ -91,7 +91,7 @@ const FeatureSection: React.FC = () => {
             viewport={{ once: true }}
           >
             GymRoutine Pro ofrece todas las herramientas necesarias para optimizar 
-            la gestión de rutinas y la experiencia de tus clientes
+            la gestión de tu negocio fitness y maximizar la rentabilidad
           </motion.p>
         </div>
         

@@ -13,7 +13,6 @@ import { motion } from "framer-motion"
 export default function RoutinesPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [filters, setFilters] = useState({
-    level: "",
     client: ""
   })
 
@@ -30,15 +29,6 @@ export default function RoutinesPage() {
 
   // Opciones de filtros
   const filterGroups = [
-    {
-      title: "Nivel",
-      key: "level",
-      options: [
-        { value: "Principiante", label: "Principiante", count: 2 },
-        { value: "Intermedio", label: "Intermedio", count: 2 },
-        { value: "Avanzado", label: "Avanzado", count: 1 },
-      ]
-    },
     {
       title: "Cliente",
       key: "client",
@@ -61,7 +51,6 @@ export default function RoutinesPage() {
 
   const handleClearAllFilters = () => {
     setFilters({
-      level: "",
       client: ""
     })
   }

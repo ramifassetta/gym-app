@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Dumbbell } from "lucide-react";
+import { ArrowRight, Dumbbell, Building2, Users, CreditCard, Calendar } from "lucide-react";
 import Link from 'next/link';
 
 const HeroSection: React.FC = () => {
@@ -31,7 +31,7 @@ const HeroSection: React.FC = () => {
               transition={{ delay: 0.3, duration: 0.5 }}
             >
               <span className="flex items-center justify-center text-xs sm:text-sm">
-                <Dumbbell className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> La evolución en gestión de gimnasios
+                <Building2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> La solución completa para gimnasios
               </span>
             </motion.div>
             
@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              Transforma la gestión de <span className="text-accent">rutinas</span> en tu gimnasio
+              Gestiona tu gimnasio de <span className="text-accent">forma inteligente</span>
             </motion.h1>
             
             <motion.p 
@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              Diseña, modifica y envía rutinas personalizadas a tus clientes de forma digital, rápida y eficiente.
+              Controla suscripciones, pagos, clientes y rutinas desde una sola plataforma. Simplifica la gestión de tu negocio fitness.
             </motion.p>
             
             <motion.div 
@@ -59,22 +59,49 @@ const HeroSection: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.5 }}
             >
-              <Link href="/register?role=gym" className="w-full sm:w-auto">
+              <Link href="/register" className="w-full sm:w-auto">
                 <Button size="lg" className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 shadow-lg hover:shadow-xl transition-all duration-300 group text-sm sm:text-base">
-                  Soy Gimnasio
+                  Comenzar Gratis
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/register?role=user" className="w-full sm:w-auto">
+              <Link href="/features" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   variant="outline"
                   className="w-full sm:w-auto bg-transparent border-2 border-white text-white hover:bg-white/10 text-sm sm:text-base"
                 >
-                  Soy Usuario
+                  Ver Características
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
+            </motion.div>
+
+            {/* Features preview */}
+            <motion.div 
+              className="mt-8 grid grid-cols-3 gap-4 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.5 }}
+            >
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <Users className="h-6 w-6 text-white" />
+                </div>
+                <span className="text-xs text-white/80">Gestión de Clientes</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <CreditCard className="h-6 w-6 text-white" />
+                </div>
+                <span className="text-xs text-white/80">Suscripciones</span>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <Calendar className="h-6 w-6 text-white" />
+                </div>
+                <span className="text-xs text-white/80">Control de Acceso</span>
+              </div>
             </motion.div>
           </motion.div>
           
@@ -101,8 +128,8 @@ const HeroSection: React.FC = () => {
               <div className="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20 shadow-2xl overflow-hidden relative z-10">
                 <div className="bg-white/5 rounded-xl p-1">
                   <img 
-                    src="https://placehold.co/900x600/3b82f6/FFFFFF/png?text=GymRoutine+Pro+Dashboard" 
-                    alt="GymRoutine Pro Dashboard" 
+                    src="https://placehold.co/900x600/3b82f6/FFFFFF/png?text=Dashboard+del+Gimnasio" 
+                    alt="Dashboard del Gimnasio" 
                     className="rounded-lg w-full shadow-lg"
                   />
                 </div>
@@ -115,6 +142,15 @@ const HeroSection: React.FC = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.8, duration: 0.8 }}
               >
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="bg-emerald-500 p-1.5 sm:p-2 rounded-full">
+                    <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs sm:text-sm font-medium">Clientes Activos</p>
+                    <p className="text-xs text-gray-600">+24 este mes</p>
+                  </div>
+                </div>
               </motion.div>
               
               <motion.div 
@@ -125,11 +161,11 @@ const HeroSection: React.FC = () => {
               >
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="bg-primary p-1.5 sm:p-2 rounded-full">
-                    <Dumbbell className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                    <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium">Nueva rutina</p>
-                    <p className="text-xs text-gray-600">Entrenador Alex</p>
+                    <p className="text-xs sm:text-sm font-medium">Ingresos</p>
+                    <p className="text-xs text-gray-600">€2,450 este mes</p>
                   </div>
                 </div>
               </motion.div>

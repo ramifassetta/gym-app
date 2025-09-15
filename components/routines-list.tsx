@@ -13,44 +13,30 @@ export function RoutinesList() {
   const routines = [
     {
       id: 1,
-      name: "Entrenamiento de Fuerza - Nivel Intermedio",
+      name: "Entrenamiento de Fuerza",
       client: "Juan Pérez",
-      level: "Intermedio",
       exercises: 8,
       duration: 60,
       createdAt: "12/06/2023",
-      color: "bg-amber-100 text-amber-700"
     },
     {
       id: 2,
       name: "Cardio y Tonificación",
       client: "María García",
-      level: "Principiante",
       exercises: 6,
       duration: 45,
       createdAt: "15/06/2023",
-      color: "bg-green-100 text-green-700"
     },
     {
       id: 3,
       name: "Hipertrofia - Tren Superior",
       client: "Carlos López",
-      level: "Avanzado",
       exercises: 10,
       duration: 75,
       createdAt: "18/06/2023",
-      color: "bg-red-100 text-red-700"
     },
   ]
 
-  const getBadgeColor = (level: string) => {
-    switch(level) {
-      case "Principiante": return "bg-green-500/80 hover:bg-green-500";
-      case "Intermedio": return "bg-amber-500/80 hover:bg-amber-500";
-      case "Avanzado": return "bg-red-500/80 hover:bg-red-500";
-      default: return "";
-    }
-  };
 
   const handleViewDetails = (routineId: number) => {
     const routine = routines.find(r => r.id === routineId);
@@ -111,9 +97,6 @@ export function RoutinesList() {
               <div className="font-medium text-lg">{routine.name}</div>
               <div className="text-sm text-muted-foreground">Cliente: {routine.client}</div>
             </div>
-            <Badge className={`${getBadgeColor(routine.level)}`}>
-              {routine.level}
-            </Badge>
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mt-4 text-sm">

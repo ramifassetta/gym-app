@@ -26,16 +26,14 @@ export function RoutinesTable() {
   const [isSendModalOpen, setIsSendModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [filters, setFilters] = useState({
-    level: "",
     client: ""
   });
 
   const routines = [
     {
       id: 1,
-      name: "Entrenamiento de Fuerza - Nivel Intermedio",
+      name: "Entrenamiento de Fuerza",
       client: "Juan Pérez",
-      level: "Intermedio",
       exercises: 8,
       duration: 60,
       createdAt: "12/06/2023",
@@ -44,7 +42,6 @@ export function RoutinesTable() {
       id: 2,
       name: "Cardio y Tonificación",
       client: "María García",
-      level: "Principiante",
       exercises: 6,
       duration: 45,
       createdAt: "15/06/2023",
@@ -53,7 +50,6 @@ export function RoutinesTable() {
       id: 3,
       name: "Hipertrofia - Tren Superior",
       client: "Carlos López",
-      level: "Avanzado",
       exercises: 10,
       duration: 75,
       createdAt: "18/06/2023",
@@ -62,7 +58,6 @@ export function RoutinesTable() {
       id: 4,
       name: "Entrenamiento Funcional",
       client: "Ana Martínez",
-      level: "Intermedio",
       exercises: 7,
       duration: 50,
       createdAt: "20/06/2023",
@@ -71,25 +66,12 @@ export function RoutinesTable() {
       id: 5,
       name: "Rutina de Flexibilidad",
       client: "Roberto Sánchez",
-      level: "Principiante",
       exercises: 5,
       duration: 30,
       createdAt: "22/06/2023",
     },
   ]
 
-  const getLevelVariant = (level: string) => {
-    switch (level) {
-      case "Principiante":
-        return "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
-      case "Intermedio":
-        return "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
-      case "Avanzado":
-        return "bg-gradient-to-r from-red-500 to-red-600 text-white"
-      default:
-        return "default"
-    }
-  }
 
   const handleViewDetails = (routineId: number) => {
     console.log("handleViewDetails called with routineId:", routineId);
@@ -157,15 +139,6 @@ export function RoutinesTable() {
   // Opciones de filtros
   const filterGroups = [
     {
-      title: "Nivel",
-      key: "level",
-      options: [
-        { value: "Principiante", label: "Principiante", count: routines.filter(r => r.level === "Principiante").length },
-        { value: "Intermedio", label: "Intermedio", count: routines.filter(r => r.level === "Intermedio").length },
-        { value: "Avanzado", label: "Avanzado", count: routines.filter(r => r.level === "Avanzado").length },
-      ]
-    },
-    {
       title: "Cliente",
       key: "client",
       options: [
@@ -180,9 +153,8 @@ export function RoutinesTable() {
 
   // Filtrar rutinas
   const filteredRoutines = routines.filter(routine => {
-    const levelMatch = !filters.level || routine.level === filters.level
     const clientMatch = !filters.client || routine.client === filters.client
-    return levelMatch && clientMatch
+    return clientMatch
   })
 
   const handleFilterChange = (key: string, value: string) => {
@@ -194,7 +166,6 @@ export function RoutinesTable() {
 
   const handleClearAllFilters = () => {
     setFilters({
-      level: "",
       client: ""
     })
   }
@@ -228,9 +199,6 @@ export function RoutinesTable() {
                   <User className="h-3 w-3" />
                   <span>{routine.client}</span>
                 </div>
-                <Badge className={getLevelVariant(routine.level)}>
-                  {routine.level}
-                </Badge>
               </div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -313,7 +281,6 @@ export function RoutinesTable() {
             <TableRow className="bg-gradient-to-r from-muted/30 to-muted/10 border-primary/10 hover:bg-gradient-to-r hover:from-muted/40 hover:to-muted/20">
               <TableHead className="font-semibold text-foreground">Nombre</TableHead>
               <TableHead className="font-semibold text-foreground">Cliente</TableHead>
-              <TableHead className="font-semibold text-foreground">Nivel</TableHead>
               <TableHead className="font-semibold text-foreground">Ejercicios</TableHead>
               <TableHead className="font-semibold text-foreground">Duración</TableHead>
               <TableHead className="font-semibold text-foreground">Creada</TableHead>
@@ -334,11 +301,6 @@ export function RoutinesTable() {
                 </TableCell>
                 <TableCell className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                   {routine.client}
-                </TableCell>
-                <TableCell>
-                  <Badge className={getLevelVariant(routine.level)}>
-                    {routine.level}
-                  </Badge>
                 </TableCell>
                 <TableCell className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
                   <span className="font-medium">{routine.exercises}</span> ejercicios

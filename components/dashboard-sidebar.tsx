@@ -9,12 +9,13 @@ import {
   LayoutDashboard,
   Users,
   Dumbbell,
-  Calendar,
-  MessageSquare,
   CreditCard,
   Settings,
   ChevronLeft,
   ChevronRight,
+  Shield,
+  BarChart3,
+  MessageSquare,
 } from "lucide-react"
 
 const navItems = [
@@ -34,19 +35,24 @@ const navItems = [
     icon: Dumbbell,
   },
   {
-    title: "Calendario",
-    href: "/dashboard/calendar",
-    icon: Calendar,
-  },
-  {
-    title: "Mensajes",
-    href: "/dashboard/messages",
-    icon: MessageSquare,
-  },
-  {
     title: "Pagos",
     href: "/dashboard/payments",
     icon: CreditCard,
+  },
+  {
+    title: "Control de Acceso",
+    href: "/dashboard/access-control",
+    icon: Shield,
+  },
+  {
+    title: "Reportes",
+    href: "/dashboard/reports",
+    icon: BarChart3,
+  },
+  {
+    title: "Comunicaciones",
+    href: "/dashboard/communications",
+    icon: MessageSquare,
   },
   {
     title: "Configuración",

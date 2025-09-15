@@ -7,9 +7,8 @@ export function RoutinesList() {
   const routines = [
     {
       id: 1,
-      name: "Entrenamiento de Fuerza - Nivel Intermedio",
+      name: "Entrenamiento de Fuerza",
       client: "Juan Pérez",
-      level: "Intermedio",
       exercises: 8,
       duration: 60,
       createdAt: "12/06/2023",
@@ -18,7 +17,6 @@ export function RoutinesList() {
       id: 2,
       name: "Cardio y Tonificación",
       client: "María García",
-      level: "Principiante",
       exercises: 6,
       duration: 45,
       createdAt: "15/06/2023",
@@ -27,7 +25,6 @@ export function RoutinesList() {
       id: 3,
       name: "Hipertrofia - Tren Superior",
       client: "Carlos López",
-      level: "Avanzado",
       exercises: 10,
       duration: 75,
       createdAt: "18/06/2023",

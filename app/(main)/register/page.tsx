@@ -1,287 +1,255 @@
 "use client"
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Eye, EyeOff, Building2, User } from "lucide-react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion } from "framer-motion"
+import { Dumbbell, Building2, User, Mail, Lock, Phone, MapPin } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
-const Register: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [userType, setUserType] = useState<'gym' | 'user' | null>(null);
+export default function RegisterPage() {
+  const [formData, setFormData] = useState({
+    gymName: "",
+    ownerName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    address: "",
+    city: "",
+    country: ""
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // Simulación de registro
+    e.preventDefault()
+    setIsLoading(true)
+    
+    // Simular registro exitoso
     setTimeout(() => {
-      setIsLoading(false);
-      // Redirigir según el tipo de usuario
-      if (userType === 'gym') {
-        window.location.href = '/dashboard';
-      } else {
-        window.location.href = '/user-dashboard';
-      }
-    }, 1500);
-  };
+      setIsLoading(false)
+      // Redirigir al dashboard del gimnasio
+      router.push("/dashboard")
+    }, 2000)
+  }
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  if (!userType) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="relative w-full max-w-md px-4 py-16">
-          {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden -z-10">
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-24 left-24 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/4 -left-12 w-36 h-36 bg-accent/10 rounded-full blur-2xl"></div>
-          </div>
-          
-          <div className="mb-8">
-            <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Volver al inicio
-            </Link>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-card to-background">
-              <CardHeader className="space-y-1 pb-2">
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                  <CardTitle className="text-2xl font-bold bg-gradient-gym bg-clip-text text-transparent">Selecciona tu tipo de cuenta</CardTitle>
-                </motion.div>
-                <CardDescription className="text-muted-foreground">
-                  Elige cómo quieres registrarte en GymRoutine
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 gap-4 mt-4">
-                  <Button
-                    onClick={() => setUserType('gym')}
-                    className="h-auto py-6 px-4 bg-gradient-gym hover:opacity-90 transition-opacity shadow-md hover:shadow-lg text-white"
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <Building2 className="h-8 w-8" />
-                      <div className="text-center">
-                        <div className="font-semibold text-base">Gimnasio</div>
-                        <div className="text-xs sm:text-sm text-white/80 mt-1 px-1">Registra tu gimnasio y gestiona tus clientes</div>
-                      </div>
-                    </div>
-                  </Button>
-
-                  <Button
-                    onClick={() => setUserType('user')}
-                    className="h-auto py-6 px-4 bg-gradient-feature hover:opacity-90 transition-opacity shadow-md hover:shadow-lg text-white"
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <User className="h-8 w-8" />
-                      <div className="text-center">
-                        <div className="font-semibold text-base">Usuario</div>
-                        <div className="text-xs sm:text-sm text-white/80 mt-1 px-1">Únete a un gimnasio y sigue tus rutinas</div>
-                      </div>
-                    </div>
-                  </Button>
-                </div>
-
-                <motion.div 
-                  className="mt-6 text-center text-sm text-muted-foreground"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                >
-                  ¿Ya tienes una cuenta?{" "}
-                  <Link href="/login" className="text-primary hover:text-primary/80 font-medium hover:underline transition-colors">
-                    Inicia sesión
-                  </Link>
-                </motion.div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </div>
-    );
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="relative w-full max-w-md px-4 py-16">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden -z-10">
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-24 left-24 w-72 h-72 bg-secondary/10 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/4 -left-12 w-36 h-36 bg-accent/10 rounded-full blur-2xl"></div>
-        </div>
-        
-        <div className="mb-8">
-          <button 
-            onClick={() => setUserType(null)} 
-            className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Volver
-          </button>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Card className="border-0 shadow-lg bg-gradient-to-br from-card to-background">
-            <CardHeader className="space-y-1 pb-2">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-              >
-                <CardTitle className="text-2xl font-bold bg-gradient-gym bg-clip-text text-transparent">
-                  {userType === 'gym' ? 'Registrar Gimnasio' : 'Registrar Usuario'}
-                </CardTitle>
-              </motion.div>
-              <CardDescription className="text-muted-foreground">
-                Ingresa los datos de tu {userType === 'gym' ? 'gimnasio' : 'cuenta'}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <motion.form 
-                onSubmit={handleSubmit} 
-                className="space-y-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-              >
-                <div className="space-y-2">
-                  <Label htmlFor="name" className="text-foreground/90">
-                    {userType === 'gym' ? 'Nombre del Gimnasio' : 'Nombre completo'}
-                  </Label>
-                  <Input 
-                    id="name" 
-                    placeholder={userType === 'gym' ? 'Nombre de tu gimnasio' : 'Tu nombre'} 
-                    required 
-                    className="border-input/50 focus-visible:ring-primary/70" 
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-foreground/90">Email</Label>
-                  <Input 
-                    id="email" 
-                    type="email" 
-                    placeholder="tu@email.com" 
-                    required 
-                    className="border-input/50 focus-visible:ring-primary/70" 
-                  />
-                </div>
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 flex items-center justify-center p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-2xl"
+      >
+        <Card className="border-primary/20 shadow-2xl bg-white/95 backdrop-blur-sm">
+          <div className="h-1 w-full bg-gradient-to-r from-primary via-secondary to-primary"></div>
+          <CardHeader className="text-center pb-6">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="mx-auto w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mb-4"
+            >
+              <Building2 className="h-8 w-8 text-white" />
+            </motion.div>
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              Registra tu Gimnasio
+            </CardTitle>
+            <CardDescription className="text-lg text-muted-foreground">
+              Únete a GymRoutine Pro y transforma la gestión de tu gimnasio
+            </CardDescription>
+          </CardHeader>
+          
+          <CardContent className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Información del Gimnasio */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                  <Building2 className="h-5 w-5" />
+                  Información del Gimnasio
+                </h3>
                 
-                <div className="space-y-2">
-                  <Label htmlFor="password" className="text-foreground/90">Contraseña</Label>
-                  <div className="relative">
-                    <Input 
-                      id="password" 
-                      type={showPassword ? "text" : "password"} 
-                      required 
-                      className="border-input/50 focus-visible:ring-primary/70 pr-10" 
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="gymName">Nombre del Gimnasio *</Label>
+                    <Input
+                      id="gymName"
+                      name="gymName"
+                      type="text"
+                      required
+                      value={formData.gymName}
+                      onChange={handleChange}
+                      placeholder="Ej: Fitness Center Pro"
+                      className="border-primary/20 focus:border-primary"
                     />
-                    <button 
-                      type="button"
-                      onClick={toggleShowPassword} 
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="confirm-password" className="text-foreground/90">Confirmar contraseña</Label>
-                  <div className="relative">
-                    <Input 
-                      id="confirm-password" 
-                      type={showConfirmPassword ? "text" : "password"} 
-                      required 
-                      className="border-input/50 focus-visible:ring-primary/70 pr-10" 
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="ownerName">Nombre del Propietario *</Label>
+                    <Input
+                      id="ownerName"
+                      name="ownerName"
+                      type="text"
+                      required
+                      value={formData.ownerName}
+                      onChange={handleChange}
+                      placeholder="Tu nombre completo"
+                      className="border-primary/20 focus:border-primary"
                     />
-                    <button 
-                      type="button"
-                      onClick={toggleShowConfirmPassword} 
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
                   </div>
                 </div>
                 
-                <Button 
-                  type="submit" 
-                  className="w-full mt-6 bg-gradient-gym hover:opacity-90 transition-opacity shadow-md hover:shadow-lg"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <>
-                      <span className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
-                      Creando cuenta...
-                    </>
-                  ) : (
-                    "Crear Cuenta"
-                  )}
-                </Button>
-              </motion.form>
-
-              <motion.div 
-                className="mt-6 text-center text-sm text-muted-foreground"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">Teléfono *</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="+34 600 123 456"
+                      className="border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="email">Email *</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="tu@email.com"
+                      className="border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="city">Ciudad *</Label>
+                    <Input
+                      id="city"
+                      name="city"
+                      type="text"
+                      required
+                      value={formData.city}
+                      onChange={handleChange}
+                      placeholder="Madrid"
+                      className="border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="country">País *</Label>
+                    <Input
+                      id="country"
+                      name="country"
+                      type="text"
+                      required
+                      value={formData.country}
+                      onChange={handleChange}
+                      placeholder="España"
+                      className="border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="address">Dirección Completa</Label>
+                  <Input
+                    id="address"
+                    name="address"
+                    type="text"
+                    value={formData.address}
+                    onChange={handleChange}
+                    placeholder="Calle Principal 123, Piso 2"
+                    className="border-primary/20 focus:border-primary"
+                  />
+                </div>
+              </div>
+              
+              {/* Cuenta de Acceso */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-primary flex items-center gap-2">
+                  <Lock className="h-5 w-5" />
+                  Cuenta de Acceso
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="password">Contraseña *</Label>
+                    <Input
+                      id="password"
+                      name="password"
+                      type="password"
+                      required
+                      value={formData.password}
+                      onChange={handleChange}
+                      placeholder="Mínimo 8 caracteres"
+                      className="border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="confirmPassword">Confirmar Contraseña *</Label>
+                    <Input
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      type="password"
+                      required
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      placeholder="Repite tu contraseña"
+                      className="border-primary/20 focus:border-primary"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
               >
+                {isLoading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Registrando tu gimnasio...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Building2 className="h-5 w-5" />
+                    Registrar Gimnasio
+                  </div>
+                )}
+              </Button>
+              
+              <div className="text-center text-sm text-muted-foreground">
                 ¿Ya tienes una cuenta?{" "}
-                <Link href="/login" className="text-primary hover:text-primary/80 font-medium hover:underline transition-colors">
-                  Inicia sesión
+                <Link href="/login" className="text-primary hover:text-primary/80 font-medium">
+                  Inicia sesión aquí
                 </Link>
-              </motion.div>
-
-              <motion.div 
-                className="mt-8 pt-6 border-t border-border/40 text-center text-xs text-muted-foreground/70"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                Al registrarte, aceptas nuestros{" "}
-                <Link href="/terms" className="hover:text-foreground hover:underline transition-colors">
-                  Términos y condiciones
-                </Link>{" "}
-                y{" "}
-                <Link href="/privacy" className="hover:text-foreground hover:underline transition-colors">
-                  Política de privacidad
-                </Link>
-              </motion.div>
-            </CardContent>
-          </Card>
-        </motion.div>
-      </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
-  );
-};
-
-export default Register;
-
+  )
+}
