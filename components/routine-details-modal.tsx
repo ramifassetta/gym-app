@@ -62,18 +62,6 @@ export function RoutineDetailsModal({
 }: RoutineDetailsModalProps) {
   if (!routine || !open) return null;
 
-  const getLevelVariant = (level: string) => {
-    switch (level) {
-      case "Principiante":
-        return "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
-      case "Intermedio":
-        return "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
-      case "Avanzado":
-        return "bg-gradient-to-r from-red-500 to-red-600 text-white"
-      default:
-        return "default"
-    }
-  };
 
   const handleAction = (action: 'edit' | 'send' | 'duplicate' | 'delete') => {
     onOpenChange(false);
@@ -128,15 +116,6 @@ export function RoutineDetailsModal({
                       <div>
                         <p className="text-sm text-muted-foreground">Cliente</p>
                         <p className="font-medium">{routine.client}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Dumbbell className="h-4 w-4 text-muted-foreground" />
-                      <div>
-                        <p className="text-sm text-muted-foreground">Nivel</p>
-                        <Badge className={getLevelVariant(routine.level)}>
-                          {routine.level}
-                        </Badge>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">

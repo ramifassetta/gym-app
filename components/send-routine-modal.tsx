@@ -28,14 +28,12 @@ interface Client {
   name: string;
   email: string;
   phone?: string;
-  level: string;
 }
 
 interface Routine {
   id: number;
   name: string;
   client: string;
-  level: string;
   exercises: number;
   duration: number;
 }
@@ -70,10 +68,10 @@ export function SendRoutineModal({
 
   // Datos de ejemplo
   const clients: Client[] = [
-    { id: 1, name: "Juan Pérez", email: "juan@email.com", phone: "+1234567890", level: "Intermedio" },
-    { id: 2, name: "María García", email: "maria@email.com", phone: "+1234567891", level: "Principiante" },
-    { id: 3, name: "Carlos López", email: "carlos@email.com", phone: "+1234567892", level: "Avanzado" },
-    { id: 4, name: "Ana Martínez", email: "ana@email.com", phone: "+1234567893", level: "Intermedio" },
+    { id: 1, name: "Juan Pérez", email: "juan@email.com", phone: "+1234567890" },
+    { id: 2, name: "María García", email: "maria@email.com", phone: "+1234567891" },
+    { id: 3, name: "Carlos López", email: "carlos@email.com", phone: "+1234567892" },
+    { id: 4, name: "Ana Martínez", email: "ana@email.com", phone: "+1234567893" },
   ];
 
   const selectedClientData = clients.find(c => c.id === selectedClient);
@@ -99,18 +97,6 @@ export function SendRoutineModal({
     }, 2000);
   };
 
-  const getLevelVariant = (level: string) => {
-    switch (level) {
-      case "Principiante":
-        return "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
-      case "Intermedio":
-        return "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
-      case "Avanzado":
-        return "bg-gradient-to-r from-red-500 to-red-600 text-white"
-      default:
-        return "default"
-    }
-  };
 
   return (
     <AnimatePresence>
@@ -147,9 +133,6 @@ export function SendRoutineModal({
                         <Dumbbell className="h-4 w-4 text-muted-foreground" />
                         <span>{routine.exercises} ejercicios</span>
                       </div>
-                      <Badge className={getLevelVariant(routine.level)}>
-                        {routine.level}
-                      </Badge>
                     </div>
                   </div>
                 </CardContent>
@@ -174,9 +157,6 @@ export function SendRoutineModal({
                           <SelectItem key={client.id} value={client.id.toString()}>
                             <div className="flex items-center gap-2">
                               <span>{client.name}</span>
-                              <Badge variant="outline" className="text-xs">
-                                {client.level}
-                              </Badge>
                             </div>
                           </SelectItem>
                         ))}
@@ -187,9 +167,6 @@ export function SendRoutineModal({
                       <div className="p-3 rounded-lg bg-muted/20 border border-muted/30">
                         <div className="flex items-center justify-between mb-2">
                           <span className="font-medium">{selectedClientData.name}</span>
-                          <Badge className={getLevelVariant(selectedClientData.level)}>
-                            {selectedClientData.level}
-                          </Badge>
                         </div>
                         <div className="text-sm text-muted-foreground space-y-1">
                           <p>Email: {selectedClientData.email}</p>

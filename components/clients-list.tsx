@@ -18,7 +18,6 @@ export function ClientsList() {
       name: "Juan Pérez",
       email: "juan@ejemplo.com",
       status: "active",
-      goal: "Pérdida de peso",
       lastActive: "Hace 2 días",
       avatar: null,
     },
@@ -27,7 +26,6 @@ export function ClientsList() {
       name: "María García",
       email: "maria@ejemplo.com",
       status: "active",
-      goal: "Tonificación",
       lastActive: "Hoy",
       avatar: null,
     },
@@ -36,7 +34,6 @@ export function ClientsList() {
       name: "Carlos López",
       email: "carlos@ejemplo.com",
       status: "inactive",
-      goal: "Ganancia muscular",
       lastActive: "Hace 1 semana",
       avatar: null,
     },
@@ -45,7 +42,6 @@ export function ClientsList() {
       name: "Ana Martínez",
       email: "ana@ejemplo.com",
       status: "active",
-      goal: "Resistencia",
       lastActive: "Ayer",
       avatar: null,
     },
@@ -96,7 +92,6 @@ export function ClientsList() {
                   >
                     {client.status === "active" ? "Activo" : "Inactivo"}
                   </Badge>
-                  <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary font-medium">{client.goal}</span>
                 </div>
               </div>
             </div>

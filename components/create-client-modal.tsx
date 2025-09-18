@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Save, X, User, Mail, Phone, Target } from "lucide-react"
+import { Save, X, User, Mail, Phone } from "lucide-react"
 
 interface CreateClientModalProps {
   open: boolean
@@ -88,65 +88,6 @@ export function CreateClientModal({ open, onOpenChange, onClientCreated }: Creat
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Información de Entrenamiento</CardTitle>
-              <CardDescription>Objetivos y preferencias del cliente</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="goal">Objetivo Principal</Label>
-                <div className="relative">
-                  <Target className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Select>
-                    <SelectTrigger id="goal" className="pl-10">
-                      <SelectValue placeholder="Seleccionar objetivo" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="weight-loss">Pérdida de peso</SelectItem>
-                      <SelectItem value="muscle-gain">Ganancia muscular</SelectItem>
-                      <SelectItem value="toning">Tonificación</SelectItem>
-                      <SelectItem value="endurance">Resistencia</SelectItem>
-                      <SelectItem value="flexibility">Flexibilidad</SelectItem>
-                      <SelectItem value="general-fitness">Fitness general</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="experience">Nivel de Experiencia</Label>
-                <Select>
-                  <SelectTrigger id="experience">
-                    <SelectValue placeholder="Seleccionar nivel" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="beginner">Principiante</SelectItem>
-                    <SelectItem value="intermediate">Intermedio</SelectItem>
-                    <SelectItem value="advanced">Avanzado</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="medicalNotes">Notas Médicas</Label>
-                <Textarea
-                  id="medicalNotes"
-                  placeholder="Alergias, lesiones previas, condiciones médicas..."
-                  className="min-h-[80px]"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="preferences">Preferencias de Entrenamiento</Label>
-                <Textarea
-                  id="preferences"
-                  placeholder="Horarios preferidos, tipos de ejercicio favoritos..."
-                  className="min-h-[80px]"
-                />
-              </div>
-            </CardContent>
-          </Card>
 
           <div className="flex justify-end gap-4 pt-6">
             <Button 

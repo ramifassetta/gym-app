@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Activity, Users, Plus, Shield, BarChart3, MessageSquare } from "lucide-react"
+import { Activity, Users, Plus, Shield, BarChart3, MessageSquare, Lock, Unlock } from "lucide-react"
 import Link from "next/link"
 import { ClientsList } from "@/components/clients-list"
 import { RoutinesList } from "@/components/routines-list"
@@ -14,9 +14,16 @@ import { motion } from "framer-motion"
 
 export default function DashboardPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const [barrierEnabled, setBarrierEnabled] = useState(false)
 
   const handleClientCreated = () => {
     console.log("Cliente creado exitosamente desde el panel de control")
+  }
+
+  const handleBarrierToggle = () => {
+    setBarrierEnabled(!barrierEnabled)
+    console.log(`Barrera ${barrierEnabled ? 'deshabilitada' : 'habilitada'}`)
+    // Aquí se enviaría la señal al sistema de barrera física
   }
 
   return (
@@ -144,7 +151,7 @@ export default function DashboardPage() {
                   </Link>
                 </CardHeader>
                 <CardContent className="pt-6">
-                  <div className="grid gap-4 md:grid-cols-3">
+                  <div className="grid gap-4 md:grid-cols-3 mb-6">
                     <div className="text-center p-4 border rounded-lg">
                       <Shield className="h-8 w-8 mx-auto mb-2 text-primary" />
                       <p className="font-bold text-lg">24</p>
@@ -159,6 +166,43 @@ export default function DashboardPage() {
                       <Activity className="h-8 w-8 mx-auto mb-2 text-primary" />
                       <p className="font-bold text-lg">87%</p>
                       <p className="text-sm text-muted-foreground">Promedio Asistencia</p>
+                    </div>
+                  </div>
+                  
+                  {/* Control de Barrera */}
+                  <div className="border-t pt-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-3 rounded-lg ${barrierEnabled ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                          {barrierEnabled ? <Unlock className="h-6 w-6" /> : <Lock className="h-6 w-6" />}
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-lg">Barrera de Acceso</h3>
+                          <p className="text-sm text-muted-foreground">
+                            {barrierEnabled ? 'Barrera habilitada - Acceso libre' : 'Barrera bloqueada - Solo con autorización'}
+                          </p>
+                        </div>
+                      </div>
+                      <Button 
+                        onClick={handleBarrierToggle}
+                        className={`${
+                          barrierEnabled 
+                            ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white' 
+                            : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white'
+                        } shadow-lg hover:shadow-xl transition-all duration-300`}
+                      >
+                        {barrierEnabled ? (
+                          <>
+                            <Lock className="mr-2 h-4 w-4" />
+                            Bloquear Barrera
+                          </>
+                        ) : (
+                          <>
+                            <Unlock className="mr-2 h-4 w-4" />
+                            Habilitar Barrera
+                          </>
+                        )}
+                      </Button>
                     </div>
                   </div>
                 </CardContent>

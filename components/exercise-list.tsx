@@ -7,10 +7,24 @@ import { Label } from "@/components/ui/label"
 import { Trash2, GripVertical, ChevronDown, ChevronUp } from "lucide-react"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 
-export function ExerciseList({ exercises = [], onRemoveExercise }) {
-  const [expandedExercise, setExpandedExercise] = useState(null)
+interface Exercise {
+  id: number
+  name: string
+  sets: number
+  reps: number
+  rest: number
+  notes?: string
+}
 
-  const toggleExpand = (id) => {
+interface ExerciseListProps {
+  exercises: Exercise[]
+  onRemoveExercise: (index: number) => void
+}
+
+export function ExerciseList({ exercises = [], onRemoveExercise }: ExerciseListProps) {
+  const [expandedExercise, setExpandedExercise] = useState<number | null>(null)
+
+  const toggleExpand = (id: number) => {
     if (expandedExercise === id) {
       setExpandedExercise(null)
     } else {

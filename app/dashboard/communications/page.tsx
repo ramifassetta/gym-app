@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { 
   MessageSquare, 
   Send, 
@@ -20,7 +21,9 @@ import {
   Calendar,
   Users,
   Zap,
-  Smartphone
+  Smartphone,
+  X,
+  FileText
 } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -48,6 +51,16 @@ const mockAutomations = [
   },
   {
     id: 3,
+    name: "Envío de Factura",
+    type: "invoice_sending",
+    status: "active",
+    description: "Envía la factura automáticamente cuando se registra un pago",
+    lastSent: "2024-01-15",
+    totalSent: 28,
+    successRate: 100
+  },
+  {
+    id: 4,
     name: "Nueva Rutina Disponible",
     type: "new_routine",
     status: "inactive",
@@ -105,6 +118,13 @@ const mockTemplates = [
   },
   {
     id: 3,
+    name: "Envío de Factura",
+    type: "invoice_sending",
+    content: "¡Hola {{clientName}}! Tu factura por ${{amount}} ha sido generada. Puedes descargarla desde el siguiente enlace: {{invoiceLink}}. ¡Gracias por tu pago!",
+    variables: ["clientName", "amount", "invoiceLink"]
+  },
+  {
+    id: 4,
     name: "Nueva Rutina",
     type: "new_routine",
     content: "¡Nueva rutina disponible! Revisa tu nueva rutina de {{routineType}} en la app. ¡A entrenar!",
@@ -116,9 +136,17 @@ export default function CommunicationsPage() {
   const [selectedTemplate, setSelectedTemplate] = useState("")
   const [messageContent, setMessageContent] = useState("")
   const [selectedClients, setSelectedClients] = useState<string[]>([])
+  const [showSendModal, setShowSendModal] = useState(false)
+  const [sendMessageForm, setSendMessageForm] = useState({
+    client: "",
+    messageType: "custom",
+    customMessage: "",
+    template: ""
+  })
   const [automationSettings, setAutomationSettings] = useState({
     subscriptionReminder: true,
     paymentConfirmation: true,
+    invoiceSending: true,
     newRoutine: false,
     customMessages: false
   })
@@ -127,6 +155,7 @@ export default function CommunicationsPage() {
     switch (type) {
       case "subscription_reminder": return <Clock className="h-4 w-4" />
       case "payment_confirmation": return <CheckCircle className="h-4 w-4" />
+      case "invoice_sending": return <FileText className="h-4 w-4" />
       case "new_routine": return <Zap className="h-4 w-4" />
       default: return <MessageSquare className="h-4 w-4" />
     }
@@ -169,7 +198,10 @@ export default function CommunicationsPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Button className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md hover:shadow-lg transition-all">
+          <Button 
+            onClick={() => setShowSendModal(true)}
+            className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md hover:shadow-lg transition-all"
+          >
             <Send className="mr-2 h-4 w-4" /> Enviar Mensaje
           </Button>
         </motion.div>
@@ -405,6 +437,17 @@ export default function CommunicationsPage() {
                   
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
+                      <p className="font-medium">Envío de Factura</p>
+                      <p className="text-sm text-muted-foreground">Envía la factura automáticamente cuando se registra un pago</p>
+                    </div>
+                    <Switch 
+                      checked={automationSettings.invoiceSending}
+                      onCheckedChange={(checked) => setAutomationSettings(prev => ({...prev, invoiceSending: checked}))}
+                    />
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
                       <p className="font-medium">Nuevas Rutinas</p>
                       <p className="text-sm text-muted-foreground">Notifica cuando se asigna una nueva rutina</p>
                     </div>
@@ -430,6 +473,100 @@ export default function CommunicationsPage() {
           </TabsContent>
         </Tabs>
       </motion.div>
+
+      {/* Modal para enviar mensaje manual */}
+      <Dialog open={showSendModal} onOpenChange={setShowSendModal}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Enviar Mensaje Manual</DialogTitle>
+            <DialogDescription>
+              Envía un mensaje personalizado o predefinido a un cliente
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6 p-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Seleccionar Cliente</label>
+                  <Select value={sendMessageForm.client} onValueChange={(value) => setSendMessageForm(prev => ({...prev, client: value}))}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona un cliente" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Juan Pérez">Juan Pérez</SelectItem>
+                      <SelectItem value="María García">María García</SelectItem>
+                      <SelectItem value="Carlos López">Carlos López</SelectItem>
+                      <SelectItem value="Ana Martínez">Ana Martínez</SelectItem>
+                      <SelectItem value="Roberto Sánchez">Roberto Sánchez</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Tipo de Mensaje</label>
+                  <Select value={sendMessageForm.messageType} onValueChange={(value) => setSendMessageForm(prev => ({...prev, messageType: value}))}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona el tipo" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="custom">Mensaje Personalizado</SelectItem>
+                      <SelectItem value="payment_confirmation">Confirmación de Pago</SelectItem>
+                      <SelectItem value="invoice_sending">Envío de Factura</SelectItem>
+                      <SelectItem value="subscription_reminder">Recordatorio de Vencimiento</SelectItem>
+                      <SelectItem value="new_routine">Nueva Rutina Disponible</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {sendMessageForm.messageType === "custom" ? (
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Mensaje Personalizado</label>
+                    <Textarea
+                      placeholder="Escribe tu mensaje aquí..."
+                      value={sendMessageForm.customMessage}
+                      onChange={(e) => setSendMessageForm(prev => ({...prev, customMessage: e.target.value}))}
+                      rows={4}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Ejemplo: "Hola Juan! Tu pago fue procesado correctamente. ¡Gracias!"</p>
+                  </div>
+                ) : (
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Plantilla Seleccionada</label>
+                    <div className="p-3 border rounded-lg bg-muted/50">
+                      <p className="text-sm">
+                        {sendMessageForm.messageType === "payment_confirmation" && "¡Pago confirmado! Tu suscripción está activa hasta el {{expirationDate}}. ¡Gracias por confiar en nosotros!"}
+                        {sendMessageForm.messageType === "invoice_sending" && "¡Hola {{clientName}}! Tu factura por ${{amount}} ha sido generada. Puedes descargarla desde el siguiente enlace: {{invoiceLink}}. ¡Gracias por tu pago!"}
+                        {sendMessageForm.messageType === "subscription_reminder" && "Hola {{clientName}}! Tu suscripción vence en {{daysLeft}} días. Renueva ahora para mantener tu acceso al gimnasio. ¡Te esperamos!"}
+                        {sendMessageForm.messageType === "new_routine" && "¡Nueva rutina disponible! Revisa tu nueva rutina de {{routineType}} en la app. ¡A entrenar!"}
+                      </p>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">Este mensaje se enviará automáticamente con los datos del cliente</p>
+                  </div>
+                )}
+              </div>
+              
+              <div className="flex gap-2 pt-4">
+                <Button 
+                  onClick={() => setShowSendModal(false)}
+                  variant="outline" 
+                  className="flex-1"
+                >
+                  Cancelar
+                </Button>
+                <Button 
+                  onClick={() => {
+                    console.log("Mensaje enviado:", sendMessageForm)
+                    setShowSendModal(false)
+                    setSendMessageForm({ client: "", messageType: "custom", customMessage: "", template: "" })
+                  }}
+                  className="flex-1 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                >
+                  <Send className="mr-2 h-4 w-4" />
+                  Enviar Mensaje
+                </Button>
+              </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

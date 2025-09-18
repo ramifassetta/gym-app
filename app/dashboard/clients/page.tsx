@@ -14,7 +14,7 @@ export default function ClientsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
   const [filters, setFilters] = useState({
     status: "",
-    goal: ""
+    paymentStatus: ""
   })
 
   const handleClientCreated = () => {
@@ -27,19 +27,16 @@ export default function ClientsPage() {
       title: "Estado",
       key: "status",
       options: [
-        { value: "active", label: "Activos", count: 3 },
-        { value: "inactive", label: "Inactivos", count: 2 },
+        { value: "active", label: "Activos", count: 4 },
+        { value: "inactive", label: "Inactivos", count: 1 },
       ]
     },
     {
-      title: "Objetivo",
-      key: "goal",
+      title: "Pago",
+      key: "paymentStatus",
       options: [
-        { value: "Pérdida de peso", label: "Pérdida de peso", count: 1 },
-        { value: "Tonificación", label: "Tonificación", count: 1 },
-        { value: "Ganancia muscular", label: "Ganancia muscular", count: 1 },
-        { value: "Resistencia", label: "Resistencia", count: 1 },
-        { value: "Flexibilidad", label: "Flexibilidad", count: 1 },
+        { value: "al día", label: "Al día", count: 4 },
+        { value: "vencido", label: "Vencido", count: 1 },
       ]
     }
   ]
@@ -54,7 +51,7 @@ export default function ClientsPage() {
   const handleClearAllFilters = () => {
     setFilters({
       status: "",
-      goal: ""
+      paymentStatus: ""
     })
   }
 

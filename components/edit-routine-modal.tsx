@@ -163,19 +163,6 @@ export function EditRoutineModal({
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="level">Nivel</Label>
-                      <Select value={formData.level} onValueChange={(value) => handleInputChange('level', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecciona el nivel" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Principiante">Principiante</SelectItem>
-                          <SelectItem value="Intermedio">Intermedio</SelectItem>
-                          <SelectItem value="Avanzado">Avanzado</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="space-y-2">
                       <Label htmlFor="duration">Duración (minutos)</Label>
                       <Input
                         id="duration"

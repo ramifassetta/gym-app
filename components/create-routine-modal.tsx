@@ -8,10 +8,18 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ExerciseSelector } from "@/components/exercise-selector"
 import { ExerciseList } from "@/components/exercise-list"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Save, X } from "lucide-react"
+import { Save, X, Plus } from "lucide-react"
+
+interface Exercise {
+  id: number
+  name: string
+  sets: number
+  reps: number
+  rest: number
+  notes?: string
+}
 
 interface CreateRoutineModalProps {
   open: boolean
@@ -21,7 +29,14 @@ interface CreateRoutineModalProps {
 
 export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: CreateRoutineModalProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedExercises, setSelectedExercises] = useState<any[]>([])
+  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([])
+  const [exerciseForm, setExerciseForm] = useState({
+    name: '',
+    sets: 3,
+    reps: 12,
+    rest: 60,
+    notes: ''
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,8 +52,28 @@ export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: Cre
     }, 1500)
   }
 
-  const handleAddExercise = (exercise: any) => {
-    setSelectedExercises([...selectedExercises, exercise])
+  const handleAddExercise = () => {
+    if (!exerciseForm.name.trim()) return
+    
+    const newExercise: Exercise = {
+      id: Date.now(), // ID temporal
+      name: exerciseForm.name.trim(),
+      sets: exerciseForm.sets,
+      reps: exerciseForm.reps,
+      rest: exerciseForm.rest,
+      notes: exerciseForm.notes.trim() || undefined
+    }
+    
+    setSelectedExercises([...selectedExercises, newExercise])
+    
+    // Limpiar formulario
+    setExerciseForm({
+      name: '',
+      sets: 3,
+      reps: 12,
+      rest: 60,
+      notes: ''
+    })
   }
 
   const handleRemoveExercise = (index: number) => {
@@ -66,37 +101,21 @@ export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: Cre
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Nombre de la Rutina</Label>
-                <Input id="name" placeholder="Ej: Entrenamiento de Fuerza - Nivel Intermedio" required />
+                <Input id="name" placeholder="Ej: Entrenamiento de Fuerza" required />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="client">Cliente</Label>
-                  <Select>
-                    <SelectTrigger id="client">
-                      <SelectValue placeholder="Seleccionar cliente" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="client1">Juan Pérez</SelectItem>
-                      <SelectItem value="client2">María García</SelectItem>
-                      <SelectItem value="client3">Carlos López</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="level">Nivel de Dificultad</Label>
-                  <Select>
-                    <SelectTrigger id="level">
-                      <SelectValue placeholder="Seleccionar nivel" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="beginner">Principiante</SelectItem>
-                      <SelectItem value="intermediate">Intermedio</SelectItem>
-                      <SelectItem value="advanced">Avanzado</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="client">Cliente</Label>
+                <Select>
+                  <SelectTrigger id="client">
+                    <SelectValue placeholder="Seleccionar cliente" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="client1">Juan Pérez</SelectItem>
+                    <SelectItem value="client2">María García</SelectItem>
+                    <SelectItem value="client3">Carlos López</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">
@@ -121,11 +140,94 @@ export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: Cre
               <CardDescription>Añade los ejercicios que formarán parte de esta rutina</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <ExerciseSelector onAddExercise={handleAddExercise} />
+              {/* Formulario para agregar ejercicio */}
+              <Card className="border-primary/20 bg-primary/5">
+                <CardHeader>
+                  <CardTitle className="text-lg">Agregar Ejercicio</CardTitle>
+                  <CardDescription>Completa los datos del ejercicio</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="exercise-name">Nombre del Ejercicio</Label>
+                    <Input 
+                      id="exercise-name"
+                      value={exerciseForm.name}
+                      onChange={(e) => setExerciseForm({...exerciseForm, name: e.target.value})}
+                      placeholder="Ej: Sentadillas, Flexiones, Plancha..."
+                      required
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="sets">Series</Label>
+                      <Input 
+                        id="sets"
+                        type="number"
+                        min="1"
+                        value={exerciseForm.sets}
+                        onChange={(e) => setExerciseForm({...exerciseForm, sets: parseInt(e.target.value)})}
+                        required
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="reps">Repeticiones</Label>
+                      <Input 
+                        id="reps"
+                        type="number"
+                        min="1"
+                        value={exerciseForm.reps}
+                        onChange={(e) => setExerciseForm({...exerciseForm, reps: parseInt(e.target.value)})}
+                        required
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="rest">Descanso (segundos)</Label>
+                      <Input 
+                        id="rest"
+                        type="number"
+                        min="0"
+                        value={exerciseForm.rest}
+                        onChange={(e) => setExerciseForm({...exerciseForm, rest: parseInt(e.target.value)})}
+                        required
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <Label htmlFor="notes">Notas (opcional)</Label>
+                    <Textarea 
+                      id="notes"
+                      value={exerciseForm.notes}
+                      onChange={(e) => setExerciseForm({...exerciseForm, notes: e.target.value})}
+                      placeholder="Ej: Mantener la espalda recta, respirar profundamente..."
+                      className="min-h-[80px]"
+                    />
+                  </div>
+                  
+                  <Button 
+                    type="button" 
+                    onClick={handleAddExercise}
+                    disabled={!exerciseForm.name.trim()}
+                    className="w-full"
+                  >
+                    <Plus className="mr-2 h-4 w-4" />
+                    Agregar Ejercicio
+                  </Button>
+                </CardContent>
+              </Card>
 
-              <div className="border rounded-md">
-                <ExerciseList exercises={selectedExercises} onRemoveExercise={handleRemoveExercise} />
-              </div>
+              {/* Lista de ejercicios agregados */}
+              {selectedExercises.length > 0 && (
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-lg">Ejercicios de la Rutina ({selectedExercises.length})</h4>
+                  <div className="border rounded-md">
+                    <ExerciseList exercises={selectedExercises} onRemoveExercise={handleRemoveExercise} />
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
 

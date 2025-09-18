@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, Edit, MessageSquare, Calendar, Activity, Target, Heart, Scale, TrendingUp, Clock, MapPin } from "lucide-react"
+import { ArrowLeft, Edit, MessageSquare, Calendar, Activity, Heart, Scale, TrendingUp, Clock, MapPin } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 
@@ -24,7 +24,6 @@ export default function ClientProfilePage({ params }: { params: Promise<{ id: st
     phone: "+34 600 123 456",
     avatar: null,
     status: "active",
-    goal: "Pérdida de peso",
     experience: "Intermedio",
     joinDate: "15 de Marzo, 2024",
     lastActive: "Hace 2 días",
@@ -140,10 +139,6 @@ export default function ClientProfilePage({ params }: { params: Promise<{ id: st
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <Target className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium">Objetivo: {client.goal}</span>
-              </div>
               <div className="flex items-center gap-3">
                 <Calendar className="h-4 w-4 text-primary" />
                 <span className="text-sm">Miembro desde: {client.joinDate}</span>

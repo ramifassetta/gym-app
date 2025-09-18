@@ -54,18 +54,6 @@ export function DeleteRoutineModal({
     }, 1500);
   };
 
-  const getLevelVariant = (level: string) => {
-    switch (level) {
-      case "Principiante":
-        return "bg-gradient-to-r from-emerald-500 to-emerald-600 text-white"
-      case "Intermedio":
-        return "bg-gradient-to-r from-amber-500 to-amber-600 text-white"
-      case "Avanzado":
-        return "bg-gradient-to-r from-red-500 to-red-600 text-white"
-      default:
-        return "default"
-    }
-  };
 
   return (
     <AnimatePresence>
@@ -127,9 +115,6 @@ export function DeleteRoutineModal({
                         <Dumbbell className="h-4 w-4 text-muted-foreground" />
                         <span>{routine.exercises} ejercicios</span>
                       </div>
-                      <Badge className={getLevelVariant(routine.level)}>
-                        {routine.level}
-                      </Badge>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <User className="h-4 w-4" />

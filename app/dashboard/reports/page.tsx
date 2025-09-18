@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { 
   BarChart3, 
   DollarSign, 
@@ -419,14 +420,15 @@ export default function ReportsPage() {
       </motion.div>
 
       {/* Modal para registrar gastos */}
-      {showExpenseForm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <Card className="w-full max-w-md mx-4">
-            <CardHeader>
-              <CardTitle>Registrar Nuevo Gasto</CardTitle>
-              <CardDescription>Agrega un gasto operativo del gimnasio</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+      <Dialog open={showExpenseForm} onOpenChange={setShowExpenseForm}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Registrar Nuevo Gasto</DialogTitle>
+            <DialogDescription>
+              Agrega un gasto operativo del gimnasio
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6 p-6">
               <div>
                 <label className="text-sm font-medium mb-2 block">Categoría</label>
                 <Select value={expenseForm.category} onValueChange={(value) => setExpenseForm(prev => ({...prev, category: value}))}>
@@ -492,10 +494,9 @@ export default function ReportsPage() {
                   Registrar
                 </Button>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

@@ -7,6 +7,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { 
   Shield, 
   Users, 
@@ -17,7 +19,11 @@ import {
   CreditCard,
   Calendar,
   Search,
-  Filter
+  Filter,
+  X,
+  Settings,
+  Lock,
+  Unlock
 } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -66,6 +72,13 @@ const mockPeakHours = [
 export default function AccessControlPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [accessTypeFilter, setAccessTypeFilter] = useState("all")
+  const [showConfigModal, setShowConfigModal] = useState(false)
+  const [barrierEnabled, setBarrierEnabled] = useState(false)
+  const [accessConfig, setAccessConfig] = useState({
+    qrEnabled: true,
+    fingerprintEnabled: true,
+    cardEnabled: true
+  })
 
   const getAccessTypeIcon = (type: string) => {
     switch (type) {
@@ -74,6 +87,12 @@ export default function AccessControlPage() {
       case "Tarjeta": return <CreditCard className="h-4 w-4" />
       default: return <Shield className="h-4 w-4" />
     }
+  }
+
+  const handleBarrierToggle = () => {
+    setBarrierEnabled(!barrierEnabled)
+    console.log(`Barrera ${barrierEnabled ? 'deshabilitada' : 'habilitada'}`)
+    // Aquí se enviaría la señal al sistema de barrera física
   }
 
   const filteredLogs = mockAccessLogs.filter(log => {
@@ -99,8 +118,11 @@ export default function AccessControlPage() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Button className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md hover:shadow-lg transition-all">
-            <Shield className="mr-2 h-4 w-4" /> Configurar Acceso
+          <Button 
+            onClick={() => setShowConfigModal(true)}
+            className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 shadow-md hover:shadow-lg transition-all"
+          >
+            <Settings className="mr-2 h-4 w-4" /> Configurar Acceso
           </Button>
         </motion.div>
       </div>
@@ -157,10 +179,62 @@ export default function AccessControlPage() {
         </Card>
       </motion.div>
 
+      {/* Control de Barrera */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <Card className="border border-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-all">
+          <CardHeader className="bg-gradient-to-r from-background to-muted">
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-primary" />
+              Control de Barrera de Acceso
+            </CardTitle>
+            <CardDescription>Habilitar o bloquear la barrera física de entrada</CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className={`p-3 rounded-lg ${barrierEnabled ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                  {barrierEnabled ? <Unlock className="h-6 w-6" /> : <Lock className="h-6 w-6" />}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Barrera de Acceso</h3>
+                  <p className="text-sm text-muted-foreground">
+                    {barrierEnabled ? 'Barrera habilitada - Acceso libre' : 'Barrera bloqueada - Solo con autorización'}
+                  </p>
+                </div>
+              </div>
+              <Button 
+                onClick={handleBarrierToggle}
+                className={`${
+                  barrierEnabled 
+                    ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white' 
+                    : 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white'
+                } shadow-lg hover:shadow-xl transition-all duration-300`}
+              >
+                {barrierEnabled ? (
+                  <>
+                    <Lock className="mr-2 h-4 w-4" />
+                    Bloquear Barrera
+                  </>
+                ) : (
+                  <>
+                    <Unlock className="mr-2 h-4 w-4" />
+                    Habilitar Barrera
+                  </>
+                )}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
       >
         <Tabs defaultValue="logs" className="space-y-6">
           <TabsList className="bg-background/80 backdrop-blur-sm border w-full justify-start p-1 rounded-xl">
@@ -266,6 +340,79 @@ export default function AccessControlPage() {
           </TabsContent>
         </Tabs>
       </motion.div>
+
+      {/* Modal de configuración de acceso */}
+      <Dialog open={showConfigModal} onOpenChange={setShowConfigModal}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Configuración de Acceso</DialogTitle>
+            <DialogDescription>
+              Configura los métodos de acceso y límites del gimnasio
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-6 p-6">
+              <div className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium mb-3 block">Métodos de Acceso Habilitados</label>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <QrCode className="h-5 w-5 text-blue-600" />
+                        <span>Acceso por QR</span>
+                      </div>
+                      <Switch 
+                        checked={accessConfig.qrEnabled}
+                        onCheckedChange={(checked) => setAccessConfig(prev => ({...prev, qrEnabled: checked}))}
+                      />
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <Fingerprint className="h-5 w-5 text-green-600" />
+                        <span>Acceso por Huella</span>
+                      </div>
+                      <Switch 
+                        checked={accessConfig.fingerprintEnabled}
+                        onCheckedChange={(checked) => setAccessConfig(prev => ({...prev, fingerprintEnabled: checked}))}
+                      />
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <CreditCard className="h-5 w-5 text-purple-600" />
+                        <span>Acceso por Tarjeta</span>
+                      </div>
+                      <Switch 
+                        checked={accessConfig.cardEnabled}
+                        onCheckedChange={(checked) => setAccessConfig(prev => ({...prev, cardEnabled: checked}))}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              
+              <div className="flex gap-2 pt-4">
+                <Button 
+                  onClick={() => setShowConfigModal(false)}
+                  variant="outline" 
+                  className="flex-1"
+                >
+                  Cancelar
+                </Button>
+                <Button 
+                  onClick={() => {
+                    console.log("Configuración guardada:", accessConfig)
+                    setShowConfigModal(false)
+                  }}
+                  className="flex-1 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                >
+                  Guardar
+                </Button>
+              </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
