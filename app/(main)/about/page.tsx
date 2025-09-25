@@ -9,10 +9,10 @@ import { ArrowLeft, Users, Target, Award, Heart } from "lucide-react";
 const About: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 pt-16 sm:pt-20">
+      <main className="flex-1">
         {/* About Content Section */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-4">
+        <section className="bg-background">
+          <div className="container mx-auto px-4 py-12 relative z-10">
             <div>
               <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-8">
                 <ArrowLeft className="mr-2 h-4 w-4" />
@@ -28,11 +28,11 @@ const About: React.FC = () => {
             >
               <div className="text-center mb-12">
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                  Sobre GymRoutine Pro
+                  Sobre <span className="whitespace-nowrap">Optifit</span>
                 </h1>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                  Somos una plataforma innovadora que transforma la gestión de gimnasios, 
-                  conectando entrenadores y clientes de manera digital y eficiente.
+                  Somos una aplicación especializada en la gestión integral de gimnasios, 
+                  diseñada para simplificar el control de acceso, gestión de clientes, pagos y rutinas.
                 </p>
               </div>
               
@@ -44,14 +44,14 @@ const About: React.FC = () => {
                 >
                   <h2 className="text-3xl font-bold mb-6">Nuestra Misión</h2>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Facilitar la gestión de gimnasios y mejorar la experiencia de entrenamiento 
-                    mediante tecnología innovadora que conecta entrenadores y clientes de manera 
-                    eficiente y personalizada.
+                    Simplificar la gestión diaria de gimnasios mediante una aplicación integral que 
+                    permite automatizar el control de acceso, gestionar clientes, calcular deudas 
+                    automáticamente y crear rutinas personalizadas.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    Creemos que cada cliente es único y merece una atención personalizada. 
-                    Nuestra plataforma permite a los entrenadores crear rutinas específicas, 
-                    hacer seguimiento del progreso y mantener una comunicación constante con sus clientes.
+                    Nuestro objetivo es que los propietarios de gimnasios puedan enfocarse en lo que 
+                    realmente importa: sus clientes. Por eso automatizamos tareas como el control de 
+                    acceso, el registro de pagos y el cálculo de deudas pendientes.
                   </p>
                 </motion.div>
                 
@@ -67,29 +67,29 @@ const About: React.FC = () => {
                         <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
                           <Users className="h-6 w-6 text-primary" />
                         </div>
-                        <h3 className="font-semibold mb-1">+1000</h3>
-                        <p className="text-sm text-muted-foreground">Clientes activos</p>
+                        <h3 className="font-semibold mb-1">100%</h3>
+                        <p className="text-sm text-muted-foreground">Enfocado en gimnasios</p>
                       </div>
                       <div className="text-center">
                         <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
                           <Target className="h-6 w-6 text-primary" />
                         </div>
-                        <h3 className="font-semibold mb-1">+50</h3>
-                        <p className="text-sm text-muted-foreground">Gimnasios</p>
+                        <h3 className="font-semibold mb-1">5</h3>
+                        <p className="text-sm text-muted-foreground">Tipos de pases</p>
                       </div>
                       <div className="text-center">
                         <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
                           <Award className="h-6 w-6 text-primary" />
                         </div>
-                        <h3 className="font-semibold mb-1">98%</h3>
-                        <p className="text-sm text-muted-foreground">Satisfacción</p>
+                        <h3 className="font-semibold mb-1">Control Automático</h3>
+                        <p className="text-sm text-muted-foreground">Control de acceso</p>
                       </div>
                       <div className="text-center">
                         <div className="bg-primary/20 p-3 rounded-full w-fit mx-auto mb-3">
                           <Heart className="h-6 w-6 text-primary" />
                         </div>
-                        <h3 className="font-semibold mb-1">24/7</h3>
-                        <p className="text-sm text-muted-foreground">Soporte</p>
+                        <h3 className="font-semibold mb-1">Auto</h3>
+                        <p className="text-sm text-muted-foreground">Cálculo de deudas</p>
                       </div>
                     </div>
                   </div>
@@ -102,10 +102,10 @@ const About: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-6">¿Por qué elegir GymRoutine Pro?</h2>
+                <h2 className="text-3xl font-bold mb-6">¿Por qué elegir Optifit?</h2>
                 <p className="text-muted-foreground mb-8 max-w-3xl mx-auto">
-                  Nuestra plataforma está diseñada pensando en las necesidades reales de los gimnasios 
-                  y sus clientes, ofreciendo una solución completa y fácil de usar.
+                  Nuestra aplicación está diseñada específicamente para gimnasios argentinos, 
+                  con funcionalidades que realmente necesitas: control de acceso, gestión de pagos y rutinas personalizadas.
                 </p>
                 
                 <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -113,9 +113,9 @@ const About: React.FC = () => {
                     <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
                       <Users className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Gestión Simplificada</h3>
+                    <h3 className="text-xl font-semibold mb-3">Control de Acceso</h3>
                     <p className="text-muted-foreground">
-                      Administra clientes, rutinas y pagos desde una sola plataforma intuitiva.
+                      Controla automáticamente la entrada y salida de tus clientes con tecnología moderna.
                     </p>
                   </div>
                   
@@ -123,9 +123,9 @@ const About: React.FC = () => {
                     <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
                       <Target className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Personalización Total</h3>
+                    <h3 className="text-xl font-semibold mb-3">Gestión de Pagos</h3>
                     <p className="text-muted-foreground">
-                      Crea rutinas únicas adaptadas a las necesidades específicas de cada cliente.
+                      Calcula automáticamente las deudas de tus clientes y gestiona todos los pagos en pesos argentinos.
                     </p>
                   </div>
                   
@@ -133,9 +133,9 @@ const About: React.FC = () => {
                     <div className="bg-primary/10 p-4 rounded-full w-fit mx-auto mb-4">
                       <Award className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3">Resultados Medibles</h3>
+                    <h3 className="text-xl font-semibold mb-3">Rutinas Personalizadas</h3>
                     <p className="text-muted-foreground">
-                      Seguimiento detallado del progreso y análisis de rendimiento en tiempo real.
+                      Crea rutinas específicas para cada cliente con ejercicios detallados y seguimiento de progreso.
                     </p>
                   </div>
                 </div>

@@ -8,8 +8,8 @@ const quicksand = Quicksand({
 })
 
 export const metadata: Metadata = {
-  title: 'FitZone Gym - Dashboard',
-  description: 'Panel de control para administrar tu gimnasio',
+  title: 'Optifit - Gestión de Gimnasios',
+  description: 'Sistema integral para la gestión de gimnasios con control de acceso, pagos y rutinas',
 }
 
 export default function RootLayout({

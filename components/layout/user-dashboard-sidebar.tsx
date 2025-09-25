@@ -95,7 +95,7 @@ export default function UserDashboardSidebar({ onClose }: UserDashboardSidebarPr
                 transition={{ duration: 0.2 }}
                 className="font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
               >
-                GymRoutine Pro
+                Optifit
               </motion.span>
             )}
           </Link>

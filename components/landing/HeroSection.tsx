@@ -31,7 +31,7 @@ const HeroSection: React.FC = () => {
               transition={{ delay: 0.3, duration: 0.5 }}
             >
               <span className="flex items-center justify-center text-xs sm:text-sm">
-                <Building2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> La solución completa para gimnasios
+                <Building2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Gestión integral para gimnasios
               </span>
             </motion.div>
             
@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              Controla suscripciones, pagos, clientes y rutinas desde una sola plataforma. Simplifica la gestión de tu negocio fitness.
+              Controla el acceso, gestiona pagos automáticamente y crea rutinas personalizadas. Todo desde una sola aplicación.
             </motion.p>
             
             <motion.div 
@@ -94,13 +94,13 @@ const HeroSection: React.FC = () => {
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                   <CreditCard className="h-6 w-6 text-white" />
                 </div>
-                <span className="text-xs text-white/80">Suscripciones</span>
+                <span className="text-xs text-white/80">Pagos y Deudas</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                   <Calendar className="h-6 w-6 text-white" />
                 </div>
-                <span className="text-xs text-white/80">Control de Acceso</span>
+                <span className="text-xs text-white/80">Rutinas</span>
               </div>
             </motion.div>
           </motion.div>
@@ -147,8 +147,8 @@ const HeroSection: React.FC = () => {
                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm font-medium">Clientes Activos</p>
-                    <p className="text-xs text-gray-600">+24 este mes</p>
+                    <p className="text-xs sm:text-sm font-medium">Accesos Hoy</p>
+                    <p className="text-xs text-gray-600">+24 clientes</p>
                   </div>
                 </div>
               </motion.div>
@@ -165,7 +165,7 @@ const HeroSection: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs sm:text-sm font-medium">Ingresos</p>
-                    <p className="text-xs text-gray-600">€2,450 este mes</p>
+                    <p className="text-xs text-gray-600">$245.000 este mes</p>
                   </div>
                 </div>
               </motion.div>

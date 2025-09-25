@@ -14,31 +14,33 @@ import {
   Users, 
   Clock, 
   TrendingUp, 
-  QrCode, 
   Fingerprint, 
-  CreditCard,
   Calendar,
   Search,
   Filter,
   X,
   Settings,
   Lock,
-  Unlock
+  Unlock,
+  Hash
 } from "lucide-react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 // Datos mock para demostración
 const mockAccessLogs = [
   {
     id: 1,
     clientName: "Juan Pérez",
-    accessType: "QR",
+    clientDNI: "43604733",
+    accessType: "Huella",
     timestamp: "2024-01-15 08:30:00",
     status: "success"
   },
   {
     id: 2,
     clientName: "María García",
+    clientDNI: "12345678",
     accessType: "Huella",
     timestamp: "2024-01-15 09:15:00",
     status: "success"
@@ -46,15 +48,25 @@ const mockAccessLogs = [
   {
     id: 3,
     clientName: "Carlos López",
-    accessType: "Tarjeta",
+    clientDNI: "87654321",
+    accessType: "DNI",
     timestamp: "2024-01-15 10:00:00",
     status: "success"
   },
   {
     id: 4,
     clientName: "Ana Martínez",
-    accessType: "QR",
+    clientDNI: "11223344",
+    accessType: "DNI",
     timestamp: "2024-01-15 11:30:00",
+    status: "success"
+  },
+  {
+    id: 5,
+    clientName: "Roberto Sánchez",
+    clientDNI: "55667788",
+    accessType: "Huella",
+    timestamp: "2024-01-15 12:15:00",
     status: "success"
   },
 ]
@@ -75,24 +87,22 @@ export default function AccessControlPage() {
   const [showConfigModal, setShowConfigModal] = useState(false)
   const [barrierEnabled, setBarrierEnabled] = useState(false)
   const [accessConfig, setAccessConfig] = useState({
-    qrEnabled: true,
     fingerprintEnabled: true,
-    cardEnabled: true
+    dniEnabled: true
   })
 
   const getAccessTypeIcon = (type: string) => {
     switch (type) {
-      case "QR": return <QrCode className="h-4 w-4" />
       case "Huella": return <Fingerprint className="h-4 w-4" />
-      case "Tarjeta": return <CreditCard className="h-4 w-4" />
+      case "DNI": return <Hash className="h-4 w-4" />
       default: return <Shield className="h-4 w-4" />
     }
   }
 
   const handleBarrierToggle = () => {
     setBarrierEnabled(!barrierEnabled)
-    console.log(`Barrera ${barrierEnabled ? 'deshabilitada' : 'habilitada'}`)
-    // Aquí se enviaría la señal al sistema de barrera física
+    console.log(`Acceso ${barrierEnabled ? 'deshabilitado' : 'habilitado'}`)
+    // Aquí se enviaría la señal al sistema de control de acceso
   }
 
   const filteredLogs = mockAccessLogs.filter(log => {
@@ -189,9 +199,9 @@ export default function AccessControlPage() {
           <CardHeader className="bg-gradient-to-r from-background to-muted">
             <CardTitle className="flex items-center gap-2">
               <Shield className="h-5 w-5 text-primary" />
-              Control de Barrera de Acceso
+              Control de Acceso
             </CardTitle>
-            <CardDescription>Habilitar o bloquear la barrera física de entrada</CardDescription>
+            <CardDescription>Habilitar o bloquear el acceso al gimnasio</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
@@ -199,12 +209,12 @@ export default function AccessControlPage() {
                 <div className={`p-3 rounded-lg ${barrierEnabled ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
                   {barrierEnabled ? <Unlock className="h-6 w-6" /> : <Lock className="h-6 w-6" />}
                 </div>
-                <div>
-                  <h3 className="font-semibold text-lg">Barrera de Acceso</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {barrierEnabled ? 'Barrera habilitada - Acceso libre' : 'Barrera bloqueada - Solo con autorización'}
-                  </p>
-                </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Control de Acceso</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {barrierEnabled ? 'Acceso habilitado - Entrada libre' : 'Acceso bloqueado - Solo con autorización'}
+                    </p>
+                  </div>
               </div>
               <Button 
                 onClick={handleBarrierToggle}
@@ -217,12 +227,12 @@ export default function AccessControlPage() {
                 {barrierEnabled ? (
                   <>
                     <Lock className="mr-2 h-4 w-4" />
-                    Bloquear Barrera
+                    Bloquear Acceso
                   </>
                 ) : (
                   <>
                     <Unlock className="mr-2 h-4 w-4" />
-                    Habilitar Barrera
+                    Habilitar Acceso
                   </>
                 )}
               </Button>
@@ -246,6 +256,13 @@ export default function AccessControlPage() {
               Registro de Accesos
             </TabsTrigger>
             <TabsTrigger 
+              value="dni-access"
+              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/80 data-[state=active]:to-primary data-[state=active]:text-white rounded-lg"
+            >
+              <Hash className="mr-2 h-4 w-4" />
+              Acceso por DNI
+            </TabsTrigger>
+            <TabsTrigger 
               value="reports"
               className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary/80 data-[state=active]:to-primary data-[state=active]:text-white rounded-lg"
             >
@@ -259,7 +276,7 @@ export default function AccessControlPage() {
               <CardHeader className="flex flex-row items-center justify-between bg-gradient-to-r from-background to-muted">
                 <div>
                   <CardTitle>Registro de Ingresos</CardTitle>
-                  <CardDescription>Historial de accesos por huella, QR y tarjeta</CardDescription>
+                  <CardDescription>Historial de accesos por huella dactilar y DNI</CardDescription>
                 </div>
                 <div className="flex gap-2">
                   <div className="relative">
@@ -277,9 +294,8 @@ export default function AccessControlPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="all">Todos</SelectItem>
-                      <SelectItem value="QR">QR</SelectItem>
                       <SelectItem value="Huella">Huella</SelectItem>
-                      <SelectItem value="Tarjeta">Tarjeta</SelectItem>
+                      <SelectItem value="DNI">DNI</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -292,6 +308,7 @@ export default function AccessControlPage() {
                         {getAccessTypeIcon(log.accessType)}
                         <div>
                           <p className="font-medium">{log.clientName}</p>
+                          <p className="text-sm text-muted-foreground font-mono">{log.clientDNI}</p>
                           <p className="text-sm text-muted-foreground">{log.timestamp}</p>
                         </div>
                       </div>
@@ -305,6 +322,35 @@ export default function AccessControlPage() {
             </Card>
           </TabsContent>
           
+          <TabsContent value="dni-access" className="space-y-4">
+            <Card className="border border-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-all">
+              <CardHeader className="bg-gradient-to-r from-background to-muted">
+                <CardTitle className="flex items-center gap-2">
+                  <Hash className="h-5 w-5 text-primary" />
+                  Control de Acceso por DNI
+                </CardTitle>
+                <CardDescription>
+                  Input para verificar acceso de clientes mediante DNI
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <div className="text-center p-8">
+                  <Hash className="h-12 w-12 mx-auto mb-4 text-primary/50" />
+                  <h3 className="text-lg font-semibold text-muted-foreground mb-2">
+                    Acceso por DNI
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    El control de acceso por DNI está disponible en el panel principal del dashboard.
+                  </p>
+                  <Link href="/dashboard">
+                    <Button variant="outline" className="border-primary/20 hover:border-primary hover:bg-primary/5">
+                      Ir al Panel Principal
+                    </Button>
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
           
           <TabsContent value="reports" className="space-y-4">
             <Card className="border border-primary/10 overflow-hidden shadow-sm hover:shadow-md transition-all">
@@ -357,19 +403,8 @@ export default function AccessControlPage() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between p-3 border rounded-lg">
                       <div className="flex items-center gap-3">
-                        <QrCode className="h-5 w-5 text-blue-600" />
-                        <span>Acceso por QR</span>
-                      </div>
-                      <Switch 
-                        checked={accessConfig.qrEnabled}
-                        onCheckedChange={(checked) => setAccessConfig(prev => ({...prev, qrEnabled: checked}))}
-                      />
-                    </div>
-                    
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
-                      <div className="flex items-center gap-3">
                         <Fingerprint className="h-5 w-5 text-green-600" />
-                        <span>Acceso por Huella</span>
+                        <span>Acceso por Huella Dactilar</span>
                       </div>
                       <Switch 
                         checked={accessConfig.fingerprintEnabled}
@@ -379,16 +414,17 @@ export default function AccessControlPage() {
                     
                     <div className="flex items-center justify-between p-3 border rounded-lg">
                       <div className="flex items-center gap-3">
-                        <CreditCard className="h-5 w-5 text-purple-600" />
-                        <span>Acceso por Tarjeta</span>
+                        <Hash className="h-5 w-5 text-orange-600" />
+                        <span>Acceso por DNI</span>
                       </div>
                       <Switch 
-                        checked={accessConfig.cardEnabled}
-                        onCheckedChange={(checked) => setAccessConfig(prev => ({...prev, cardEnabled: checked}))}
+                        checked={accessConfig.dniEnabled}
+                        onCheckedChange={(checked) => setAccessConfig(prev => ({...prev, dniEnabled: checked}))}
                       />
                     </div>
                   </div>
                 </div>
+
 
               </div>
               

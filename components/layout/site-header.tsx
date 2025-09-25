@@ -45,7 +45,7 @@ const SiteHeader: React.FC = () => {
                 <Dumbbell className={`h-6 w-6 text-white`} />
               </div>
               <span className={`text-xl font-bold ${isHomePage ? (scrolled ? 'text-primary' : 'text-white') : 'text-primary'}`}>
-                GymRoutine Pro
+                Optifit
               </span>
             </Link>
           
@@ -67,31 +67,31 @@ const SiteHeader: React.FC = () => {
             </nav>
             
             <div className="flex space-x-3">
-                              <Link href="/login">
-                  <Button
-                    variant="outline"
-                    className={isHomePage 
-                      ? (scrolled 
-                        ? "border-primary text-primary hover:bg-primary hover:text-white" 
-                        : "bg-transparent border-white text-white hover:bg-white/10")
-                      : "border-primary text-primary hover:bg-primary hover:text-white"
-                    }
-                  >
-                    Iniciar Sesión
-                  </Button>
-                </Link>
-                <Link href="/register">
-                  <Button 
-                    className={isHomePage 
-                      ? (scrolled 
-                        ? "bg-primary text-white hover:bg-primary/90" 
-                        : "bg-white text-primary hover:bg-white/90")
-                      : "bg-primary text-white hover:bg-primary/90"
-                    }
-                  >
-                    Registrarse
-                  </Button>
-                </Link>
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  className={isHomePage 
+                    ? (scrolled 
+                      ? "border-primary text-primary hover:bg-primary hover:text-white" 
+                      : "bg-transparent border-white text-white hover:bg-white/10")
+                    : "border-primary text-primary hover:bg-primary hover:text-white"
+                  }
+                >
+                  Iniciar Sesión
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button 
+                  className={isHomePage 
+                    ? (scrolled 
+                      ? "bg-primary text-white hover:bg-primary/90" 
+                      : "bg-white text-primary hover:bg-white/90")
+                    : "bg-primary text-white hover:bg-primary/90"
+                  }
+                >
+                  Registrarse
+                </Button>
+              </Link>
             </div>
           </div>
           

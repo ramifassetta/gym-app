@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ExerciseList } from "@/components/exercise-list"
+import { ClientAutocomplete } from "@/components/client-autocomplete"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Save, X, Plus } from "lucide-react"
 
@@ -27,9 +28,19 @@ interface CreateRoutineModalProps {
   onRoutineCreated?: () => void
 }
 
+interface Client {
+  id: number
+  name: string
+  email: string
+  phone?: string
+  dni: string
+  status: "active" | "inactive"
+}
+
 export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: CreateRoutineModalProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([])
+  const [selectedClient, setSelectedClient] = useState<Client | null>(null)
   const [exerciseForm, setExerciseForm] = useState({
     name: '',
     sets: 3,
@@ -40,10 +51,18 @@ export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: Cre
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Validar que se haya seleccionado un cliente
+    if (!selectedClient) {
+      alert("Por favor selecciona un cliente para la rutina")
+      return
+    }
+
     setIsLoading(true)
 
     // Simulación de creación de rutina
     setTimeout(() => {
+      console.log("Rutina creada para:", selectedClient.name)
       setIsLoading(false)
       onOpenChange(false)
       if (onRoutineCreated) {
@@ -104,19 +123,13 @@ export function CreateRoutineModal({ open, onOpenChange, onRoutineCreated }: Cre
                 <Input id="name" placeholder="Ej: Entrenamiento de Fuerza" required />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="client">Cliente</Label>
-                <Select>
-                  <SelectTrigger id="client">
-                    <SelectValue placeholder="Seleccionar cliente" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="client1">Juan Pérez</SelectItem>
-                    <SelectItem value="client2">María García</SelectItem>
-                    <SelectItem value="client3">Carlos López</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <ClientAutocomplete
+                label="Cliente"
+                placeholder="Buscar cliente por nombre, email o DNI..."
+                onClientSelect={setSelectedClient}
+                selectedClient={selectedClient}
+                required
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="description">Descripción</Label>

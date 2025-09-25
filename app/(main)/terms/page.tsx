@@ -40,7 +40,7 @@ const Terms: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">1. Introducción</h2>
                   <p className="text-muted-foreground">
-                    Bienvenido a GymRoutine Pro. Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web y servicios de GymRoutine Pro.
+                    Bienvenido a Optifit. Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web y servicios de Optifit.
                   </p>
                   <p className="text-muted-foreground">
                     Al acceder a este sitio web, asumimos que aceptas estos términos y condiciones en su totalidad. No continúes usando el sitio web si no aceptas todos los términos y condiciones establecidos en esta página.
@@ -52,7 +52,7 @@ const Terms: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">2. Licencia de uso</h2>
                   <p className="text-muted-foreground">
-                    A menos que se indique lo contrario, GymRoutine Pro y/o sus licenciatarios poseen los derechos de propiedad intelectual de todo el material en GymRoutine Pro. Todos los derechos de propiedad intelectual están reservados.
+                    A menos que se indique lo contrario, Optifit y/o sus licenciatarios poseen los derechos de propiedad intelectual de todo el material en Optifit. Todos los derechos de propiedad intelectual están reservados.
                   </p>
                   <p className="text-muted-foreground">
                     Puedes ver y/o imprimir páginas desde el sitio para tu uso personal, sujeto a las restricciones establecidas en estos términos y condiciones.
@@ -61,10 +61,10 @@ const Terms: React.FC = () => {
                   <div className="pl-5 border-l-2 border-primary/30 py-2">
                     <h3 className="text-xl font-medium">No debes:</h3>
                     <ul className="list-disc pl-5 mt-2 space-y-2 text-muted-foreground">
-                      <li>Republicar material de GymRoutine Pro</li>
-                      <li>Vender, alquilar o sublicenciar material de GymRoutine Pro</li>
-                      <li>Reproducir, duplicar o copiar material de GymRoutine Pro</li>
-                      <li>Redistribuir contenido de GymRoutine Pro</li>
+                      <li>Republicar material de Optifit</li>
+                      <li>Vender, alquilar o sublicenciar material de Optifit</li>
+                      <li>Reproducir, duplicar o copiar material de Optifit</li>
+                      <li>Redistribuir contenido de Optifit</li>
                     </ul>
                   </div>
                 </section>
@@ -74,7 +74,7 @@ const Terms: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">3. Uso de la plataforma</h2>
                   <p className="text-muted-foreground">
-                    Al utilizar nuestra plataforma, aceptas utilizar GymRoutine Pro de manera responsable. Nos reservamos el derecho de suspender cuentas o rechazar servicios a cualquier usuario por violación de estos términos de uso.
+                    Al utilizar nuestra plataforma, aceptas utilizar Optifit de manera responsable. Nos reservamos el derecho de suspender cuentas o rechazar servicios a cualquier usuario por violación de estos términos de uso.
                   </p>
                   <p className="text-muted-foreground">
                     Los usuarios son responsables de mantener la confidencialidad de sus cuentas y contraseñas. Deberás notificarnos inmediatamente si descubres o sospechas de cualquier uso no autorizado de tu cuenta.
@@ -86,7 +86,7 @@ const Terms: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">4. Limitación de responsabilidades</h2>
                   <p className="text-muted-foreground">
-                    En ningún caso GymRoutine Pro o sus proveedores serán responsables por cualquier daño (incluyendo, sin limitación, daños por pérdida de datos o beneficios, o debido a la interrupción del negocio) derivados del uso o la incapacidad de usar los materiales en GymRoutine Pro.
+                    En ningún caso Optifit o sus proveedores serán responsables por cualquier daño (incluyendo, sin limitación, daños por pérdida de datos o beneficios, o debido a la interrupción del negocio) derivados del uso o la incapacidad de usar los materiales en Optifit.
                   </p>
                 </section>
 
@@ -95,7 +95,7 @@ const Terms: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">5. Precisión de los materiales</h2>
                   <p className="text-muted-foreground">
-                    Los materiales que aparecen en el sitio web de GymRoutine Pro podrían incluir errores técnicos, tipográficos o fotográficos. GymRoutine Pro no garantiza que cualquiera de los materiales en su sitio web sea preciso, completo o actual.
+                    Los materiales que aparecen en el sitio web de Optifit podrían incluir errores técnicos, tipográficos o fotográficos. Optifit no garantiza que cualquiera de los materiales en su sitio web sea preciso, completo o actual.
                   </p>
                 </section>
 
@@ -104,7 +104,7 @@ const Terms: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">6. Modificaciones</h2>
                   <p className="text-muted-foreground">
-                    GymRoutine Pro puede revisar estos términos de servicio del sitio web en cualquier momento sin previo aviso. Al usar este sitio web, aceptas estar sujeto a la versión actual de estos términos de servicio.
+                    Optifit puede revisar estos términos de servicio del sitio web en cualquier momento sin previo aviso. Al usar este sitio web, aceptas estar sujeto a la versión actual de estos términos de servicio.
                   </p>
                 </section>
 

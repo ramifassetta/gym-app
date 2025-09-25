@@ -85,7 +85,7 @@ ${session.location ? `📍 Ubicación: ${session.location}` : ''}
 Por favor, confirma tu asistencia respondiendo a este mensaje.
 
 ¡Nos vemos pronto!
-El equipo de GymRoutine Pro`);
+El equipo de Optifit`);
     }
   }, [session]);
 

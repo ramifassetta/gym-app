@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Save, X, User, Mail, Phone } from "lucide-react"
+import { Save, X, User, Mail, Phone, Fingerprint, CheckCircle, AlertCircle } from "lucide-react"
 
 interface CreateClientModalProps {
   open: boolean
@@ -19,6 +19,30 @@ interface CreateClientModalProps {
 
 export function CreateClientModal({ open, onOpenChange, onClientCreated }: CreateClientModalProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [fingerprintStatus, setFingerprintStatus] = useState<'none' | 'scanning' | 'success' | 'error'>('none')
+  const [fingerprintTemplate, setFingerprintTemplate] = useState<string | null>(null)
+
+  const handleFingerprintScan = async () => {
+    setFingerprintStatus('scanning')
+    
+    // Simular escaneo de huella dactilar
+    setTimeout(() => {
+      // Simular éxito/error aleatorio para demo
+      const success = Math.random() > 0.3 // 70% de éxito
+      
+      if (success) {
+        setFingerprintStatus('success')
+        setFingerprintTemplate('mock_fingerprint_template_' + Date.now())
+      } else {
+        setFingerprintStatus('error')
+      }
+    }, 2000)
+  }
+
+  const handleRemoveFingerprint = () => {
+    setFingerprintStatus('none')
+    setFingerprintTemplate(null)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,6 +50,7 @@ export function CreateClientModal({ open, onOpenChange, onClientCreated }: Creat
 
     // Simulación de creación de cliente
     setTimeout(() => {
+      console.log("Cliente creado con huella:", fingerprintTemplate ? "Sí" : "No")
       setIsLoading(false)
       onOpenChange(false)
       if (onClientCreated) {
@@ -82,8 +107,106 @@ export function CreateClientModal({ open, onOpenChange, onClientCreated }: Creat
               </div>
 
               <div className="space-y-2">
+                <Label htmlFor="dni">DNI</Label>
+                <Input id="dni" placeholder="12345678A" required />
+              </div>
+
+              <div className="space-y-2">
                 <Label htmlFor="birthDate">Fecha de Nacimiento</Label>
                 <Input id="birthDate" type="date" />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Sección de Registro de Huella Dactilar */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Fingerprint className="h-5 w-5 text-primary" />
+                Registro de Huella Dactilar
+              </CardTitle>
+              <CardDescription>
+                Registra la huella dactilar del cliente para acceso rápido al gimnasio
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {fingerprintStatus === 'none' && (
+                <div className="text-center p-6 border-2 border-dashed border-muted-foreground/25 rounded-lg">
+                  <Fingerprint className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+                  <h3 className="text-lg font-semibold mb-2">Registrar Huella Dactilar</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Coloca el dedo en el lector de huellas para registrar la huella del cliente
+                  </p>
+                  <Button 
+                    type="button"
+                    onClick={handleFingerprintScan}
+                    className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                  >
+                    <Fingerprint className="mr-2 h-4 w-4" />
+                    Registrar Huella
+                  </Button>
+                </div>
+              )}
+
+              {fingerprintStatus === 'scanning' && (
+                <div className="text-center p-6 border-2 border-primary/50 rounded-lg bg-primary/5">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+                  <h3 className="text-lg font-semibold mb-2">Escaneando Huella...</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Coloca el dedo en el lector y manténlo hasta que se complete el escaneo
+                  </p>
+                </div>
+              )}
+
+              {fingerprintStatus === 'success' && (
+                <div className="text-center p-6 border-2 border-green-200 rounded-lg bg-green-50">
+                  <CheckCircle className="h-12 w-12 mx-auto mb-4 text-green-600" />
+                  <h3 className="text-lg font-semibold mb-2 text-green-800">¡Huella Registrada!</h3>
+                  <p className="text-sm text-green-600 mb-4">
+                    La huella dactilar se ha registrado exitosamente
+                  </p>
+                  <Button 
+                    type="button"
+                    variant="outline"
+                    onClick={handleRemoveFingerprint}
+                    className="border-red-200 text-red-600 hover:bg-red-50"
+                  >
+                    <X className="mr-2 h-4 w-4" />
+                    Eliminar Huella
+                  </Button>
+                </div>
+              )}
+
+              {fingerprintStatus === 'error' && (
+                <div className="text-center p-6 border-2 border-red-200 rounded-lg bg-red-50">
+                  <AlertCircle className="h-12 w-12 mx-auto mb-4 text-red-600" />
+                  <h3 className="text-lg font-semibold mb-2 text-red-800">Error al Registrar</h3>
+                  <p className="text-sm text-red-600 mb-4">
+                    No se pudo registrar la huella. Intenta nuevamente.
+                  </p>
+                  <div className="flex gap-2 justify-center">
+                    <Button 
+                      type="button"
+                      onClick={handleFingerprintScan}
+                      className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                    >
+                      <Fingerprint className="mr-2 h-4 w-4" />
+                      Intentar Nuevamente
+                    </Button>
+                    <Button 
+                      type="button"
+                      variant="outline"
+                      onClick={handleRemoveFingerprint}
+                    >
+                      Cancelar
+                    </Button>
+                  </div>
+                </div>
+              )}
+
+              <div className="text-xs text-muted-foreground text-center">
+                <p>💡 <strong>Opcional:</strong> La huella dactilar permite acceso rápido al gimnasio</p>
+                <p>El cliente también puede acceder usando su DNI si no tiene huella registrada</p>
               </div>
             </CardContent>
           </Card>

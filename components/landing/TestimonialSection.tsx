@@ -6,21 +6,21 @@ import { Quote } from 'lucide-react';
 
 const testimonials = [
   {
-    content: "Desde que empezamos a usar GymRoutine Pro, la comunicación con nuestros clientes mejoró notablemente. Ahora pueden ver sus rutinas en cualquier momento y nosotros podemos actualizarlas al instante.",
+    content: "El control de acceso por DNI y huella ha simplificado mucho la gestión de mi gimnasio. Ya no tengo que preocuparme por quién entra y quién no, el sistema lo controla automáticamente.",
     author: "Carlos Ruiz",
     role: "Dueño de GymFit Center",
     avatar: "https://placehold.co/100/3b82f6/FFFFFF?text=CR"
   },
   {
-    content: "Como entrenadora, puedo crear rutinas personalizadas mucho más rápido. La posibilidad de incluir videos demostrativos ha reducido significativamente las dudas de mis clientes.",
+    content: "El cálculo automático de deudas me ahorra mucho tiempo. Antes tenía que calcular manualmente cuánto debía cada cliente, ahora la aplicación lo hace por mí.",
     author: "Laura Martínez",
-    role: "Entrenadora personal",
+    role: "Administradora de Gimnasio",
     avatar: "https://placehold.co/100/3b82f6/FFFFFF?text=LM"
   },
   {
-    content: "La aplicación me permite seguir mi rutina desde cualquier lugar. Puedo marcar mis avances y ver mi progreso mes a mes, lo que me mantiene motivado para seguir entrenando.",
+    content: "Poder crear rutinas personalizadas para cada cliente y hacer seguimiento de su progreso ha mejorado mucho la calidad del servicio que ofrezco en mi gimnasio.",
     author: "Miguel Ángel Pérez",
-    role: "Usuario Premium",
+    role: "Entrenador Personal",
     avatar: "https://placehold.co/100/3b82f6/FFFFFF?text=MP"
   }
 ];
@@ -72,7 +72,7 @@ const TestimonialSection: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Descubre cómo GymRoutine Pro está transformando la gestión de gimnasios 
+            Descubre cómo Optifit está transformando la gestión de gimnasios 
             y la experiencia de entrenamiento en todo el país
           </motion.p>
         </div>

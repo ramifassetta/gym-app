@@ -104,7 +104,7 @@ export function CancelSubscriptionModal({
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground">
-                    El cliente perderá acceso a los servicios de GymRoutine Pro al final del período actual.
+                    El cliente perderá acceso a los servicios de Optifit al final del período actual.
                   </p>
                 </CardContent>
               </Card>

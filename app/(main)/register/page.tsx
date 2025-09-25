@@ -45,14 +45,14 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="w-full max-w-2xl"
       >
-        <Card className="border-primary/20 shadow-2xl bg-white/95 backdrop-blur-sm">
+        <Card className="border-primary/20 shadow-2xl bg-white">
           <div className="h-1 w-full bg-gradient-to-r from-primary via-secondary to-primary"></div>
           <CardHeader className="text-center pb-6">
             <motion.div
@@ -67,7 +67,7 @@ export default function RegisterPage() {
               Registra tu Gimnasio
             </CardTitle>
             <CardDescription className="text-lg text-muted-foreground">
-              Únete a GymRoutine Pro y transforma la gestión de tu gimnasio
+              Únete a Optifit y transforma la gestión de tu gimnasio
             </CardDescription>
           </CardHeader>
           

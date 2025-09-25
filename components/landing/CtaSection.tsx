@@ -33,7 +33,7 @@ const CtaSection: React.FC = () => {
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6">¿Listo para transformar tu gimnasio?</h2>
             <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto">
-              Únete a cientos de gimnasios que ya están aprovechando los beneficios de GymRoutine Pro.
+              Únete a cientos de gimnasios que ya están aprovechando los beneficios de Optifit.
             </p>
           </motion.div>
           
@@ -96,8 +96,8 @@ const CtaSection: React.FC = () => {
           >
             <p className="text-white/70">
               ¿Tienes preguntas? Llámanos al <span className="font-semibold text-white">900 123 456</span> o escríbenos a{" "}
-              <a href="mailto:info@gymroutinepro.com" className="text-white underline">
-                info@gymroutinepro.com
+              <a href="mailto:info@optifit.com" className="text-white underline">
+                info@optifit.com
               </a>
             </p>
           </motion.div>

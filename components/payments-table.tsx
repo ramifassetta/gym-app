@@ -91,7 +91,7 @@ export function PaymentsTable() {
         method: payment.method,
         invoiceNumber: payment.id,
         items: [
-          { id: 1, description: "Suscripción GymRoutine Pro", quantity: 1, unitPrice: 29.99, total: 29.99 },
+          { id: 1, description: "Suscripción Optifit", quantity: 1, unitPrice: 29.99, total: 29.99 },
           { id: 2, description: "Servicios adicionales", quantity: 1, unitPrice: 10.00, total: 10.00 }
         ],
         subtotal: 39.99,

@@ -80,7 +80,7 @@ ${reason ? `Motivo: ${reason}` : ''}
 Te contactaremos pronto para reprogramar la sesión.
 
 Disculpa las molestias.
-El equipo de GymRoutine Pro`);
+El equipo de Optifit`);
     }
   }, [session, reason]);
 

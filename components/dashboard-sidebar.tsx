@@ -75,7 +75,7 @@ export default function DashboardSidebar() {
       <div className="flex h-14 items-center border-b px-4">
         <Link href="/dashboard" className="flex items-center gap-2">
           <Dumbbell className="h-6 w-6 text-primary" />
-          {!isCollapsed && <span className="font-bold">GymRoutine Pro</span>}
+          {!isCollapsed && <span className="font-bold">Optifit</span>}
         </Link>
       </div>
       <div className="flex-1 overflow-auto py-2">

@@ -102,7 +102,7 @@ export default function DashboardSidebar({ onClose }: DashboardSidebarProps) {
                 transition={{ duration: 0.2 }}
                 className="font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
               >
-                GymRoutine Pro
+                Optifit
               </motion.span>
             )}
           </Link>
@@ -168,7 +168,10 @@ export default function DashboardSidebar({ onClose }: DashboardSidebarProps) {
                   )}
                   
                   {isActive && (
-                    <div className="absolute right-2 w-1 h-6 bg-gradient-to-b from-primary to-primary/60 rounded-full" />
+                    <div className={cn(
+                      "absolute w-1 h-6 bg-gradient-to-b from-primary to-primary/60 rounded-full",
+                      isCollapsed ? "right-1" : "right-2"
+                    )} />
                   )}
                 </Link>
               </motion.div>

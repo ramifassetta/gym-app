@@ -11,53 +11,43 @@ import { Check, ChevronRight, Dumbbell, Users, MessageSquare, BarChart3, Shield,
 
 const mainFeatures = [
   {
+    icon: <Users className="h-6 w-6" />,
+    title: "Gestión de Clientes",
+    description: "Administra toda la información de tus clientes, suscripciones y datos de contacto en una sola plataforma.",
+    benefits: ["Registro completo de clientes", "Gestión de suscripciones", "Historial de pagos", "Datos de contacto organizados"]
+  },
+  {
     icon: <Dumbbell className="h-6 w-6" />,
     title: "Gestión de Rutinas",
     description: "Crea y personaliza rutinas de ejercicios específicas para cada cliente con nuestra herramienta intuitiva.",
-    benefits: ["Editor visual de ejercicios", "Plantillas personalizables", "Progresión automática", "Historial completo"]
-  },
-  {
-    icon: <Users className="h-6 w-6" />,
-    title: "Gestión de Clientes",
-    description: "Administra toda la información de tus clientes, objetivos y progreso en una sola plataforma.",
-    benefits: ["Perfiles detallados", "Seguimiento de objetivos", "Historial médico", "Fotos de progreso"]
-  },
-  {
-    icon: <MessageSquare className="h-6 w-6" />,
-    title: "Comunicación Integrada",
-    description: "Mantén una comunicación constante con tus clientes a través de mensajes y notificaciones.",
-    benefits: ["Chat en tiempo real", "Notificaciones automáticas", "Recordatorios personalizados", "Compartir rutinas"]
+    benefits: ["Editor de rutinas personalizado", "Plantillas de ejercicios", "Asignación por cliente", "Seguimiento de progreso"]
   },
   {
     icon: <BarChart3 className="h-6 w-6" />,
-    title: "Análisis y Reportes",
-    description: "Obtén insights detallados sobre el rendimiento de tus clientes y el crecimiento de tu negocio.",
-    benefits: ["Métricas de progreso", "Reportes personalizados", "Análisis de tendencias", "Exportación de datos"]
+    title: "Control de Pagos",
+    description: "Gestiona los pagos de tus clientes, calcula deudas automáticamente y mantén un registro detallado.",
+    benefits: ["Registro de pagos", "Cálculo automático de deudas", "Múltiples métodos de pago", "Reportes de ingresos"]
   },
   {
     icon: <Shield className="h-6 w-6" />,
-    title: "Seguridad y Privacidad",
-    description: "Protege la información sensible de tus clientes con las mejores prácticas de seguridad.",
-    benefits: ["Encriptación de datos", "Cumplimiento GDPR", "Copias de seguridad", "Acceso controlado"]
+    title: "Control de Acceso",
+    description: "Sistema de acceso por DNI y huella dactilar para controlar la entrada de tus clientes al gimnasio.",
+    benefits: ["Acceso por DNI", "Reconocimiento de huella", "Registro de asistencia", "Control de horarios"]
   },
   {
-    icon: <Zap className="h-6 w-6" />,
-    title: "Automatización",
-    description: "Automatiza tareas repetitivas y enfócate en lo que realmente importa: tus clientes.",
-    benefits: ["Recordatorios automáticos", "Rutinas programadas", "Reportes automáticos", "Integraciones"]
+    icon: <MessageSquare className="h-6 w-6" />,
+    title: "Comunicación",
+    description: "Mantén una comunicación efectiva con tus clientes a través de mensajes y notificaciones.",
+    benefits: ["Mensajes directos", "Notificaciones automáticas", "Recordatorios de pago", "Comunicación masiva"]
+  },
+  {
+    icon: <FileText className="h-6 w-6" />,
+    title: "Reportes y Análisis",
+    description: "Obtén insights detallados sobre el rendimiento de tu gimnasio y el comportamiento de tus clientes.",
+    benefits: ["Reportes de asistencia", "Análisis de pagos", "Estadísticas de clientes", "Exportación de datos"]
   }
 ];
 
-const compareFeatures = [
-  { feature: "Usuarios activos", basic: "Hasta 50", pro: "Hasta 200", enterprise: "Ilimitados" },
-  { feature: "Rutinas personalizadas", basic: "✓", pro: "✓", enterprise: "✓" },
-  { feature: "Comunicación con clientes", basic: "Básica", pro: "Avanzada", enterprise: "Premium" },
-  { feature: "Análisis y reportes", basic: "Básicos", pro: "Detallados", enterprise: "Avanzados" },
-  { feature: "Soporte técnico", basic: "Email", pro: "24/7", enterprise: "Dedicado" },
-  { feature: "Integraciones", basic: "Limitadas", pro: "Estándar", enterprise: "Personalizadas" },
-  { feature: "API", basic: "✗", pro: "✗", enterprise: "✓" },
-  { feature: "Configuración personalizada", basic: "✗", pro: "✗", enterprise: "✓" }
-];
 
 const FeatureCard = ({ feature, index }: { feature: typeof mainFeatures[0], index: number }) => {
   return (
@@ -97,9 +87,9 @@ const FeatureCard = ({ feature, index }: { feature: typeof mainFeatures[0], inde
 const Features: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 pt-16 sm:pt-20">
+      <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-gym text-white py-16 rounded-md">
+        <section className="relative overflow-hidden bg-gradient-gym text-white py-12 rounded-md">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute top-1/2 -left-24 w-72 h-72 bg-accent/20 rounded-full blur-3xl"></div>
@@ -134,7 +124,7 @@ const Features: React.FC = () => {
         </section>
         
         {/* Main Features Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-12">
           <div className="container mx-auto px-4">
             <motion.div
               className="text-center mb-12"
@@ -147,7 +137,7 @@ const Features: React.FC = () => {
                 Todo lo que necesitas en una plataforma
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                GymRoutine Pro combina todas las herramientas esenciales para la gestión de gimnasios 
+                Optifit combina todas las herramientas esenciales para la gestión de gimnasios 
                 en una interfaz intuitiva y fácil de usar.
               </p>
             </motion.div>
@@ -160,62 +150,9 @@ const Features: React.FC = () => {
           </div>
         </section>
         
-        {/* Comparison Section */}
-        <section className="py-16 md:py-24 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <motion.div
-              className="text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Comparativa de planes
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Encuentra el plan que mejor se adapte a las necesidades de tu gimnasio
-              </p>
-            </motion.div>
-            
-            <div className="overflow-x-auto -mx-4 sm:mx-0">
-              <div className="min-w-[800px] sm:min-w-0">
-                <Table className="w-full">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="min-w-[180px]">Característica</TableHead>
-                      <TableHead>Plan Básico</TableHead>
-                      <TableHead>Plan Profesional</TableHead>
-                      <TableHead>Plan Enterprise</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {compareFeatures.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">{item.feature}</TableCell>
-                        <TableCell>{item.basic}</TableCell>
-                        <TableCell>{item.pro}</TableCell>
-                        <TableCell>{item.enterprise}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </div>
-            
-            <div className="mt-10 text-center">
-              <Link href="/pricing">
-                <Button size="lg">
-                  Ver todos los planes
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
         
         {/* Use Cases Section */}
-        <section className="py-16 md:py-24 bg-muted/30">
+        <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <motion.div
               className="text-center mb-12"
@@ -228,7 +165,7 @@ const Features: React.FC = () => {
                 Casos de uso
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Descubre cómo GymRoutine Pro se adapta a diferentes tipos de negocios
+                Descubre cómo Optifit se adapta a diferentes tipos de negocios
               </p>
             </motion.div>
             
@@ -238,7 +175,6 @@ const Features: React.FC = () => {
                   <TabsList>
                     <TabsTrigger value="gyms">Gimnasios</TabsTrigger>
                     <TabsTrigger value="trainers">Entrenadores</TabsTrigger>
-                    <TabsTrigger value="studios">Estudios</TabsTrigger>
                   </TabsList>
                 </div>
                 
@@ -249,26 +185,26 @@ const Features: React.FC = () => {
                         <div>
                           <h3 className="text-2xl font-bold mb-4">Para gimnasios</h3>
                           <p className="text-muted-foreground mb-6">
-                            GymRoutine Pro permite a los gimnasios gestionar fácilmente cientos de clientes, 
-                            asignar entrenadores específicos, crear rutinas personalizadas y hacer seguimiento 
-                            de los pagos de membresías en una sola plataforma.
+                            Nuestra aplicación permite a los gimnasios gestionar fácilmente todos sus clientes, 
+                            controlar el acceso por DNI y huella, crear rutinas personalizadas y hacer seguimiento 
+                            de los pagos y deudas en una sola plataforma.
                           </p>
                           <ul className="space-y-2">
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Gestión centralizada de clientes</span>
+                              <span>Registro completo de clientes</span>
                             </li>
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Asignación de entrenadores a clientes</span>
+                              <span>Control de acceso por DNI y huella</span>
                             </li>
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Control de acceso y asistencia</span>
+                              <span>Gestión de pagos y cálculo de deudas</span>
                             </li>
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Gestión de membresías y pagos</span>
+                              <span>Creación de rutinas personalizadas</span>
                             </li>
                           </ul>
                         </div>
@@ -293,17 +229,17 @@ const Features: React.FC = () => {
                         <div>
                           <h3 className="text-2xl font-bold mb-4">Para entrenadores</h3>
                           <p className="text-muted-foreground mb-6">
-                            Los entrenadores pueden crear rutinas personalizadas, hacer seguimiento del progreso 
-                            de sus clientes y mantener una comunicación constante para maximizar los resultados.
+                            Los entrenadores pueden crear rutinas personalizadas para cada cliente, hacer seguimiento 
+                            de su progreso y mantener una comunicación efectiva para maximizar los resultados.
                           </p>
                           <ul className="space-y-2">
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Creación de rutinas personalizadas</span>
+                              <span>Editor de rutinas personalizado</span>
                             </li>
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Seguimiento del progreso</span>
+                              <span>Asignación de rutinas por cliente</span>
                             </li>
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
@@ -311,7 +247,7 @@ const Features: React.FC = () => {
                             </li>
                             <li className="flex items-start">
                               <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Análisis de rendimiento</span>
+                              <span>Seguimiento de progreso detallado</span>
                             </li>
                           </ul>
                         </div>
@@ -329,55 +265,13 @@ const Features: React.FC = () => {
                   </Card>
                 </TabsContent>
                 
-                <TabsContent value="studios">
-                  <Card>
-                    <CardContent className="p-6">
-                      <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                          <h3 className="text-2xl font-bold mb-4">Para estudios especializados</h3>
-                          <p className="text-muted-foreground mb-6">
-                            Estudios de yoga, pilates, crossfit y otros deportes pueden gestionar sus clases, 
-                            reservas y clientes de manera eficiente con herramientas adaptadas a sus necesidades.
-                          </p>
-                          <ul className="space-y-2">
-                            <li className="flex items-start">
-                              <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Gestión de clases y horarios</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Sistema de reservas</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Control de capacidad</span>
-                            </li>
-                            <li className="flex items-start">
-                              <Check className="h-5 w-5 text-primary mr-3 shrink-0 mt-0.5" />
-                              <span>Gestión de instructores</span>
-                            </li>
-                          </ul>
-                        </div>
-                        <div className="text-center">
-                          <div className="bg-primary/10 p-8 rounded-2xl">
-                            <Calendar className="h-16 w-16 text-primary mx-auto mb-4" />
-                            <h4 className="text-lg font-semibold mb-2">Organización</h4>
-                            <p className="text-muted-foreground">
-                              Mantén tu estudio organizado y tus clientes satisfechos
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
               </Tabs>
             </div>
           </div>
         </section>
         
         {/* CTA Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-12">
           <div className="container mx-auto px-4">
             <motion.div
               className="text-center max-w-3xl mx-auto"
@@ -390,7 +284,7 @@ const Features: React.FC = () => {
                 ¿Listo para transformar tu negocio?
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Únete a cientos de profesionales del fitness que ya están usando GymRoutine Pro 
+                Únete a cientos de profesionales del fitness que ya están usando Optifit 
                 para mejorar la gestión de sus clientes y aumentar sus ingresos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

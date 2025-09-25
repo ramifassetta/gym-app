@@ -17,6 +17,7 @@ export function ClientsList() {
       id: 1,
       name: "Juan Pérez",
       email: "juan@ejemplo.com",
+      dni: "43604733",
       status: "active",
       lastActive: "Hace 2 días",
       avatar: null,
@@ -25,6 +26,7 @@ export function ClientsList() {
       id: 2,
       name: "María García",
       email: "maria@ejemplo.com",
+      dni: "12345678",
       status: "active",
       lastActive: "Hoy",
       avatar: null,
@@ -33,6 +35,7 @@ export function ClientsList() {
       id: 3,
       name: "Carlos López",
       email: "carlos@ejemplo.com",
+      dni: "87654321",
       status: "inactive",
       lastActive: "Hace 1 semana",
       avatar: null,
@@ -41,6 +44,7 @@ export function ClientsList() {
       id: 4,
       name: "Ana Martínez",
       email: "ana@ejemplo.com",
+      dni: "11223344",
       status: "active",
       lastActive: "Ayer",
       avatar: null,
@@ -82,6 +86,7 @@ export function ClientsList() {
               <div>
                 <div className="font-medium text-lg">{client.name}</div>
                 <div className="text-sm text-muted-foreground">{client.email}</div>
+                <div className="text-sm text-muted-foreground font-mono">{client.dni}</div>
                 <div className="flex items-center gap-2 mt-1.5">
                   <Badge 
                     variant={client.status === "active" ? "default" : "secondary"}

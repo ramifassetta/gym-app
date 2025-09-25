@@ -67,7 +67,7 @@ export function SendInvoiceModal({
   React.useEffect(() => {
     if (invoice) {
       setEmail(invoice.client.email);
-      setSubject(`Factura #${invoice.invoiceNumber} - GymRoutine Pro`);
+      setSubject(`Factura #${invoice.invoiceNumber} - Optifit`);
       setMessage(`Hola ${invoice.client.name},
 
 Adjunto la factura #${invoice.invoiceNumber} por un importe de ${invoice.amount}.
@@ -80,7 +80,7 @@ Detalles de la factura:
 Si tienes alguna pregunta, no dudes en contactarnos.
 
 Saludos,
-El equipo de GymRoutine Pro`);
+El equipo de Optifit`);
     }
   }, [invoice]);
 

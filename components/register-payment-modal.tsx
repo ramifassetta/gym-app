@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Save, X, CreditCard, User, Calendar, DollarSign } from "lucide-react"
+import { Save, X, CreditCard, User, Calendar, Banknote } from "lucide-react"
 
 interface RegisterPaymentModalProps {
   open: boolean
@@ -19,6 +19,42 @@ interface RegisterPaymentModalProps {
 
 export function RegisterPaymentModal({ open, onOpenChange, onPaymentRegistered }: RegisterPaymentModalProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedPaymentType, setSelectedPaymentType] = useState("")
+  const [amountPaid, setAmountPaid] = useState("")
+  const [debt, setDebt] = useState(0)
+
+  // Configuración de precios de pases
+  const passPrices = {
+    "pase-libre": 45000,
+    "pase-libre-3-meses": 120000,
+    "pase-libre-anual": 400000,
+    "pase-mensual-3-dias": 15000,
+    "pase-dia": 2000
+  }
+
+  // Calcular deuda cuando cambie el tipo de pase o el monto pagado
+  const calculateDebt = (paymentType: string, paidAmount: string) => {
+    if (!paymentType || !paidAmount) {
+      setDebt(0)
+      return
+    }
+    
+    const price = passPrices[paymentType as keyof typeof passPrices] || 0
+    const paid = parseFloat(paidAmount) || 0
+    const calculatedDebt = price - paid
+    
+    setDebt(calculatedDebt)
+  }
+
+  const handlePaymentTypeChange = (value: string) => {
+    setSelectedPaymentType(value)
+    calculateDebt(value, amountPaid)
+  }
+
+  const handleAmountChange = (value: string) => {
+    setAmountPaid(value)
+    calculateDebt(selectedPaymentType, value)
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -80,27 +116,26 @@ export function RegisterPaymentModal({ open, onOpenChange, onPaymentRegistered }
               <CardDescription>Información del pago recibido</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="amount">Monto</Label>
-                  <div className="relative">
-                    <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                    <Input id="amount" type="number" step="0.01" placeholder="0.00" className="pl-10" required />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="amount">Monto Pagado (Pesos Argentinos)</Label>
+                <div className="relative">
+                  <Banknote className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input 
+                    id="amount" 
+                    type="number" 
+                    step="0.01" 
+                    placeholder="0.00" 
+                    className="pl-10" 
+                    value={amountPaid}
+                    onChange={(e) => handleAmountChange(e.target.value)}
+                    required 
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="currency">Moneda</Label>
-                  <Select defaultValue="EUR">
-                    <SelectTrigger id="currency">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="EUR">EUR (€)</SelectItem>
-                      <SelectItem value="USD">USD ($)</SelectItem>
-                      <SelectItem value="GBP">GBP (£)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                {selectedPaymentType && (
+                  <p className="text-sm text-muted-foreground">
+                    Precio del pase: ${passPrices[selectedPaymentType as keyof typeof passPrices]?.toLocaleString()}
+                  </p>
+                )}
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -119,10 +154,7 @@ export function RegisterPaymentModal({ open, onOpenChange, onPaymentRegistered }
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="cash">Efectivo</SelectItem>
-                      <SelectItem value="card">Tarjeta</SelectItem>
                       <SelectItem value="transfer">Transferencia</SelectItem>
-                      <SelectItem value="paypal">PayPal</SelectItem>
-                      <SelectItem value="stripe">Stripe</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -130,19 +162,42 @@ export function RegisterPaymentModal({ open, onOpenChange, onPaymentRegistered }
 
               <div className="space-y-2">
                 <Label htmlFor="paymentType">Tipo de Pago</Label>
-                <Select>
+                <Select value={selectedPaymentType} onValueChange={handlePaymentTypeChange}>
                   <SelectTrigger id="paymentType">
                     <SelectValue placeholder="Seleccionar tipo" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="subscription">Suscripción Mensual</SelectItem>
-                    <SelectItem value="session">Sesión Individual</SelectItem>
-                    <SelectItem value="package">Paquete de Sesiones</SelectItem>
-                    <SelectItem value="personal-training">Entrenamiento Personal</SelectItem>
-                    <SelectItem value="other">Otro</SelectItem>
+                    <SelectItem value="pase-libre">Pase Libre - $45.000</SelectItem>
+                    <SelectItem value="pase-libre-3-meses">Pase Libre 3 meses - $120.000</SelectItem>
+                    <SelectItem value="pase-libre-anual">Pase Libre anual - $400.000</SelectItem>
+                    <SelectItem value="pase-mensual-3-dias">Pase mensual 3 días - $15.000</SelectItem>
+                    <SelectItem value="pase-dia">Pase día - $2.000</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+
+              {/* Mostrar deuda si existe */}
+              {debt !== 0 && (
+                <div className={`p-4 rounded-lg border ${
+                  debt > 0 
+                    ? 'bg-red-50 border-red-200 text-red-800' 
+                    : 'bg-green-50 border-green-200 text-green-800'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">
+                      {debt > 0 ? 'Deuda pendiente:' : 'Pago en exceso:'}
+                    </span>
+                    <span className="font-bold">
+                      ${Math.abs(debt).toLocaleString()}
+                    </span>
+                  </div>
+                  {debt > 0 && (
+                    <p className="text-sm mt-1 opacity-80">
+                      El cliente debe ${debt.toLocaleString()} pesos argentinos
+                    </p>
+                  )}
+                </div>
+              )}
 
               <div className="space-y-2">
                 <Label htmlFor="reference">Referencia/Número de Transacción</Label>

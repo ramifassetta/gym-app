@@ -8,37 +8,37 @@ const features = [
   {
     icon: <Users className="h-5 w-5 sm:h-6 sm:w-6" />,
     title: "Gestión de Clientes",
-    description: "Administra todos tus clientes desde una sola plataforma. Controla suscripciones, estado de pagos y acceso al gimnasio.",
+    description: "Registra y administra todos tus clientes con sus datos de contacto, suscripciones y historial de pagos.",
     color: "bg-gradient-gym"
   },
   {
     icon: <CreditCard className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Suscripciones y Pagos",
-    description: "Sistema completo de gestión de membresías, pagos recurrentes y alertas automáticas de vencimiento.",
+    title: "Control de Pagos",
+    description: "Registra pagos, calcula deudas automáticamente y gestiona todos los movimientos en pesos argentinos.",
     color: "bg-gradient-feature"
   },
   {
     icon: <Calendar className="h-5 w-5 sm:h-6 sm:w-6" />,
     title: "Control de Acceso",
-    description: "Integración con sistemas de huella dactilar y control de entrada/salida para monitorear la asistencia.",
+    description: "Registra automáticamente la entrada y salida de tus clientes con tecnología avanzada.",
     color: "bg-gradient-gym"
   },
   {
     icon: <Building2 className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Dashboard Empresarial",
-    description: "Vista completa de tu negocio: ingresos, clientes activos, tendencias y métricas de rendimiento.",
+    title: "Gestión de Rutinas",
+    description: "Crea rutinas personalizadas para cada cliente con ejercicios detallados y seguimiento de progreso.",
     color: "bg-gradient-feature"
   },
   {
     icon: <Bell className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Notificaciones Automáticas",
-    description: "Alertas inteligentes para suscripciones que vencen, pagos pendientes y recordatorios importantes.",
+    title: "Comunicación",
+    description: "Mantén comunicación directa con tus clientes a través de mensajes y notificaciones automáticas.",
     color: "bg-gradient-gym"
   },
   {
     icon: <BarChart3 className="h-5 w-5 sm:h-6 sm:w-6" />,
-    title: "Reportes y Analytics",
-    description: "Genera reportes detallados de clientes, ingresos y tendencias para tomar decisiones informadas.",
+    title: "Reportes y Análisis",
+    description: "Genera reportes de asistencia, análisis de pagos y estadísticas de clientes para tu gimnasio.",
     color: "bg-gradient-feature"
   }
 ];
@@ -90,7 +90,7 @@ const FeatureSection: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            GymRoutine Pro ofrece todas las herramientas necesarias para optimizar 
+            Optifit ofrece todas las herramientas necesarias para optimizar 
             la gestión de tu negocio fitness y maximizar la rentabilidad
           </motion.p>
         </div>

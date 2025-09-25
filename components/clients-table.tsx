@@ -37,6 +37,7 @@ export function ClientsTable() {
       name: "Juan Pérez",
       email: "juan@ejemplo.com",
       phone: "+1234567890",
+      dni: "43604733",
       status: "active",
       lastActive: "Hace 2 días",
       avatar: "/placeholder-user.jpg",
@@ -51,6 +52,7 @@ export function ClientsTable() {
       name: "María García",
       email: "maria@ejemplo.com",
       phone: "+1234567891",
+      dni: "12345678",
       status: "active",
       lastActive: "Hoy",
       avatar: "/placeholder-user.jpg",
@@ -65,6 +67,7 @@ export function ClientsTable() {
       name: "Carlos López",
       email: "carlos@ejemplo.com",
       phone: "+1234567892",
+      dni: "87654321",
       status: "inactive",
       lastActive: "Hace 1 semana",
       avatar: "/placeholder-user.jpg",
@@ -79,6 +82,7 @@ export function ClientsTable() {
       name: "Ana Martínez",
       email: "ana@ejemplo.com",
       phone: "+1234567893",
+      dni: "11223344",
       status: "active",
       lastActive: "Ayer",
       avatar: "/placeholder-user.jpg",
@@ -93,6 +97,7 @@ export function ClientsTable() {
       name: "Roberto Sánchez",
       email: "roberto@ejemplo.com",
       phone: "+1234567894",
+      dni: "55667788",
       status: "active",
       lastActive: "Hace 3 días",
       avatar: "/placeholder-user.jpg",
@@ -285,6 +290,10 @@ export function ClientsTable() {
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
+                <span className="text-sm text-muted-foreground">DNI:</span>
+                <span className="text-sm font-mono text-muted-foreground">{client.dni}</span>
+              </div>
+              <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Estado:</span>
                 <Badge 
                   variant={client.status === "active" ? "default" : "secondary"}
@@ -331,6 +340,7 @@ export function ClientsTable() {
           <TableHeader>
             <TableRow className="border-b border-primary/10 bg-gradient-to-r from-muted/50 to-muted/30 hover:bg-muted/60">
               <TableHead className="font-semibold text-foreground">Cliente</TableHead>
+              <TableHead className="font-semibold text-foreground">DNI</TableHead>
               <TableHead className="font-semibold text-foreground">Estado</TableHead>
               <TableHead className="font-semibold text-foreground">Pago</TableHead>
               <TableHead className="font-semibold text-foreground">Vence</TableHead>
@@ -366,6 +376,7 @@ export function ClientsTable() {
                     </div>
                   </div>
                 </TableCell>
+                <TableCell className="text-muted-foreground font-mono">{client.dni}</TableCell>
                 <TableCell>
                   <Badge 
                     variant={client.status === "active" ? "default" : "secondary"}

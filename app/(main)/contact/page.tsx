@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Mail, Phone, MapPin, Send } from "lucide-react";
+import { ArrowLeft, Mail, Phone, Send } from "lucide-react";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -70,7 +70,7 @@ const Contact: React.FC = () => {
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-gym">Contacto</h1>
             <p className="text-lg mb-8 max-w-3xl mx-auto text-muted-foreground">
-              ¿Tienes preguntas sobre GymRoutine Pro? Estamos aquí para ayudarte. Completa el formulario a continuación
+              ¿Tienes preguntas sobre Optifit? Estamos aquí para ayudarte. Completa el formulario a continuación
               o utiliza nuestros datos de contacto directo.
             </p>
           </motion.div>
@@ -96,8 +96,8 @@ const Contact: React.FC = () => {
                       </div>
                       <div>
                         <h3 className="font-medium text-lg">Email</h3>
-                        <p className="text-sm text-muted-foreground mt-1">info@gymroutinepro.com</p>
-                        <p className="text-sm text-muted-foreground">soporte@gymroutinepro.com</p>
+                        <p className="text-sm text-muted-foreground mt-1">info@optifit.com</p>
+                        <p className="text-sm text-muted-foreground">soporte@optifit.com</p>
                       </div>
                     </div>
                   </CardContent>
@@ -121,25 +121,6 @@ const Contact: React.FC = () => {
                 </Card>
               </motion.div>
 
-              <motion.div variants={fadeIn} transition={{ duration: 0.5 }}>
-                <Card className="overflow-hidden shadow-md hover:shadow-lg transition-shadow border-opacity-50 bg-card/80 backdrop-blur-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-primary/10 p-3 rounded-full">
-                        <MapPin className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-medium text-lg">Oficina</h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Calle Tecnología 123
-                          <br />
-                          28001 Madrid, España
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
             </motion.div>
 
             <motion.div 

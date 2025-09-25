@@ -6,7 +6,7 @@ import { ChevronDown } from 'lucide-react';
 
 const faqs = [
   {
-    question: "¿Cómo funciona GymRoutine Pro para gimnasios?",
+    question: "¿Cómo funciona Optifit para gimnasios?",
     answer: "Los gimnasios pueden crear perfiles de usuarios, diseñar rutinas personalizadas, incluir videos demostrativos, programar actualizaciones y recibir feedback directamente en la plataforma. Todo esto mientras gestionan pagos, membresías y comunicaciones."
   },
   {
@@ -15,14 +15,14 @@ const faqs = [
   },
   {
     question: "¿Es necesario tener conocimientos técnicos para utilizar la plataforma?",
-    answer: "No, GymRoutine Pro está diseñada con una interfaz intuitiva y fácil de usar. Ofrecemos tutoriales, soporte técnico y capacitación para que cualquier gimnasio pueda implementarla sin dificultad."
+    answer: "No, Optifit está diseñada con una interfaz intuitiva y fácil de usar. Ofrecemos tutoriales, soporte técnico y capacitación para que cualquier gimnasio pueda implementarla sin dificultad."
   },
   {
     question: "¿Cómo se gestionan los pagos en la plataforma?",
     answer: "La plataforma incluye un sistema integrado de pagos que permite a los gimnasios gestionar membresías, cuotas recurrentes y pagos únicos. Los usuarios pueden realizar pagos seguros directamente desde la app."
   },
   {
-    question: "¿Cuánto cuesta implementar GymRoutine Pro en mi gimnasio?",
+    question: "¿Cuánto cuesta implementar Optifit en mi gimnasio?",
     answer: "Ofrecemos diferentes planes según las necesidades de cada gimnasio, desde planes básicos hasta soluciones enterprise. Contáctanos para recibir una cotización personalizada."
   }
 ];
@@ -79,7 +79,7 @@ const FaqSection: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Respuestas a las dudas más comunes sobre GymRoutine Pro
+            Respuestas a las dudas más comunes sobre Optifit
           </motion.p>
         </div>
         

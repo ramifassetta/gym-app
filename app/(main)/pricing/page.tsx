@@ -9,55 +9,24 @@ import { Check, Package, Shield, Star } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Básico",
-    description: "Para gimnasios pequeños que comienzan",
-    price: "29",
+    name: "Premium",
+    description: "Plan completo para gimnasios",
+    price: "15.000",
+    currency: "ARS",
     period: "mes",
+    trialPeriod: "1 mes gratis",
     features: [
-      "Hasta 50 usuarios activos",
-      "Creación de rutinas ilimitadas",
+      "Clientes ilimitados",
+      "Rutinas ilimitadas",
+      "Control de acceso por DNI y huella",
+      "Gestión completa de pagos",
       "Comunicación con clientes",
-      "Panel de administración básico",
-      "Soporte por email",
-    ],
-    icon: <Package className="h-10 w-10 text-primary" />,
-    popular: false,
-    ctaText: "Comenzar Prueba Gratuita"
-  },
-  {
-    name: "Profesional",
-    description: "Para gimnasios en crecimiento",
-    price: "79",
-    period: "mes",
-    features: [
-      "Hasta 200 usuarios activos",
-      "Creación de rutinas ilimitadas",
-      "Comunicación avanzada con clientes",
-      "Seguimiento de progreso detallado",
-      "Gestión de pagos integrada",
+      "Panel de administración completo",
       "Soporte prioritario 24/7",
     ],
     icon: <Star className="h-10 w-10 text-primary" />,
     popular: true,
-    ctaText: "Elegir Plan Profesional"
-  },
-  {
-    name: "Enterprise",
-    description: "Para grandes cadenas de gimnasios",
-    price: "199",
-    period: "mes",
-    features: [
-      "Usuarios ilimitados",
-      "Todas las funcionalidades profesionales",
-      "Integraciones personalizadas",
-      "API completa para desarrolladores",
-      "Análisis avanzados y reportes",
-      "Soporte dedicado 24/7",
-      "Configuración personalizada"
-    ],
-    icon: <Shield className="h-10 w-10 text-primary" />,
-    popular: false,
-    ctaText: "Contactar Ventas"
+    ctaText: "Comenzar Prueba Gratuita"
   }
 ];
 
@@ -88,8 +57,9 @@ const PricingPlan = ({ plan, index }: { plan: typeof pricingPlans[0], index: num
         
         <CardContent className="text-center pb-0">
           <div className="mb-6">
-            <span className="text-4xl font-bold">{plan.price}€</span>
-            <span className="text-muted-foreground">/{plan.period}</span>
+            <div className="text-sm text-emerald-600 font-medium mb-2">{plan.trialPeriod}</div>
+            <span className="text-4xl font-bold">${plan.price}</span>
+            <span className="text-muted-foreground"> {plan.currency}/{plan.period}</span>
           </div>
           
           <ul className="space-y-3 text-left mb-8">
@@ -117,8 +87,8 @@ const PricingPlan = ({ plan, index }: { plan: typeof pricingPlans[0], index: num
 const Pricing: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-1 pt-16 sm:pt-20">
-        <section className="relative overflow-hidden bg-gradient-gym text-white py-16 rounded-md">
+      <main className="flex-1">
+        <section className="relative overflow-hidden bg-gradient-gym text-white py-12 rounded-md">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute top-1/2 -left-24 w-72 h-72 bg-accent/20 rounded-full blur-3xl"></div>
@@ -152,65 +122,57 @@ const Pricing: React.FC = () => {
           </div>
         </section>
         
-        <section className="py-16 md:py-24">
+        <section className="py-12">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {pricingPlans.map((plan, index) => (
-                <PricingPlan key={index} plan={plan} index={index} />
-              ))}
+            <div className="flex justify-center">
+              <div className="max-w-md w-full">
+                {pricingPlans.map((plan, index) => (
+                  <PricingPlan key={index} plan={plan} index={index} />
+                ))}
+              </div>
             </div>
             
-            <motion.div
-              className="text-center mt-16 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              <h2 className="text-2xl font-bold mb-4">¿Tienes dudas sobre qué plan elegir?</h2>
-              <p className="text-muted-foreground mb-6">
-                Nuestro equipo está listo para ayudarte a encontrar la mejor opción para tu negocio.
-                Contacta con nosotros y te asesoraremos sin compromiso.
-              </p>
-              <Link href="/contact">
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                  Contactar con Ventas
-                </Button>
-              </Link>
-            </motion.div>
           </div>
         </section>
         
-        <section className="py-16 bg-muted/30">
+        <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold mb-6">Preguntas Frecuentes</h2>
               
               <div className="space-y-6 text-left">
                 <div className="bg-background p-6 rounded-lg shadow-sm">
-                  <h3 className="font-bold mb-2">¿Puedo cambiar de plan en cualquier momento?</h3>
+                  <h3 className="font-bold mb-2">¿Qué incluye el período de prueba gratuito?</h3>
                   <p className="text-muted-foreground">
-                    Sí, puedes actualizar o cambiar tu plan en cualquier momento. Los cambios se aplicarán al inicio del siguiente período de facturación.
+                    El período de prueba de 1 mes incluye acceso completo a todas las funcionalidades: gestión de clientes, rutinas, control de acceso por DNI y huella, gestión de pagos y comunicación.
                   </p>
                 </div>
                 
                 <div className="bg-background p-6 rounded-lg shadow-sm">
-                  <h3 className="font-bold mb-2">¿Hay algún contrato de permanencia?</h3>
+                  <h3 className="font-bold mb-2">¿Cómo funciona el control de acceso por DNI y huella?</h3>
                   <p className="text-muted-foreground">
-                    No, trabajamos con suscripciones mensuales sin compromisos a largo plazo. Puedes cancelar cuando quieras.
+                    Nuestro sistema permite registrar las huellas dactilares de tus clientes y controlar su acceso al gimnasio mediante lectores de huella y DNI, manteniendo un registro completo de asistencia.
                   </p>
                 </div>
                 
                 <div className="bg-background p-6 rounded-lg shadow-sm">
-                  <h3 className="font-bold mb-2">¿Ofrecéis descuentos para pagos anuales?</h3>
+                  <h3 className="font-bold mb-2">¿Puedo gestionar los pagos y deudas de mis clientes?</h3>
                   <p className="text-muted-foreground">
-                    Sí, disfrutarás de un 20% de descuento si eliges la facturación anual en cualquiera de nuestros planes.
+                    Sí, el sistema calcula automáticamente las deudas de tus clientes, registra los pagos recibidos y te permite hacer seguimiento de todos los movimientos financieros de tu gimnasio.
                   </p>
                 </div>
                 
                 <div className="bg-background p-6 rounded-lg shadow-sm">
-                  <h3 className="font-bold mb-2">¿Qué métodos de pago aceptáis?</h3>
+                  <h3 className="font-bold mb-2">¿Hay límite en la cantidad de clientes o rutinas?</h3>
                   <p className="text-muted-foreground">
-                    Aceptamos todas las principales tarjetas de crédito, PayPal, y transferencia bancaria para planes Enterprise.
+                    No, puedes registrar clientes ilimitados y crear todas las rutinas que necesites. El plan incluye gestión completa sin restricciones de cantidad.
+                  </p>
+                </div>
+                
+                <div className="bg-background p-6 rounded-lg shadow-sm">
+                  <h3 className="font-bold mb-2">¿Qué métodos de pago aceptan para la suscripción?</h3>
+                  <p className="text-muted-foreground">
+                    Aceptamos transferencias bancarias, tarjetas de crédito y débito, y Mercado Pago para facilitar el pago de tu suscripción mensual.
                   </p>
                 </div>
               </div>

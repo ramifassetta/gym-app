@@ -4,7 +4,6 @@ import SiteHeader from "@/components/layout/site-header";
 import SiteFooter from "@/components/layout/site-footer";
 import StatsSection from "@/components/landing/StatsSection";
 import FeatureSection from "@/components/landing/FeatureSection";
-import TestimonialSection from "@/components/landing/TestimonialSection";
 import FaqSection from "@/components/landing/FaqSection";
 import HeroSection from "@/components/landing/HeroSection";
 import CtaSection from "@/components/landing/CtaSection";
@@ -23,9 +22,6 @@ const Index: React.FC = () => {
         
         {/* Features Section */}
         <FeatureSection />
-        
-        {/* Testimonials Section */}
-        <TestimonialSection />
         
         {/* FAQ Section */}
         <FaqSection />

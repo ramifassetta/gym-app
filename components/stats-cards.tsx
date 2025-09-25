@@ -14,7 +14,7 @@ export function StatsCards() {
     {
       title: "Accesos Hoy",
       value: "24",
-      change: "",
+      change: "personas accedieron hoy",
       icon: Shield,
       gradient: "from-purple-500 to-purple-600"
     },

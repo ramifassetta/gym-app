@@ -84,7 +84,7 @@ const Privacy: React.FC = () => {
                 <section className="space-y-4">
                   <h2 className="text-2xl font-bold">1. Información que recopilamos</h2>
                   <p className="text-muted-foreground">
-                    En GymRoutine Pro, respetamos tu privacidad y nos comprometemos a proteger tus datos personales. Esta Política de Privacidad describe cómo recopilamos, utilizamos y compartimos tu información cuando utilizas nuestros servicios.
+                    En Optifit, respetamos tu privacidad y nos comprometemos a proteger tus datos personales. Esta Política de Privacidad describe cómo recopilamos, utilizamos y compartimos tu información cuando utilizas nuestros servicios.
                   </p>
                   <p className="text-muted-foreground">
                     Podemos recopilar los siguientes tipos de información:
@@ -123,7 +123,7 @@ const Privacy: React.FC = () => {
                   <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
                     <li>Con proveedores de servicios que trabajan en nuestro nombre para apoyar nuestras operaciones.</li>
                     <li>Para cumplir con obligaciones legales, como responder a una citación o una orden judicial.</li>
-                    <li>Para proteger los derechos, la propiedad o la seguridad de GymRoutine Pro, nuestros usuarios o el público.</li>
+                    <li>Para proteger los derechos, la propiedad o la seguridad de Optifit, nuestros usuarios o el público.</li>
                     <li>En caso de una fusión, adquisición o venta de activos, en cuyo caso tu información puede ser transferida como parte de esa transacción.</li>
                   </ul>
                 </section>

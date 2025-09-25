@@ -7,27 +7,27 @@ import { Users, Dumbbell, Building, Award } from 'lucide-react';
 const stats = [
   {
     icon: <Users className="h-8 w-8 text-primary" />,
-    value: "10,000+",
-    label: "Usuarios activos",
-    description: "Entrenando con nuestra plataforma"
+    value: "100%",
+    label: "Enfocado en gimnasios",
+    description: "Especializado para tu negocio"
   },
   {
     icon: <Dumbbell className="h-8 w-8 text-primary" />,
-    value: "50,000+",
-    label: "Rutinas creadas",
-    description: "Personalizadas y optimizadas"
+    value: "1",
+    label: "Mes gratis",
+    description: "Prueba sin compromisos"
   },
   {
     icon: <Building className="h-8 w-8 text-primary" />,
-    value: "500+",
-    label: "Gimnasios",
-    description: "Confían en nosotros"
+    value: "24/7",
+    label: "Disponibilidad",
+    description: "Acceso controlado siempre"
   },
   {
     icon: <Award className="h-8 w-8 text-primary" />,
-    value: "98%",
-    label: "Satisfacción",
-    description: "Evaluaciones positivas"
+    value: "Auto",
+    label: "Cálculo de deudas",
+    description: "Gestión automática de pagos"
   }
 ];
 

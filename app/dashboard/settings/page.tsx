@@ -60,11 +60,11 @@ export default function SettingsPage() {
             <TabsTrigger value="account" className="data-[state=active]:bg-primary data-[state=active]:text-white">
               Cuenta
             </TabsTrigger>
-            <TabsTrigger value="notifications" className="data-[state=active]:bg-primary data-[state=active]:text-white">
-              Notificaciones
-            </TabsTrigger>
             <TabsTrigger value="billing" className="data-[state=active]:bg-primary data-[state=active]:text-white">
               Facturación
+            </TabsTrigger>
+            <TabsTrigger value="pricing" className="data-[state=active]:bg-primary data-[state=active]:text-white">
+              Precios
             </TabsTrigger>
           </TabsList>
 
@@ -85,8 +85,8 @@ export default function SettingsPage() {
                   <div className="flex flex-col items-center sm:flex-row sm:items-start gap-6">
                     <div className="flex flex-col items-center gap-2">
                       <Avatar className="h-24 w-24 border-2 border-primary/10">
-                        <AvatarImage src="/placeholder-user.jpg" alt="@user" />
-                        <AvatarFallback className="bg-gradient-to-br from-primary/10 to-primary/5">ET</AvatarFallback>
+                        <AvatarImage src="/placeholder-user.jpg" alt="@gimnasio" />
+                        <AvatarFallback className="bg-gradient-to-br from-primary/10 to-primary/5">GYM</AvatarFallback>
                       </Avatar>
                       <Button 
                         variant="outline" 
@@ -101,18 +101,10 @@ export default function SettingsPage() {
                     <div className="flex-1 space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="first-name">Nombre</Label>
+                          <Label htmlFor="full-name">Nombre completo</Label>
                           <Input 
-                            id="first-name" 
-                            defaultValue="Entrenador"
-                            className="bg-gradient-to-r from-background to-muted/20 border-primary/20 focus:border-primary/40 transition-all duration-300" 
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="last-name">Apellido</Label>
-                          <Input 
-                            id="last-name" 
-                            defaultValue="Ejemplo"
+                            id="full-name" 
+                            defaultValue="Gimnasio"
                             className="bg-gradient-to-r from-background to-muted/20 border-primary/20 focus:border-primary/40 transition-all duration-300" 
                           />
                         </div>
@@ -123,7 +115,7 @@ export default function SettingsPage() {
                         <Input 
                           id="email" 
                           type="email" 
-                          defaultValue="entrenador@ejemplo.com"
+                          defaultValue="gimnasio@ejemplo.com"
                           className="bg-gradient-to-r from-background to-muted/20 border-primary/20 focus:border-primary/40 transition-all duration-300" 
                         />
                       </div>
@@ -133,7 +125,7 @@ export default function SettingsPage() {
                         <Input 
                           id="phone" 
                           type="tel" 
-                          defaultValue="+34 600 123 456"
+                          defaultValue="+54 11 1234-5678"
                           className="bg-gradient-to-r from-background to-muted/20 border-primary/20 focus:border-primary/40 transition-all duration-300" 
                         />
                       </div>
@@ -142,9 +134,9 @@ export default function SettingsPage() {
                         <Label htmlFor="bio">Biografía</Label>
                         <Textarea
                           id="bio"
-                          placeholder="Cuéntanos sobre ti y tu experiencia como entrenador..."
+                          placeholder="Cuéntanos sobre tu gimnasio y servicios..."
                           className="min-h-[100px] bg-gradient-to-r from-background to-muted/20 border-primary/20 focus:border-primary/40 transition-all duration-300"
-                          defaultValue="Entrenador personal certificado con más de 5 años de experiencia en entrenamiento de fuerza y acondicionamiento físico."
+                          defaultValue="Gimnasio moderno con equipamiento de última generación. Ofrecemos entrenamiento personalizado, clases grupales y un ambiente motivador para alcanzar tus objetivos fitness."
                         />
                       </div>
                     </div>
@@ -222,163 +214,8 @@ export default function SettingsPage() {
               </CardFooter>
             </Card>
 
-            <Card className="overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
-              <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
-              <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10">
-                <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-sm">
-                    <Save className="h-4 w-4" />
-                  </div>
-                  Sesiones Activas
-                </CardTitle>
-                <CardDescription>Gestiona los dispositivos donde has iniciado sesión</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4 p-6">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b border-primary/10 pb-4">
-                    <div>
-                      <div className="font-medium">Chrome en Windows</div>
-                      <div className="text-sm text-muted-foreground">Madrid, España • Activo ahora</div>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300"
-                    >
-                      Este Dispositivo
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between border-b border-primary/10 pb-4">
-                    <div>
-                      <div className="font-medium">Safari en iPhone</div>
-                      <div className="text-sm text-muted-foreground">Madrid, España • Hace 2 horas</div>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300"
-                    >
-                      Cerrar Sesión
-                    </Button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-medium">Chrome en MacBook</div>
-                      <div className="text-sm text-muted-foreground">Barcelona, España • Hace 5 días</div>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300"
-                    >
-                      Cerrar Sesión
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="p-6 bg-gradient-to-r from-primary/5 to-primary/10">
-                <Button 
-                  variant="destructive" 
-                  className="ml-auto bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  Cerrar Todas las Sesiones
-                </Button>
-              </CardFooter>
-            </Card>
           </TabsContent>
 
-          <TabsContent value="notifications" className="space-y-4">
-            <Card className="overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
-              <div className="h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
-              <CardHeader className="bg-gradient-to-r from-primary/5 to-primary/10">
-                <CardTitle className="flex items-center gap-2">
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 text-white shadow-sm">
-                    <Save className="h-4 w-4" />
-                  </div>
-                  Preferencias de Notificaciones
-                </CardTitle>
-                <CardDescription>Configura cómo y cuándo quieres recibir notificaciones</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6 p-6">
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                    Notificaciones por Correo
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="email-new-client">Nuevos clientes</Label>
-                        <p className="text-sm text-muted-foreground">
-                          Recibe un correo cuando un nuevo cliente se registre
-                        </p>
-                      </div>
-                      <Switch id="email-new-client" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="email-messages">Mensajes</Label>
-                        <p className="text-sm text-muted-foreground">Recibe un correo cuando recibas un nuevo mensaje</p>
-                      </div>
-                      <Switch id="email-messages" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="email-payments">Pagos</Label>
-                        <p className="text-sm text-muted-foreground">Recibe un correo cuando recibas un nuevo pago</p>
-                      </div>
-                      <Switch id="email-payments" defaultChecked />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-lg font-medium bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-                    Notificaciones en la Aplicación
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="app-new-client">Nuevos clientes</Label>
-                        <p className="text-sm text-muted-foreground">
-                          Recibe una notificación cuando un nuevo cliente se registre
-                        </p>
-                      </div>
-                      <Switch id="app-new-client" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="app-messages">Mensajes</Label>
-                        <p className="text-sm text-muted-foreground">
-                          Recibe una notificación cuando recibas un nuevo mensaje
-                        </p>
-                      </div>
-                      <Switch id="app-messages" defaultChecked />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-0.5">
-                        <Label htmlFor="app-payments">Pagos</Label>
-                        <p className="text-sm text-muted-foreground">
-                          Recibe una notificación cuando recibas un nuevo pago
-                        </p>
-                      </div>
-                      <Switch id="app-payments" defaultChecked />
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="flex justify-end gap-4 p-6 bg-gradient-to-r from-primary/5 to-primary/10">
-                <Button 
-                  variant="outline"
-                  className="border-primary/20 hover:bg-primary/5 hover:border-primary/40 transition-all duration-300"
-                >
-                  Cancelar
-                </Button>
-                <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  Guardar Preferencias
-                </Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
 
           <TabsContent value="billing" className="space-y-4">
             <Card className="overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
@@ -396,8 +233,8 @@ export default function SettingsPage() {
                 <div className="rounded-lg border border-primary/10 p-4 bg-gradient-to-br from-card to-card/50">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-medium bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Plan Pro</h3>
-                      <p className="text-sm text-muted-foreground">€29.99/mes • Renovación el 15/07/2023</p>
+                      <h3 className="font-medium bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">Plan Premium</h3>
+                      <p className="text-sm text-muted-foreground">$15.000 ARS/mes • Renovación el 15/01/2025</p>
                     </div>
                     <Button 
                       variant="outline"
@@ -417,11 +254,32 @@ export default function SettingsPage() {
                     </div>
                     <div className="flex items-center text-sm">
                       <div className="w-6 text-center text-emerald-500">✓</div>
-                      <span>Biblioteca completa de ejercicios</span>
+                      <span>Control de acceso por DNI y huella</span>
                     </div>
                     <div className="flex items-center text-sm">
                       <div className="w-6 text-center text-emerald-500">✓</div>
-                      <span>Soporte prioritario</span>
+                      <span>Gestión completa de pagos</span>
+                    </div>
+                    <div className="flex items-center text-sm">
+                      <div className="w-6 text-center text-emerald-500">✓</div>
+                      <span>Soporte prioritario 24/7</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Información del período de prueba */}
+                <div className="rounded-lg border border-emerald-200 p-4 bg-gradient-to-br from-emerald-50 to-emerald-100/50">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-emerald-500 text-white">
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-emerald-800">Período de Prueba Completado</h4>
+                      <p className="text-sm text-emerald-600">
+                        Tu período de prueba de 1 mes ha finalizado. Ahora estás en el plan Premium por $15.000 ARS/mes.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -483,6 +341,114 @@ export default function SettingsPage() {
                 </Button>
               </CardFooter>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="pricing" className="space-y-4">
+            <form onSubmit={handleSubmit}>
+              <Card className="overflow-hidden border-primary/10 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-card to-card/50">
+                <div className="h-1 w-full bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500"></div>
+                <CardHeader className="bg-gradient-to-r from-background to-muted">
+                  <CardTitle className="flex items-center gap-2">
+                    <Plus className="h-5 w-5 text-primary" />
+                    Configuración de Precios de Pases
+                  </CardTitle>
+                  <CardDescription>
+                    Establece los precios para cada tipo de pase en tu gimnasio
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6 p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="pase-libre">Pase Libre</Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-muted-foreground">$</span>
+                        <Input 
+                          id="pase-libre" 
+                          type="number" 
+                          defaultValue="45000"
+                          className="pl-8"
+                          placeholder="45000"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="pase-libre-3-meses">Pase Libre 3 meses</Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-muted-foreground">$</span>
+                        <Input 
+                          id="pase-libre-3-meses" 
+                          type="number" 
+                          defaultValue="120000"
+                          className="pl-8"
+                          placeholder="120000"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="pase-libre-anual">Pase Libre anual</Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-muted-foreground">$</span>
+                        <Input 
+                          id="pase-libre-anual" 
+                          type="number" 
+                          defaultValue="400000"
+                          className="pl-8"
+                          placeholder="400000"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="pase-mensual-3-dias">Pase mensual 3 días</Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-muted-foreground">$</span>
+                        <Input 
+                          id="pase-mensual-3-dias" 
+                          type="number" 
+                          defaultValue="15000"
+                          className="pl-8"
+                          placeholder="15000"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="pase-dia">Pase día</Label>
+                      <div className="relative">
+                        <span className="absolute left-3 top-3 text-muted-foreground">$</span>
+                        <Input 
+                          id="pase-dia" 
+                          type="number" 
+                          defaultValue="2000"
+                          className="pl-8"
+                          placeholder="2000"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-medium text-blue-900 mb-2">💡 Información</h4>
+                    <p className="text-sm text-blue-800">
+                      Los precios que configures aquí se utilizarán automáticamente en el modal de registrar pagos 
+                      para calcular las deudas de los clientes. Puedes modificar estos valores en cualquier momento.
+                    </p>
+                  </div>
+                </CardContent>
+                <CardFooter className="bg-gradient-to-r from-background to-muted">
+                  <Button 
+                    type="submit" 
+                    disabled={isLoading}
+                    className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                  >
+                    <Save className="mr-2 h-4 w-4" />
+                    {isLoading ? "Guardando..." : "Guardar Precios"}
+                  </Button>
+                </CardFooter>
+              </Card>
+            </form>
           </TabsContent>
         </Tabs>
       </motion.div>
