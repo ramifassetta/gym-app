@@ -12,9 +12,11 @@ import { Switch } from "@/components/ui/switch"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Save, Upload, Plus } from "lucide-react"
 import { motion } from "framer-motion"
+import { CancelSubscriptionModal } from "@/components/cancel-subscription-modal"
 
 export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(false)
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -333,6 +335,7 @@ export default function SettingsPage() {
                 <Button 
                   variant="outline" 
                   className="text-destructive border-destructive/20 hover:bg-destructive/10 hover:border-destructive/40 transition-all duration-300"
+                  onClick={() => setIsCancelModalOpen(true)}
                 >
                   Cancelar Suscripción
                 </Button>
@@ -452,6 +455,30 @@ export default function SettingsPage() {
           </TabsContent>
         </Tabs>
       </motion.div>
+
+      {/* Modal de Cancelar Suscripción */}
+      <CancelSubscriptionModal
+        isOpen={isCancelModalOpen}
+        onClose={() => setIsCancelModalOpen(false)}
+        subscription={{
+          id: 1,
+          client: {
+            name: "Gimnasio",
+            email: "gimnasio@ejemplo.com",
+            avatar: "/placeholder-user.jpg"
+          },
+          plan: "Plan Premium",
+          status: "active",
+          startDate: "2024-01-01",
+          endDate: "2024-12-31",
+          amount: "50000",
+          paymentMethod: "Transferencia"
+        }}
+        onCancel={(subscriptionId) => {
+          console.log("Cancelando suscripción:", subscriptionId);
+          setIsCancelModalOpen(false);
+        }}
+      />
     </motion.div>
   )
 }

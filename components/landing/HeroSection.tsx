@@ -128,7 +128,7 @@ const HeroSection: React.FC = () => {
               <div className="bg-white/10 backdrop-blur-md p-3 sm:p-4 rounded-2xl border border-white/20 shadow-2xl overflow-hidden relative z-10">
                 <div className="bg-white/5 rounded-xl p-1">
                   <img 
-                    src="https://placehold.co/900x600/3b82f6/FFFFFF/png?text=Dashboard+del+Gimnasio" 
+                    src="/istockphoto-952352556-612x612.jpg" 
                     alt="Dashboard del Gimnasio" 
                     className="rounded-lg w-full shadow-lg"
                   />
@@ -146,10 +146,7 @@ const HeroSection: React.FC = () => {
                   <div className="bg-emerald-500 p-1.5 sm:p-2 rounded-full">
                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-medium">Accesos Hoy</p>
-                    <p className="text-xs text-gray-600">+24 clientes</p>
-                  </div>
+                  
                 </div>
               </motion.div>
               
